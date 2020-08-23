@@ -1,0 +1,77 @@
+.moistureBox,
+.rateBox {
+  display: inline-block;
+  width: 75px;
+  margin: 0 5px 0 10px;
+  // margin-right: 5px;
+}
+.padding-0 {
+  padding: 0;
+}
+.rateBox {
+  width: 112px;
+}
+.customerWrapper {
+  padding: 15px 0;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+.customerNameBox,
+.totalBagBox {
+  display: inline-block;
+  width: 70%;
+  margin-left: 10px;
+}
+.totalBagBox {
+  width: 130px;
+}
+.leftSide .label {
+  min-width: 117px;
+}
+.rightSide .label {
+  min-width: 63px;
+}
+.todayRateBox {
+  display: inline-block;
+  width: 150px;
+  margin-left: 10px;
+}
+.customerWrapper {
+  clear: both;
+}
+.rateBoxWrapper {
+  padding: 12px 0;
+}
+.bagWeightWrapper {
+  ul {
+    padding-left: 0;
+  }
+}
+.weightItem {
+  list-style: none;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+}
+.weightItem input {
+  display: inline-block;
+  width: 50px;
+  padding: 5px;
+}
+.weightBox,
+.amountBox {
+  display: inline-block;
+  max-width: 200px;
+  margin-left: 5px;
+}
+.signSpace {
+  width: 100%;
+  border-top: 1px solid #000;
+  margin-top: 20px;
+}
+.firmWrapper {
+  padding: 10px 0;
+}
+.totalWeightWrapper .form-group {
+  width: 50%;
+  display: inline-block;
+}

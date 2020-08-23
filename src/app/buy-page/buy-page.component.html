@@ -1,0 +1,154 @@
+<div class="container">
+  <form>
+    <div class="firmWrapper text-center">
+      <h4>Shivsphurthi Soyabean Center, Kasegaon</h4>
+      <p style="margin: 0;">A/p: Kasegaon, Near S.T Stand, Mob. 9423272768, 0987654321</p>
+    </div>
+    <div class="invoiceType text-center">
+      <p>Buy Invoice</p>
+    </div>
+    <div>
+      <div class="rateBoxWrapper float-left">
+        <label for="billId" class="label">Bill No: </label>
+        <input type="text" readonly class="form-control todayRateBox" name="billId" [(ngModel)]="billNumber" readonly style="margin-right: 10px;">
+        <label for="todayDate">Date: </label>
+        <span>{{todaysDate}}</span>
+      </div>
+      <div class="rateBoxWrapper float-right">
+        <label for="todayRateBoxId" class="label">Today's Rate: </label>
+        <input type="text" class="form-control todayRateBox" name="todayRateBoxId"
+          placeholder="Today Rate" [(ngModel)]="standardRate" disabled>
+      </div>
+    </div>
+    <div class="row customerWrapper form-group">
+      <div class="col-md-5">
+        <label for="customerName" class="label">Customer Name</label>
+        <input type="text" [(ngModel)]="customerName" class="form-control customerNameBox"
+          name="customerName" placeholder="Customer Name" [ngClass]="{'error-field': isCustomerNameValid}" (change)="isCustomerNameValid=false;isAllFieldsCalculated=true;">
+
+      </div>
+      <div class="col-md-2 padding-0">
+        <label for="moistureName" class="label">Moisture</label>
+        <input type="text" [(ngModel)]="moisture"
+          (change)="onMoistureChange($event, moisture);isMoistureValid=false;isAllFieldsCalculated=true;" name="moistureName"
+          class="form-control moistureBox" placeholder="Moisture" [ngClass]="{'error-field': isMoistureValid}">
+          <!-- required maxlength="5" minlength="2" #moistureName="ngModel" [ngClass]="{'error-field': moistureName.invalid && (moistureName.dirty || moistureName.touched)}" -->
+        <label>%</label>
+        <!-- <span *ngIf="moistureName.invalid && (moistureName.dirty || moistureName.touched)"
+          class="alert-danger">
+          <div *ngIf="moistureName.errors.required" class="error-message">
+            Moisture is required.
+          </div>
+          <div *ngIf="moistureName.errors.maxlength" class="error-message">
+            Moisture cannot be more than 5 characters long.
+          </div>
+          <div *ngIf="moistureName.errors.minlength" class="error-message">
+            Moisture must be greater than 10.
+          </div>
+        </span> -->
+      </div>
+      <div class="col-md-2">
+        <label for="calculatedRate" class="label">Rate</label>
+        <input type="text" [(ngModel)]="calculatedRate" class="form-control rateBox"
+          name="calculatedRate" placeholder="Rate" disabled>
+      </div>
+      <div class="col-md-3">
+        <label for="totalBagsName" class="label">Total Bags</label>
+        <input type="text" [(ngModel)]="totalBags" numbersOnly
+          (change)="onTotalBagsChange($event, totalBags);isTotalBagsValid=false;isAllFieldsCalculated=true;" class="form-control totalBagBox"
+          name="totalBagsName" placeholder="Total Bags" [ngClass]="{'error-field': isTotalBagsValid}">
+          <!-- required maxlength="3" minlength="1" #totalBagsName="ngModel" [ngClass]="{'error-field': totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)}" -->
+        <!-- <span
+          *ngIf="totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)"
+          class="alert-danger">
+          <div *ngIf="totalBagsName.errors.required" class="error-message">
+            Field is required.
+          </div>
+          <div *ngIf="totalBagsName.errors.minlength" class="error-message">
+            Field cannot be more than 3 characters long.
+          </div>
+          <div *ngIf="totalBagsName.errors.minlength" class="error-message">
+            Field must be at least 1 characters long.
+          </div>
+        </span> -->
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-5 bagWeightWrapper">
+        <ul>
+          <li *ngFor="let data of bagWeightList; let eleIndex=index" class="weightItem">
+            <input type="text" [(ngModel)]="data.weight" value="" class="form-control"
+              (change)="onBagWeightChange($event, data);isAllFieldsCalculated=true;" name="product-{{data.id}}"
+              numbersOnly [ngClass]="{'error-field': !data.weight}">
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-md-4">
+        <div>
+          <div class="form-group text-right" style="padding-right: 46px;">
+            <button type="button" class="btn btn-primary"
+              (click)="calculateBill()">Calculate</button>
+          </div>
+          <div class="form-group">
+            <label style="min-width:93px;">Total Amount:</label>
+            <input type="text" [(ngModel)]="totalAmount" name="totalAmount"
+              class="form-control weightBox amountBox text-right" disabled>
+          </div>
+          <div class="form-group">
+            <label style="min-width:100px;">Carry Charge:</label>
+            <input type="text" [(ngModel)]="carryCharge" name="carryCharge"
+              class="form-control weightBox amountBox text-right" disabled>
+          </div>
+          <div class="form-group">
+            <label for="netPayAmountName" style="min-width:100px;">Net Amount:</label>
+            <input type="text" [(ngModel)]="netPayAmount" name="netPayAmountName"
+              class="form-control weightBox amountBox text-right" disabled>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="commentsOnBill">Comments</label>
+          <textarea class="form-control" [(ngModel)]="commentsOnBill" (change)="isAllFieldsCalculated=true" name="commentsOnBill" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-7 totalWeightWrapper">
+        <div class="form-group">
+          <label>Total Weight:</label>
+          <input type="text" [(ngModel)]="totalWeight" name="totalWeight"
+            class="form-control weightBox" value="{{totalWeight}}" readonly>
+        </div>
+        <div class="form-group">
+          <label style="min-width:93px;">Cutting:</label>
+          <input type="text" [(ngModel)]="weightCutting" name="weightCutting"
+            class="form-control weightBox" disabled>
+        </div>
+        <div class="form-group">
+          <label style="min-width:93px;">Extra Cutting:</label>
+          <!-- (change)="calculateNettWeight($event)" -->
+          <input type="text" [(ngModel)]="weightExtraCuting" (change)="isAllFieldsCalculated=true;" name="weightExtraCuting" class="form-control weightBox" numbersOnly>
+        </div>
+        <div class="form-group">
+          <label style="min-width:93px;">Net Weight:</label>
+          <input type="text" [(ngModel)]="netWeight" name="netWeight"
+            class="form-control weightBox" disabled>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="signature">Signature: </label>
+          <div class="signSpace"></div>
+        </div>
+        <div class="button-wrapper text-right">
+          <button type="button" (click)="submitCalculatedForm($event)" class="btn btn-primary">Submit</button>
+          <button type="button" (click)="cancelForm()" class="btn btn-primary"
+            style="margin-left: 10px;">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

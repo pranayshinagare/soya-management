@@ -1,0 +1,127 @@
+<div class="container">
+  <form>
+    <div class="firmWrapper text-center">
+      <h4>Shivsphurthi Soyabean Center, Kasegaon</h4>
+      <p style="margin: 0;">A/p: Kasegaon, Near S.T Stand, Mob. 9423272768, 0987654321</p>
+    </div>
+    <div class="invoiceType text-center">
+      <p>Sell Invoice</p>
+    </div>
+    <div>
+      <div class="rateBoxWrapper float-left">
+        <label for="todayDate">Date: </label>
+        <span>{{todaysDate}}</span> |
+        <label for="vehicleNumberId" style="margin-left: 5px;">Vehicle No: </label>
+        <input type="text" class="form-control todayRateBox" name="vehicleNumberId"
+          [(ngModel)]="vehicleNumber" style="margin-right: 10px;">
+      </div>
+      <div class="rateBoxWrapper float-right">
+        <label for="todayRateBoxId" class="label">Rate of Sell: </label>
+        <input type="text" class="form-control todayRateBox" name="todayRateBoxId"
+          placeholder="Today Rate" [(ngModel)]="standardSellRate">
+      </div>
+    </div>
+    <div class="row customerWrapper form-group">
+      <div class="col-md-5">
+        <label for="customerName" class="label">Owner Name</label>
+        <input type="text" [(ngModel)]="customerName" class="form-control customerNameBox"
+          name="customerName" placeholder="Owner Name">
+      </div>
+      <!-- <div class="col-md-2 padding-0">
+        <label for="moisture" class="label">Moisture</label>
+        <input type="text" [(ngModel)]="moisture" name="moisture"
+          class="form-control moistureBox" placeholder="Moisture">
+        <label>%</label>
+      </div>
+      <div class="col-md-2">
+        <label for="calculatedRate" class="label">Rate</label>
+        <input type="text" [(ngModel)]="calculatedRate" class="form-control rateBox"
+          name="calculatedRate" placeholder="Rate">
+      </div> -->
+      <div class="col-md-3">
+        <label for="totalBags" class="label">Total Bags</label>
+        <input type="text" [(ngModel)]="totalBags" class="form-control totalBagBox"
+          name="totalBags" placeholder="Total Bags"
+          (change)="onTotalBagChange($event, totalBags)">
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-7 totalWeightWrapper">
+        <div class="form-group">
+          <label>Total Weight:</label>
+          <input type="text" [(ngModel)]="totalWeight" numbersOnly
+            (change)="onTotalWeightChange($event, totalWeight)"
+            class="form-control weightBox" name="totalWeight" placeholder="Total Weight">
+        </div>
+        <div class="form-group">
+          <label style="min-width:93px;">Cutting:</label>
+          <input type="text" [(ngModel)]="weightCuting" numbersOnly
+            (change)="onTotalWeightCutting($event, weightCuting)"
+            class="form-control weightBox" name="weightCuting"
+            placeholder="Cutting Weight">
+        </div>
+        <!-- <div class="form-group">
+          <label style="min-width:93px;">Extra Cutting:</label>
+          <input type="text" [(ngModel)]="weightExtraCuting" name="weightExtraCuting"
+            class="form-control weightBox">
+        </div> -->
+        <div class="form-group">
+          <label style="min-width:93px;">Net Weight:</label>
+          <input type="text" [(ngModel)]="netWeight" name="netWeight"
+            class="form-control weightBox" disabled>
+        </div>
+        <div class="form-group">
+          <div class="form-group text-right" style="padding-right: 46px;">
+            <button type="button" class="btn btn-primary"
+              (click)="calculateBill()">Calculate</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="commentsOnBill">Comments</label>
+          <textarea class="form-control" [(ngModel)]="commentsOnSell"
+            name="commentsOnSell" id="commentsOnBill" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <!-- <div class="col-md-4 bagWeightWrapper">
+      </div> -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <div class="form-group">
+            <label style="min-width:93px;">Total Amount:</label>
+            <input type="text" [(ngModel)]="totalAmount" name="totalAmount"
+              class="form-control weightBox amountBox" disabled>
+          </div>
+          <div class="form-group">
+            <label style="min-width:100px;">Carry Charge:</label>
+            <input type="text" [(ngModel)]="carryCharge"
+              (change)="onCarryChargeChange($event, carryCharge)" name="carryCharge"
+              class="form-control weightBox amountBox">
+          </div>
+          <div class="form-group">
+            <label style="min-width:100px;">Net Amout:</label>
+            <input type="text" [(ngModel)]="netPayAmount" name="netPayAmount"
+              class="form-control weightBox amountBox" disabled>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="signature">Signature: </label>
+          <div class="signSpace"></div>
+        </div>
+        <div class="button-wrapper text-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary"
+            style="margin-left: 10px;">Cancel</button>
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+</div>
