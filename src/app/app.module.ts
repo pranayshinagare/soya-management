@@ -19,6 +19,7 @@ import { SellListComponent } from './sell-list/sell-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     CustomerListComponent,
     StockCheckComponent,
     NumberDirective,
-    SellListComponent
+    SellListComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

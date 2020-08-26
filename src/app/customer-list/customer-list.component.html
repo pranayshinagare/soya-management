@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h3 class="ptb-15 mb-0">Buy Sell Invoice</h3>
+  <h3 class="ptb-15 mb-0">Bull Soya Invoice</h3>
   <form class="pb-20">
     <div class="form-row">
       <div class="form-group col-md-2">
@@ -43,12 +43,12 @@
       <thead>
         <tr>
           <th>Bill No.</th>
-          <th style="width: 120px;">Date</th>
-          <th style="width: 210px;">Customer Name</th>
+          <th style="width: 75px;">Date</th>
+          <th style="width: 200px;">Customer Name</th>
           <th>Total Bags</th>
           <th>Moisture</th>
-          <th>Rate(M.10%)</th>
-          <th>Rate</th>
+          <th>Std. Rate(M.10%)</th>
+          <th>Cal. Rate</th>
           <th>Total Weight</th>
           <th>Weight Cutting</th>
           <th>Extra Cutting</th>
@@ -56,7 +56,8 @@
           <th>Total Amount</th>
           <th>Carry Charges</th>
           <th>Net Amount</th>
-          <th>View</th>
+          <th>Payment Mode</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -76,7 +77,13 @@
           <td>{{item.totalAmount}}</td>
           <td>{{item.carryCharge}}</td>
           <td>{{item.netPayAmount}}</td>
-          <td class="text-center cursor-pointer">
+          <td class="text-center">
+            <i class="fa fa-money" aria-hidden="true" title="Cash"
+              *ngIf="!item.chequeMode"></i>
+            <i class="fa fa-credit-card" aria-hidden="true" title="Cheque"
+              *ngIf="item.chequeMode"></i>
+          </td>
+          <td class="text-center cursor-pointer" title="Edit">
             <i class="fa fa-pencil-square-o" aria-hidden="true"
               (click)="viewBill(item)"></i>
         </tr>

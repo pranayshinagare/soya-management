@@ -1,10 +1,11 @@
 <div class="container-fluid">
-  <h3 class="ptb-15 mb-0">Search Sell Invoice</h3>
-  <form class="filterWrapper pb-20">
+  <h3 class="ptb-15 mb-0">Sell Invoice</h3>
+  <form class="pb-20">
     <div class="form-row">
       <div class="form-group col-md-2">
         <label for="billNumber">Bill No</label>
-        <input type="text" class="form-control" [(ngModel)]="billNumber" name="billNumber" placeholder="Bill Number">
+        <input type="text" class="form-control" [(ngModel)]="billNumber" name="billNumber"
+          placeholder="Bill Number">
       </div>
       <div class="form-group col-md-3">
         <label for="fromDate1">From Date</label>
@@ -22,58 +23,79 @@
           <i class="fa fa-calendar" aria-hidden="true"></i>
         </button>
       </div>
-      <!-- <div class="form-group col-md-4">
-        <label for="customerName">Customer Name</label>
-        <input type="text" class="form-control" name="customerName" placeholder="Customer Name" [(ngModel)]="customerName">
-      </div> -->
+      <div class="form-group col-md-4">
+        <label for="customerName">Owner Name</label>
+        <input type="text" class="form-control" name="customerName"
+          placeholder="Customer Name" [(ngModel)]="customerName">
+      </div>
     </div>
     <div class="text-right">
       <button type="button" routerLink="/sell-soyabean" class="btn btn-primary mr-10">Add
         New Entry</button>
-      <button type="submit" class="btn btn-primary mr-10">Search</button>
-      <button type="button" class="btn btn-primary" (click)="clearSelection($event)">Clear</button>
+      <button type="submit" (click)="getCustomerList()"
+        class="btn btn-primary mr-10">Search</button>
+      <button type="button" class="btn btn-primary"
+        (click)="clearSelection($event)">Clear</button>
     </div>
   </form>
   <div class="customerGrid">
-    <table class="table table-striped">
+    <table class="table table-striped customer-list">
       <thead>
         <tr>
           <th>Bill No.</th>
-          <th style="width: 120px;">Date</th>
-          <th style="width: 210px;">Customer Name</th>
-          <th>Rate(M.10%)</th>
-          <th>Moisture</th>
-          <th>Rate</th>
+          <th style="width: 75px;">Date</th>
+          <th>Vehicle No.</th>
+          <th style="width: 200px;">Owner Name</th>
           <th>Total Bags</th>
+          <!-- <th>Moisture</th> -->
+          <th>Rate of Sell</th>
+          <!-- <th>Cal. Rate</th> -->
           <th>Total Weight</th>
           <th>Weight Cutting</th>
-          <th>Extra Cutting</th>
+          <!-- <th>Extra Cutting</th> -->
           <th>Net Weight</th>
           <th>Total Amount</th>
           <th>Carry Charges</th>
           <th>Net Amount</th>
-          <th>View</th>
+          <!-- <th>Payment Mode</th> -->
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of customerData; let eleIndex=index">
-          <td>{{item.billNo}}</td>
+        <tr
+          *ngFor="let item of customerData | slice: (customerDataPage-1) * customerDataPageSize : (customerDataPage-1) * customerDataPageSize + customerDataPageSize">
+          <td>{{item.id}}</td>
           <td>{{item.date}}</td>
+          <td>{{item.vehicleNumber}}</td>
           <td>{{item.customerName}}</td>
-          <td>{{item.rateOfMoisture}}</td>
-          <td>{{item.moisture}}</td>
-          <td>{{item.rateToGive}}</td>
           <td>{{item.totalBags}}</td>
+          <!-- <td>{{item.moisture}}</td> -->
+          <td>{{item.standardRate}}</td>
+          <!-- <td>{{item.calculatedRate}}</td> -->
           <td>{{item.totalWeight}}</td>
           <td>{{item.weightCutting}}</td>
-          <td>{{item.extraCutting}}</td>
+          <!-- <td>{{item.weightExtraCuting}}</td> -->
           <td>{{item.netWeight}}</td>
           <td>{{item.totalAmount}}</td>
-          <td>{{item.carryCharges}}</td>
-          <td>{{item.netAmount}}</td>
-          <td>view</td>
+          <td>{{item.carryCharge}}</td>
+          <td>{{item.netPayAmount}}</td>
+          <!-- <td class="text-center">
+            <i class="fa fa-money" aria-hidden="true" title="Cash"
+              *ngIf="!item.chequeMode"></i>
+            <i class="fa fa-credit-card" aria-hidden="true" title="Cheque"
+              *ngIf="item.chequeMode"></i>
+          </td> -->
+          <td class="text-center cursor-pointer" title="Edit">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"
+              (click)="viewBill(item)"></i>
         </tr>
       </tbody>
     </table>
+    <div class="text-right">
+      <ngb-pagination *ngIf="customerData.length" [collectionSize]="customerData.length"
+        [(page)]="customerDataPage" [maxSize]="5" [rotate]="true" [ellipses]="false"
+        [boundaryLinks]="true">
+      </ngb-pagination>
+    </div>
   </div>
 </div>

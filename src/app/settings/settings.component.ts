@@ -56,8 +56,8 @@ export class SettingsComponent implements OnInit {
     this.spinner.show();
     const req = {
       "todayStdRate": Number(this.todaysRate) ? Number(this.todaysRate) : null,
-      "carryRate": Number(this.carryCharge) ? Number(this.carryCharge) : null,
-      "weightCutting": Number(this.weightCutting) ? Number(this.weightCutting) : null
+      "carryRate": Number(this.carryCharge) ? Number(this.carryCharge) : 10,
+      "weightCutting": Number(this.weightCutting) ? Number(this.weightCutting) : 2
     }
 
     this.configApi.setGlobalData(req).subscribe(

@@ -26,6 +26,8 @@ export class BuyPageComponent implements OnInit {
   netPayAmount: any = 0;
   commentsOnBill: any = '';
   billNumber: any = '';
+  chequeNumberBox: any = '';
+  isChequePayment: any = false;
 
   standardCarrying: any = 10;
   standardRate: any = 0;
@@ -35,6 +37,7 @@ export class BuyPageComponent implements OnInit {
   isMoistureValid: any = false;
   isTotalBagsValid: any = false;
   isAllFieldsCalculated: any = true;
+  isChequeNumberBox: any = false;
 
   editBill: any = '';
   customerBillId: any = null;
@@ -52,14 +55,19 @@ export class BuyPageComponent implements OnInit {
         this.standardCarrying = resp.body['carryRate'];
         this.standardWeightCut = resp.body['weightCutting'];
         this.spinner.hide();
+        if (!this.standardRate) {
+          this.toastr.error('Something Went Wrong');
+          this.router.navigate(['page-not-found']);
+        }
       },
       error => {
         this.spinner.hide();
         this.toastr.error('Something Went Wrong');
-        this.router.navigate(['']);
+        this.router.navigate(['page-not-found']);
       }
     );
   }
+
   ngOnInit() {
     this.editBill = this.configApi.getData();
     if (this.editBill) {
@@ -71,10 +79,10 @@ export class BuyPageComponent implements OnInit {
   }
 
   setEditBillData = (editBill) => {
-    this.billNumber = editBill.id,
-      this.customerBillId = editBill.id,
-      this.todaysDate = editBill.date || '23-08-2020',
-      this.standardRate = editBill.standardRate;
+    this.billNumber = editBill.id;
+    this.customerBillId = editBill.id;
+    this.todaysDate = editBill.date;
+    this.standardRate = editBill.standardRate;
     this.customerName = editBill.customerName;
     this.moisture = editBill.moisture;
     this.calculatedRate = editBill.calculatedRate;
@@ -88,6 +96,9 @@ export class BuyPageComponent implements OnInit {
     this.carryCharge = editBill.carryCharge;
     this.netPayAmount = editBill.netPayAmount;
     this.commentsOnBill = editBill.comments;
+    this.isChequePayment = editBill.chequeMode;
+    this.chequeNumberBox = editBill.chequeNumber;
+    this.isAllFieldsCalculated = false;
   }
 
   onBagWeightChange = (event, item) => {
@@ -100,13 +111,12 @@ export class BuyPageComponent implements OnInit {
   }
 
   submitCalculatedForm = (event) => {
-    console.log(this.isAllFieldsCalculated);
     if (this.isAllFieldsCalculated) {
       this.toastr.warning('Please Calculate The Bill Before Saving');
     } else {
       this.spinner.show();
       const request = {
-        // 'date': this.todaysDate,
+        'date': this.todaysDate,
         'customerBillId': this.customerBillId ? this.customerBillId : null,
         'id': this.customerBillId ? this.customerBillId : null,
         'standardRate': this.standardRate,
@@ -123,7 +133,8 @@ export class BuyPageComponent implements OnInit {
         'carryCharge': this.carryCharge,
         'netPayAmount': this.netPayAmount,
         'comments': this.commentsOnBill,
-        'chequeMode': false
+        'chequeMode': this.isChequePayment,
+        'chequeNumber': this.isChequePayment ? this.chequeNumberBox : null
       };
 
       if (!this.customerBillId) {
@@ -136,6 +147,7 @@ export class BuyPageComponent implements OnInit {
           error => {
             this.toastr.error('Something Went Wrong');
             // this.clearData();
+            // this.router.navigate(['page-not-found']);
             this.spinner.hide();
           }
         );
@@ -149,6 +161,7 @@ export class BuyPageComponent implements OnInit {
           },
           error => {
             this.toastr.error('Something Went Wrong');
+            // this.router.navigate(['page-not-found']);
             this.spinner.hide();
           }
         );
@@ -231,7 +244,6 @@ export class BuyPageComponent implements OnInit {
   calculateNetAmount = () => {
     const decimalVal = this.totalAmount - this.carryCharge;
     this.netPayAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(2));
-    console.log(this.netPayAmount);
   }
 
   calculateBill = () => {
@@ -260,7 +272,14 @@ export class BuyPageComponent implements OnInit {
       this.isTotalBagsValid = true;
       isValid = false;
     }
-    console.log(this.bagWeightList);
+
+    if (this.isChequePayment) {
+      if (!this.chequeNumberBox) {
+        this.isChequeNumberBox = true;
+        isValid = false;
+      }
+    }
+
     let isListhasZero;
     if (this.bagWeightList.length) {
       isListhasZero = this.bagWeightList.find(item => {
@@ -285,9 +304,10 @@ export class BuyPageComponent implements OnInit {
         'weight': 0
       });
     }
-    console.log(this.bagWeightList);
   }
-
+  printBill = () => {
+    window.print();
+  }
   cancelForm = () => {
     window.location.reload();
   }

@@ -17,6 +17,9 @@
 .pb-20 {
   padding-bottom: 20px;
 }
+.ml-10 {
+  margin-left: 10px;
+}
 .error-field {
   border: 2px solid red;
 }
@@ -30,5 +33,27 @@
 .customer-list {
   th {
     font-weight: 500;
+  }
+}
+
+@media print {
+  .noprint {
+    visibility: hidden;
+  }
+  .print-hide-ele {
+    display: none;
+  }
+  .plr-0 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .custName-print {
+    width: 65%;
+  }
+  .moistBox-print {
+    width: 65px;
+  }
+  .print-label {
+    font-size: 0.8rem;
   }
 }

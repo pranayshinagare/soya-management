@@ -4,12 +4,16 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'https://json-api-analysis.herokuapp.com/';
 const getGlobalData = `${baseUrl}globalData`;
 const setGlobalData = `${baseUrl}globalData`;
 const saveCustomerBill = `${baseUrl}buyCustomerList`;
 const customerList = `${baseUrl}buyCustomerList`;
 const updateCustomerBill = `${baseUrl}buyCustomerList`;
+
+const saveSellBill = `${baseUrl}sellList`;
+const updateSellBill = `${baseUrl}sellList`;
+const sellBillList = `${baseUrl}sellList`;
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +55,21 @@ export class WebApiService {
     return this.http.get<[]>(
       customerList, { observe: 'response' })
   }
+  saveSellBill = (request) => {
+    return this.http.post<[]>(
+      saveSellBill, request, { observe: 'response' })
+  }
+
+  updateSellBill = (request) => {
+    return this.http.put<[]>(
+      `${updateSellBill}/${request.id}`, request, { observe: 'response' })
+  }
+
+  sellBillList = (request) => {
+    return this.http.get<[]>(
+      sellBillList, { observe: 'response' })
+  }
+
   componentData = '';
   setData = (data) => {
     this.componentData = data;

@@ -1,80 +1,51 @@
 {
   "buyCustomerList": [
     {
-      "standardRate": 3400,
-      "customerName": "Pranay Shinagare",
-      "moisture": "12",
-      "calculatedRate": 3328,
-      "totalBags": "4",
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 103
-        },
-        {
-          "id": 2,
-          "weight": 112
-        },
-        {
-          "id": 3,
-          "weight": 125
-        },
-        {
-          "id": 4,
-          "weight": 90
-        }
-      ],
-      "totalWeight": 430,
-      "weightCutting": 8.6,
-      "weightExtraCuting": "20",
-      "netWeight": 401.4,
-      "totalAmount": 13358.59,
-      "carryCharge": 40,
-      "netPayAmount": 13318.59,
-      "comments": "",
-      "cashMode": true,
-      "id": 1
-    },
-    {
-      "standardRate": 3400,
-      "customerName": "Pranay",
+      "date": "26/08/2020",
+      "customerBillId": 1,
+      "id": 1,
+      "standardRate": 4200,
+      "customerName": "Tushar Shinagare",
       "moisture": 13,
-      "calculatedRate": 3292,
+      "calculatedRate": 4068,
       "totalBags": 4,
       "bagWeightList": [
         {
           "id": 1,
-          "weight": 100
+          "weight": 102
         },
         {
           "id": 2,
-          "weight": 120
-        },
-        {
-          "id": 3,
           "weight": 110
         },
         {
+          "id": 3,
+          "weight": 120
+        },
+        {
           "id": 4,
-          "weight": 100
+          "weight": 150
         }
       ],
-      "totalWeight": 430,
-      "weightCutting": 8.6,
-      "weightExtraCuting": 20,
-      "netWeight": 401.4,
-      "totalAmount": 13214.09,
+      "totalWeight": 482,
+      "weightCutting": 9.64,
+      "weightExtraCuting": 0,
+      "netWeight": 472.36,
+      "totalAmount": 19215.6,
       "carryCharge": 40,
-      "netPayAmount": 13174.09,
-      "comments": "",
-      "cashMode": true,
-      "id": 2
+      "netPayAmount": 19175.6,
+      "comments": "Nannya ch soyabean  rokh ",
+      "chequeMode": false,
+      "chequeNumber": null
     },
     {
-      "standardRate": 3400,
-      "customerName": "Pranay",
-      "moisture": 13,
-      "calculatedRate": 3292,
+      "date": "26/08/2020",
+      "customerBillId": null,
+      "id": 2,
+      "standardRate": 4200,
+      "customerName": "Krishnat Shinagare",
+      "moisture": 12,
+      "calculatedRate": 4112,
       "totalBags": 2,
       "bagWeightList": [
         {
@@ -90,274 +61,375 @@
       "weightCutting": 4.6,
       "weightExtraCuting": 0,
       "netWeight": 225.4,
-      "totalAmount": 7420.17,
+      "totalAmount": 9268.45,
       "carryCharge": 20,
-      "netPayAmount": 7400.17,
-      "comments": "Yes",
-      "cashMode": true,
-      "id": 3
-    },
-    {
-      "standardRate": 3400,
-      "customerName": "Pranay",
-      "moisture": 12,
-      "calculatedRate": 3328,
-      "totalBags": 1,
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 100
-        }
-      ],
-      "totalWeight": 100,
-      "weightCutting": 2,
-      "weightExtraCuting": 2,
-      "netWeight": 96,
-      "totalAmount": 3194.88,
-      "carryCharge": 10,
-      "netPayAmount": 3184.88,
-      "comments": "23",
-      "cashMode": true,
-      "id": 4
-    },
-    {
-      "standardRate": 4500,
-      "customerName": "Prnay",
-      "moisture": 14,
-      "calculatedRate": 4312,
-      "totalBags": 2,
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 100
-        },
-        {
-          "id": 2,
-          "weight": 120
-        }
-      ],
-      "totalWeight": 220,
-      "weightCutting": 4.4,
-      "weightExtraCuting": 10,
-      "netWeight": 205.6,
-      "totalAmount": 8865.47,
-      "carryCharge": 20,
-      "netPayAmount": 8845.47,
-      "comments": "",
-      "cashMode": true,
-      "id": 5
-    },
-    {
-      "standardRate": 2300,
-      "customerName": "Ganesh Shingare",
-      "moisture": 12,
-      "calculatedRate": 2250,
-      "totalBags": 3,
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 90
-        },
-        {
-          "id": 2,
-          "weight": 67
-        },
-        {
-          "id": 3,
-          "weight": 78
-        }
-      ],
-      "totalWeight": 235,
-      "weightcutting": 11.75,
-      "weightExtraCuting": 0,
-      "netWeight": 223.25,
-      "totalAmount": 5023.13,
-      "carryCharge": 60,
-      "netPayAmount": 4963.13,
-      "comments": "kavach denar nai",
-      "cashMode": true,
-      "id": 6
-    },
-    {
-      "standardRate": 2300,
-      "customerName": "Sada More",
-      "moisture": 21,
-      "calculatedRate": 1950,
-      "totalBags": 3,
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 110
-        },
-        {
-          "id": 2,
-          "weight": 120
-        },
-        {
-          "id": 3,
-          "weight": 140
-        }
-      ],
-      "totalWeight": 370,
-      "weightcutting": 18.5,
-      "weightExtraCuting": 23,
-      "netWeight": 328.5,
-      "totalAmount": 6405.75,
-      "carryCharge": 60,
-      "netPayAmount": 6345.75,
-      "comments": "TEST",
+      "netPayAmount": 9248.45,
+      "comments": "Ganyach soyabean",
       "chequeMode": false,
-      "id": 7
+      "chequeNumber": null
     },
     {
-      "customerBillId": 5,
-      "standardRate": 4500,
-      "customerName": "Prnay",
-      "moisture": 14,
-      "calculatedRate": 4312,
-      "totalBags": 2,
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 100
-        },
-        {
-          "id": 2,
-          "weight": 110
-        }
-      ],
-      "totalWeight": 210,
-      "weightCutting": 4.2,
-      "weightExtraCuting": 10,
-      "netWeight": 195.8,
-      "totalAmount": 8442.9,
-      "carryCharge": 20,
-      "netPayAmount": 8422.9,
-      "comments": "",
-      "chequeMode": false,
-      "id": 8
-    },
-    {
-      "customerBillId": 9,
-      "id": 9,
+      "date": "26/08/2020",
+      "customerBillId": 3,
+      "id": 3,
       "standardRate": 4200,
-      "customerName": "Sai shingare updated",
-      "moisture": 17,
-      "calculatedRate": 3892,
-      "totalBags": 2,
+      "customerName": "Subhash patil",
+      "moisture": 12,
+      "calculatedRate": 4112,
+      "totalBags": 30,
       "bagWeightList": [
         {
           "id": 1,
-          "weight": 45
-        },
-        {
-          "id": 2,
-          "weight": 78
-        }
-      ],
-      "totalWeight": 123,
-      "weightCutting": 2.46,
-      "weightExtraCuting": 0,
-      "netWeight": 120.54,
-      "totalAmount": 4691.42,
-      "carryCharge": 20,
-      "netPayAmount": 4671.42,
-      "comments": "New sai 2 updated",
-      "chequeMode": false
-    },
-    {
-      "customerBillId": 10,
-      "id": 10,
-      "standardRate": 4200,
-      "customerName": "Krishna Shingare1",
-      "moisture": 10,
-      "calculatedRate": 4200,
-      "totalBags": 1,
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 120
-        }
-      ],
-      "totalWeight": 120,
-      "weightCutting": 2.4,
-      "weightExtraCuting": 0,
-      "netWeight": 117.6,
-      "totalAmount": 4939.2,
-      "carryCharge": 10,
-      "netPayAmount": 4929.2,
-      "comments": "krishna name added",
-      "chequeMode": false
-    },
-    {
-      "customerBillId": 11,
-      "id": 11,
-      "standardRate": 4200,
-      "customerName": "Nilesh Jadhav",
-      "moisture": 13.4,
-      "calculatedRate": 4050.4,
-      "totalBags": 5,
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 110
-        },
-        {
-          "id": 2,
-          "weight": 98
-        },
-        {
-          "id": 3,
-          "weight": 112
-        },
-        {
-          "id": 4,
           "weight": 102
         },
         {
+          "id": 2,
+          "weight": 102
+        },
+        {
+          "id": 3,
+          "weight": 110
+        },
+        {
+          "id": 4,
+          "weight": 110
+        },
+        {
           "id": 5,
+          "weight": 110
+        },
+        {
+          "id": 6,
+          "weight": 110
+        },
+        {
+          "id": 7,
+          "weight": 110
+        },
+        {
+          "id": 8,
+          "weight": 90
+        },
+        {
+          "id": 9,
+          "weight": 95
+        },
+        {
+          "id": 10,
+          "weight": 86
+        },
+        {
+          "id": 11,
+          "weight": 102
+        },
+        {
+          "id": 12,
+          "weight": 100
+        },
+        {
+          "id": 13,
+          "weight": 110
+        },
+        {
+          "id": 14,
+          "weight": 110
+        },
+        {
+          "id": 15,
+          "weight": 110
+        },
+        {
+          "id": 16,
+          "weight": 110
+        },
+        {
+          "id": 17,
+          "weight": 103
+        },
+        {
+          "id": 18,
+          "weight": 76
+        },
+        {
+          "id": 19,
+          "weight": 87
+        },
+        {
+          "id": 20,
+          "weight": 90
+        },
+        {
+          "id": 21,
+          "weight": 91
+        },
+        {
+          "id": 22,
+          "weight": 103
+        },
+        {
+          "id": 23,
+          "weight": 120
+        },
+        {
+          "id": 24,
+          "weight": 78
+        },
+        {
+          "id": 25,
+          "weight": 110
+        },
+        {
+          "id": 26,
+          "weight": 80
+        },
+        {
+          "id": 27,
+          "weight": 85
+        },
+        {
+          "id": 28,
+          "weight": 107
+        },
+        {
+          "id": 29,
           "weight": 105
+        },
+        {
+          "id": 30,
+          "weight": 112
         }
       ],
-      "totalWeight": 527,
-      "weightCutting": 10.54,
+      "totalWeight": 3014,
+      "weightCutting": 60.28,
       "weightExtraCuting": 0,
-      "netWeight": 516.46,
-      "totalAmount": 20918.7,
-      "carryCharge": 50,
-      "netPayAmount": 20868.7,
-      "comments": "Cash payment updated",
-      "chequeMode": false
+      "netWeight": 2953.72,
+      "totalAmount": 121456.97,
+      "carryCharge": 300,
+      "netPayAmount": 121156.97,
+      "comments": "30 poti on subhash",
+      "chequeMode": false,
+      "chequeNumber": null
     },
     {
+      "date": "26/08/2020",
       "customerBillId": null,
-      "id": 12,
+      "id": 4,
       "standardRate": 4200,
-      "customerName": "new gan",
-      "moisture": 19,
-      "calculatedRate": 3760,
-      "totalBags": 1,
+      "customerName": "Vasant Patil, Vashi",
+      "moisture": 12,
+      "calculatedRate": 4112,
+      "totalBags": 45,
       "bagWeightList": [
         {
           "id": 1,
-          "weight": 65
+          "weight": 110
+        },
+        {
+          "id": 2,
+          "weight": 120
+        },
+        {
+          "id": 3,
+          "weight": 80
+        },
+        {
+          "id": 4,
+          "weight": 90
+        },
+        {
+          "id": 5,
+          "weight": 110
+        },
+        {
+          "id": 6,
+          "weight": 112
+        },
+        {
+          "id": 7,
+          "weight": 102
+        },
+        {
+          "id": 8,
+          "weight": 110
+        },
+        {
+          "id": 9,
+          "weight": 110
+        },
+        {
+          "id": 10,
+          "weight": 90
+        },
+        {
+          "id": 11,
+          "weight": 110
+        },
+        {
+          "id": 12,
+          "weight": 110
+        },
+        {
+          "id": 13,
+          "weight": 102
+        },
+        {
+          "id": 14,
+          "weight": 104
+        },
+        {
+          "id": 15,
+          "weight": 108
+        },
+        {
+          "id": 16,
+          "weight": 104
+        },
+        {
+          "id": 17,
+          "weight": 103
+        },
+        {
+          "id": 18,
+          "weight": 90
+        },
+        {
+          "id": 19,
+          "weight": 102
+        },
+        {
+          "id": 20,
+          "weight": 102
+        },
+        {
+          "id": 21,
+          "weight": 104
+        },
+        {
+          "id": 22,
+          "weight": 90
+        },
+        {
+          "id": 23,
+          "weight": 103
+        },
+        {
+          "id": 24,
+          "weight": 90
+        },
+        {
+          "id": 25,
+          "weight": 95
+        },
+        {
+          "id": 26,
+          "weight": 102
+        },
+        {
+          "id": 27,
+          "weight": 56
+        },
+        {
+          "id": 28,
+          "weight": 100
+        },
+        {
+          "id": 29,
+          "weight": 102
+        },
+        {
+          "id": 30,
+          "weight": 102
+        },
+        {
+          "id": 31,
+          "weight": 104
+        },
+        {
+          "id": 32,
+          "weight": 102
+        },
+        {
+          "id": 33,
+          "weight": 103
+        },
+        {
+          "id": 34,
+          "weight": 103
+        },
+        {
+          "id": 35,
+          "weight": 102
+        },
+        {
+          "id": 36,
+          "weight": 110
+        },
+        {
+          "id": 37,
+          "weight": 102
+        },
+        {
+          "id": 38,
+          "weight": 102
+        },
+        {
+          "id": 39,
+          "weight": 100
+        },
+        {
+          "id": 40,
+          "weight": 109
+        },
+        {
+          "id": 41,
+          "weight": 102
+        },
+        {
+          "id": 42,
+          "weight": 102
+        },
+        {
+          "id": 43,
+          "weight": 121
+        },
+        {
+          "id": 44,
+          "weight": 102
+        },
+        {
+          "id": 45,
+          "weight": 102
         }
       ],
-      "totalWeight": 65,
-      "weightCutting": 1.3,
-      "weightExtraCuting": 0,
-      "netWeight": 63.7,
-      "totalAmount": 2395.12,
-      "carryCharge": 10,
-      "netPayAmount": 2385.12,
-      "comments": "",
-      "chequeMode": false
+      "totalWeight": 4579,
+      "weightCutting": 91.58,
+      "weightExtraCuting": 20,
+      "netWeight": 4467.42,
+      "totalAmount": 183700.31,
+      "carryCharge": 450,
+      "netPayAmount": 183250.31,
+      "comments": "ROKH CASH",
+      "chequeMode": false,
+      "chequeNumber": null
     }
   ],
-  "sellList": [],
-  "buyCustomer": {},
-  "sellData": {},
-  "settingData": {},
+  "sellList": [
+    {
+      "date": "26/08/2020",
+      "id": 1,
+      "vehicleNumber": "MTL662",
+      "standardRate": 4500,
+      "customerName": "Shivsphurti traders, Kasegaon",
+      "totalBags": 125,
+      "totalWeight": 13000,
+      "weightCutting": 250,
+      "netWeight": 12750,
+      "totalAmount": 573750,
+      "carryCharge": 1500,
+      "netPayAmount": 572250,
+      "comments": "First gadi to star soya"
+    }
+  ],
   "globalData": {
     "todayStdRate": 4200,
     "carryRate": 10,

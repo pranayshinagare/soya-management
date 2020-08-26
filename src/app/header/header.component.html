@@ -9,22 +9,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/customers" [routerLinkActive]="'active'">Customer List</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/customers" [routerLinkActive]="'active'">Customer List</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" routerLink="/buy-soyabean" [routerLinkActive]="'active'">Buying Soya</a>
+          <a class="nav-link" (click)="configApi.setData('')" routerLink="/buy-soyabean" [routerLinkActive]="'active'">Buy Soya</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/sell-soyabean" [routerLinkActive]="'active'">Sell Soya</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/sell-soyabean" [routerLinkActive]="'active'">Sell Soya</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/sell-list" [routerLinkActive]="'active'">Sell List</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/sell-list" [routerLinkActive]="'active'">Sell List</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/settings" [routerLinkActive]="'active'">Settings</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/settings" [routerLinkActive]="'active'">Settings</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/stock" [routerLinkActive]="'active'">Stock</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/stock" [routerLinkActive]="'active'">Stock</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

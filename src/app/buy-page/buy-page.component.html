@@ -5,34 +5,37 @@
       <p style="margin: 0;">A/p: Kasegaon, Near S.T Stand, Mob. 9423272768, 0987654321</p>
     </div>
     <div class="invoiceType text-center">
-      <p>Buy Invoice</p>
+      <p>Soyabean Invoice</p>
     </div>
     <div>
       <div class="rateBoxWrapper float-left">
-        <label for="billId" class="label">Bill No: </label>
-        <input type="text" readonly class="form-control todayRateBox" name="billId" [(ngModel)]="billNumber" readonly style="margin-right: 10px;">
         <label for="todayDate">Date: </label>
-        <span>{{todaysDate}}</span>
+        <span> {{todaysDate}}</span>
+        <label for="billId" class="label ml-10">Bill No: </label>
+        <input type="text" readonly class="form-control todayRateBox" name="billId"
+          [(ngModel)]="billNumber" readonly style="margin-right: 10px;">
       </div>
       <div class="rateBoxWrapper float-right">
-        <label for="todayRateBoxId" class="label">Today's Rate: </label>
+        <label for="todayRateBoxId" class="label">Standard Rate: </label>
         <input type="text" class="form-control todayRateBox" name="todayRateBoxId"
           placeholder="Today Rate" [(ngModel)]="standardRate" disabled>
       </div>
     </div>
     <div class="row customerWrapper form-group">
-      <div class="col-md-5">
-        <label for="customerName" class="label">Customer Name</label>
-        <input type="text" [(ngModel)]="customerName" class="form-control customerNameBox"
-          name="customerName" placeholder="Customer Name" [ngClass]="{'error-field': isCustomerNameValid}" (change)="isCustomerNameValid=false;isAllFieldsCalculated=true;">
-
+      <div class="col-md-5 plr-0">
+        <label for="customerName" class="label print-label">Customer Name</label>
+        <input type="text" [(ngModel)]="customerName"
+          class="form-control customerNameBox custName-print" name="customerName"
+          placeholder="Customer Name" [ngClass]="{'error-field': isCustomerNameValid}"
+          (change)="isCustomerNameValid=false;isAllFieldsCalculated=true;">
       </div>
-      <div class="col-md-2 padding-0">
-        <label for="moistureName" class="label">Moisture</label>
+      <div class="col-md-2 p-0">
+        <label for="moistureName" class="label print-label">Moisture</label>
         <input type="text" [(ngModel)]="moisture"
-          (change)="onMoistureChange($event, moisture);isMoistureValid=false;isAllFieldsCalculated=true;" name="moistureName"
-          class="form-control moistureBox" placeholder="Moisture" [ngClass]="{'error-field': isMoistureValid}">
-          <!-- required maxlength="5" minlength="2" #moistureName="ngModel" [ngClass]="{'error-field': moistureName.invalid && (moistureName.dirty || moistureName.touched)}" -->
+          (change)="onMoistureChange($event, moisture);isMoistureValid=false;isAllFieldsCalculated=true;"
+          name="moistureName" class="form-control moistureBox moistBox-print"
+          placeholder="Moisture" [ngClass]="{'error-field': isMoistureValid}">
+        <!-- required maxlength="5" minlength="2" #moistureName="ngModel" [ngClass]="{'error-field': moistureName.invalid && (moistureName.dirty || moistureName.touched)}" -->
         <label>%</label>
         <!-- <span *ngIf="moistureName.invalid && (moistureName.dirty || moistureName.touched)"
           class="alert-danger">
@@ -47,17 +50,18 @@
           </div>
         </span> -->
       </div>
-      <div class="col-md-2">
-        <label for="calculatedRate" class="label">Rate</label>
+      <div class="col-md-2 plr-0">
+        <label for="calculatedRate" class="label print-label">Rate</label>
         <input type="text" [(ngModel)]="calculatedRate" class="form-control rateBox"
           name="calculatedRate" placeholder="Rate" disabled>
       </div>
-      <div class="col-md-3">
-        <label for="totalBagsName" class="label">Total Bags</label>
+      <div class="col-md-3 text-right">
+        <label for="totalBagsName" class="label print-label">Total Bags</label>
         <input type="text" [(ngModel)]="totalBags" numbersOnly
-          (change)="onTotalBagsChange($event, totalBags);isTotalBagsValid=false;isAllFieldsCalculated=true;" class="form-control totalBagBox"
-          name="totalBagsName" placeholder="Total Bags" [ngClass]="{'error-field': isTotalBagsValid}">
-          <!-- required maxlength="3" minlength="1" #totalBagsName="ngModel" [ngClass]="{'error-field': totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)}" -->
+          (change)="onTotalBagsChange($event, totalBags);isTotalBagsValid=false;isAllFieldsCalculated=true;"
+          class="form-control totalBagBox" name="totalBagsName" placeholder="Total Bags"
+          [ngClass]="{'error-field': isTotalBagsValid}">
+        <!-- required maxlength="3" minlength="1" #totalBagsName="ngModel" [ngClass]="{'error-field': totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)}" -->
         <!-- <span
           *ngIf="totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)"
           class="alert-danger">
@@ -78,17 +82,18 @@
         <ul>
           <li *ngFor="let data of bagWeightList; let eleIndex=index" class="weightItem">
             <input type="text" [(ngModel)]="data.weight" value="" class="form-control"
-              (change)="onBagWeightChange($event, data);isAllFieldsCalculated=true;" name="product-{{data.id}}"
-              numbersOnly [ngClass]="{'error-field': !data.weight}">
+              (change)="onBagWeightChange($event, data);isAllFieldsCalculated=true;"
+              name="product-{{data.id}}" numbersOnly
+              [ngClass]="{'error-field': !data.weight}">
           </li>
         </ul>
 
       </div>
       <div class="col-md-4">
         <div>
-          <div class="form-group text-right" style="padding-right: 46px;">
-            <button type="button" class="btn btn-primary"
-              (click)="calculateBill()">Calculate</button>
+          <div class="form-group text-right print-hide-ele" style="padding-right: 46px;">
+            <button type="button" class="btn btn-primary" (click)="calculateBill()"
+              title="Calculate">Calculate</button>
           </div>
           <div class="form-group">
             <label style="min-width:93px;">Total Amount:</label>
@@ -97,7 +102,7 @@
           </div>
           <div class="form-group">
             <label style="min-width:100px;">Carry Charge:</label>
-            <input type="text" [(ngModel)]="carryCharge" name="carryCharge"
+            <input type="text" [(ngModel)]="carryCharge" (change)="isAllFieldsCalculated=true;" name="carryCharge"
               class="form-control weightBox amountBox text-right" disabled>
           </div>
           <div class="form-group">
@@ -110,7 +115,25 @@
       <div class="col-md-3">
         <div class="form-group">
           <label for="commentsOnBill">Comments</label>
-          <textarea class="form-control" [(ngModel)]="commentsOnBill" (change)="isAllFieldsCalculated=true" name="commentsOnBill" rows="3"></textarea>
+          <textarea class="form-control" [(ngModel)]="commentsOnBill" name="commentsOnBill"
+            rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <div class="custom-control custom-switch">
+            <input type="checkbox" [(ngModel)]="isChequePayment"
+              (change)="isAllFieldsCalculated=true;"
+              class="custom-control-input print-hide-ele" id="isChequePaymentSwitch"
+              name="isChequePaymentSwitchName">
+            <label class="custom-control-label" for="isChequePaymentSwitch">Cheque
+              Payment</label>
+          </div>
+        </div>
+        <div *ngIf="isChequePayment">
+          <label for="chequeNumberBoxName">Cheque Number</label>
+          <input type="text" [(ngModel)]="chequeNumberBox"
+            (change)="isAllFieldsCalculated=true;isChequeNumberBox=false;"
+            [ngClass]="{'error-field': isChequeNumberBox}" name="chequeNumberBoxName"
+            class="form-control" placeholder="Cheque Number">
         </div>
       </div>
     </div>
@@ -129,7 +152,9 @@
         <div class="form-group">
           <label style="min-width:93px;">Extra Cutting:</label>
           <!-- (change)="calculateNettWeight($event)" -->
-          <input type="text" [(ngModel)]="weightExtraCuting" (change)="isAllFieldsCalculated=true;" name="weightExtraCuting" class="form-control weightBox" numbersOnly>
+          <input type="text" [(ngModel)]="weightExtraCuting"
+            (change)="isAllFieldsCalculated=true;" name="weightExtraCuting"
+            class="form-control weightBox" numbersOnly>
         </div>
         <div class="form-group">
           <label style="min-width:93px;">Net Weight:</label>
@@ -143,10 +168,15 @@
           <label for="signature">Signature: </label>
           <div class="signSpace"></div>
         </div>
-        <div class="button-wrapper text-right">
-          <button type="button" (click)="submitCalculatedForm($event)" class="btn btn-primary">Submit</button>
+        <div class="button-wrapper text-right print-hide-ele">
+          <button type="button" (click)="printBill();" class="btn btn-primary"
+            title="Print"><i class="fa fa-print" aria-hidden="true"></i>
+          </button>
+          <button type="button" (click)="submitCalculatedForm($event)"
+            class="btn btn-primary" style="margin-left: 10px;"
+            title="Submit">Submit</button>
           <button type="button" (click)="cancelForm()" class="btn btn-primary"
-            style="margin-left: 10px;">Cancel</button>
+            style="margin-left: 10px;" title="Cancel">Cancel</button>
         </div>
       </div>
     </div>

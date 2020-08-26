@@ -6,6 +6,7 @@ import { SellPageComponent } from './sell-page/sell-page.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StockCheckComponent } from './stock-check/stock-check.component';
 import { SellListComponent } from './sell-list/sell-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'stock', component: StockCheckComponent },
   { path: 'stock', component: StockCheckComponent },
   { path: 'sell-list', component: SellListComponent },
+  { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '',   redirectTo: '/customers', pathMatch: 'full' }
 ];
 

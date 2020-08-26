@@ -21,7 +21,6 @@ export class CustomerListComponent implements OnInit {
 
   constructor(private calendar: NgbCalendar, private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
   clearSelection = (event) => {
-    console.log(this);
     this.billNumber = '';
     this.fromdDate = '';
     this.toDate = '';
@@ -39,7 +38,6 @@ export class CustomerListComponent implements OnInit {
     this.configApi.searchCustomers(request).subscribe(
       resp => {
         this.customerData = resp.body;
-        console.log('rest');
         this.spinner.hide();
       },
       error => {
