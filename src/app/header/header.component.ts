@@ -8,7 +8,7 @@ import { WebApiService } from '../web.api.services';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private configApi: WebApiService) { }
+  constructor(public configApi: WebApiService) { }
 
   ngOnInit() {
   }

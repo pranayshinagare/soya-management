@@ -247,6 +247,7 @@ export class BuyPageComponent implements OnInit {
   }
 
   calculateBill = () => {
+    this.emptyWeightList(this.bagWeightList);
     if (this.validateForm()) {
       const totalBagWeight = this.bagWeightList.map(item => item.weight).reduce((prev, next) => prev + next);
       this.totalWeight = totalBagWeight;
@@ -256,6 +257,14 @@ export class BuyPageComponent implements OnInit {
       this.calculateNetAmount();
       this.isAllFieldsCalculated = false;
     }
+  }
+
+  emptyWeightList = (wtList) => {
+    let list = wtList.filter(item => {
+      return item.weight
+    });
+    this.bagWeightList = list;
+    this.totalBags = this.bagWeightList.length
   }
 
   validateForm = () => {
@@ -280,15 +289,15 @@ export class BuyPageComponent implements OnInit {
       }
     }
 
-    let isListhasZero;
-    if (this.bagWeightList.length) {
-      isListhasZero = this.bagWeightList.find(item => {
-        return !item.weight;
-      });
-      if (isListhasZero) {
-        isValid = false;
-      }
-    }
+    // let isListhasZero;
+    // if (this.bagWeightList.length) {
+    //   isListhasZero = this.bagWeightList.find(item => {
+    //     return !item.weight;
+    //   });
+    //   if (isListhasZero) {
+    //     isValid = false;
+    //   }
+    // }
 
     if (!isValid) {
       this.toastr.warning('Please Check Highlighted Fields');
@@ -297,13 +306,33 @@ export class BuyPageComponent implements OnInit {
   }
 
   onTotalBagsChange = (event, bags) => {
-    this.bagWeightList = [];
-    for (let index = 0; index < Number(bags); index++) {
-      this.bagWeightList.push({
-        'id': index + 1,
-        'weight': 0
-      });
+    let numBags = Number(bags);
+    if (numBags > this.bagWeightList.length && this.bagWeightList.length) {
+      for (let index = 0; index < numBags; index++) {
+        let isItemPresent = this.bagWeightList.find(itm => {
+          return itm.id === (index + 1);
+        });
+        if (!isItemPresent) {
+          this.bagWeightList.push({
+            'id': index + 1,
+            'weight': 0
+          });
+        }
+      }
+    } else if (numBags < this.bagWeightList.length && this.bagWeightList.length) {
+      let diff = this.bagWeightList.length - numBags;
+      for (let index = 0; index < diff; index++) {
+        this.bagWeightList.pop(index);
+      }
+    } else {
+      for (let index = 0; index < Number(bags); index++) {
+        this.bagWeightList.push({
+          'id': index + 1,
+          'weight': 0
+        });
+      }
     }
+    console.log(this.bagWeightList);
   }
   printBill = () => {
     window.print();

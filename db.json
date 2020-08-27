@@ -40,13 +40,13 @@
     },
     {
       "date": "26/08/2020",
-      "customerBillId": null,
+      "customerBillId": 2,
       "id": 2,
       "standardRate": 4200,
       "customerName": "Krishnat Shinagare",
       "moisture": 12,
       "calculatedRate": 4112,
-      "totalBags": 2,
+      "totalBags": 3,
       "bagWeightList": [
         {
           "id": 1,
@@ -55,15 +55,19 @@
         {
           "id": 2,
           "weight": 110
+        },
+        {
+          "id": 3,
+          "weight": 102
         }
       ],
-      "totalWeight": 230,
-      "weightCutting": 4.6,
+      "totalWeight": 332,
+      "weightCutting": 6.64,
       "weightExtraCuting": 0,
-      "netWeight": 225.4,
-      "totalAmount": 9268.45,
-      "carryCharge": 20,
-      "netPayAmount": 9248.45,
+      "netWeight": 325.36,
+      "totalAmount": 13378.8,
+      "carryCharge": 30,
+      "netPayAmount": 13348.8,
       "comments": "Ganyach soyabean",
       "chequeMode": false,
       "chequeNumber": null
@@ -76,7 +80,7 @@
       "customerName": "Subhash patil",
       "moisture": 12,
       "calculatedRate": 4112,
-      "totalBags": 30,
+      "totalBags": 26,
       "bagWeightList": [
         {
           "id": 1,
@@ -180,32 +184,16 @@
         },
         {
           "id": 26,
-          "weight": 80
-        },
-        {
-          "id": 27,
-          "weight": 85
-        },
-        {
-          "id": 28,
-          "weight": 107
-        },
-        {
-          "id": 29,
-          "weight": 105
-        },
-        {
-          "id": 30,
-          "weight": 112
+          "weight": 100
         }
       ],
-      "totalWeight": 3014,
-      "weightCutting": 60.28,
+      "totalWeight": 2625,
+      "weightCutting": 52.5,
       "weightExtraCuting": 0,
-      "netWeight": 2953.72,
-      "totalAmount": 121456.97,
-      "carryCharge": 300,
-      "netPayAmount": 121156.97,
+      "netWeight": 2572.5,
+      "totalAmount": 105781.2,
+      "carryCharge": 260,
+      "netPayAmount": 105521.2,
       "comments": "30 poti on subhash",
       "chequeMode": false,
       "chequeNumber": null
@@ -409,6 +397,106 @@
       "carryCharge": 450,
       "netPayAmount": 183250.31,
       "comments": "ROKH CASH",
+      "chequeMode": false,
+      "chequeNumber": null
+    },
+    {
+      "date": "28/08/2020",
+      "customerBillId": null,
+      "id": 5,
+      "standardRate": 4200,
+      "customerName": "Sanjiv Patil",
+      "moisture": 12,
+      "calculatedRate": 4112,
+      "totalBags": 6,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 110
+        },
+        {
+          "id": 2,
+          "weight": 112
+        },
+        {
+          "id": 3,
+          "weight": 104
+        },
+        {
+          "id": 4,
+          "weight": 90
+        },
+        {
+          "id": 5,
+          "weight": 98
+        },
+        {
+          "id": 6,
+          "weight": 121
+        }
+      ],
+      "totalWeight": 635,
+      "weightCutting": 12.7,
+      "weightExtraCuting": 0,
+      "netWeight": 622.3,
+      "totalAmount": 25588.98,
+      "carryCharge": 60,
+      "netPayAmount": 25528.98,
+      "comments": "",
+      "chequeMode": false,
+      "chequeNumber": null
+    },
+    {
+      "date": "28/08/2020",
+      "customerBillId": null,
+      "id": 6,
+      "standardRate": 4200,
+      "customerName": "suman patil",
+      "moisture": 12,
+      "calculatedRate": 4112,
+      "totalBags": 8,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 100
+        },
+        {
+          "id": 2,
+          "weight": 102
+        },
+        {
+          "id": 3,
+          "weight": 105
+        },
+        {
+          "id": 4,
+          "weight": 207
+        },
+        {
+          "id": 5,
+          "weight": 206
+        },
+        {
+          "id": 6,
+          "weight": 26
+        },
+        {
+          "id": 7,
+          "weight": 12
+        },
+        {
+          "id": 8,
+          "weight": 24
+        }
+      ],
+      "totalWeight": 782,
+      "weightCutting": 15.64,
+      "weightExtraCuting": 0,
+      "netWeight": 766.36,
+      "totalAmount": 31512.72,
+      "carryCharge": 80,
+      "netPayAmount": 31432.72,
+      "comments": "",
       "chequeMode": false,
       "chequeNumber": null
     }

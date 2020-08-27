@@ -36,11 +36,10 @@ export class SettingsComponent implements OnInit {
 
   validateFields = () => {
     let isValid = true;
-    if (!this.todaysRate || !this.carryCharge || !this.weightCutting) {
+    if (!this.todaysRate) {
       this.toastr.error('Please Enter Valid Data');
       isValid = false;
     }
-    console.log('test valid')
     return isValid;
   }
 
@@ -52,26 +51,28 @@ export class SettingsComponent implements OnInit {
   }
 
   submitData = () => {
-    this.btnDisableFlag = true;
-    this.spinner.show();
-    const req = {
-      "todayStdRate": Number(this.todaysRate) ? Number(this.todaysRate) : null,
-      "carryRate": Number(this.carryCharge) ? Number(this.carryCharge) : 10,
-      "weightCutting": Number(this.weightCutting) ? Number(this.weightCutting) : 2
-    }
-
-    this.configApi.setGlobalData(req).subscribe(
-      resp => {
-        this.spinner.hide();
-        this.toastr.success('Data saved successfully');
-        this.btnDisableFlag = false;
-      },
-      error => {
-        this.toastr.error('Something Went Wrong');
-        this.btnDisableFlag = false;
-        // this.clearData();
-        this.spinner.hide();
+    if (!!this.validateFields()) {
+      this.btnDisableFlag = true;
+      this.spinner.show();
+      const req = {
+        "todayStdRate": Number(this.todaysRate) ? Number(this.todaysRate) : null,
+        "carryRate": Number(this.carryCharge) ? Number(this.carryCharge) : 10,
+        "weightCutting": Number(this.weightCutting) ? Number(this.weightCutting) : 2
       }
-    );
+
+      this.configApi.setGlobalData(req).subscribe(
+        resp => {
+          this.spinner.hide();
+          this.toastr.success('Data saved successfully');
+          this.btnDisableFlag = false;
+        },
+        error => {
+          this.toastr.error('Something Went Wrong');
+          this.btnDisableFlag = false;
+          // this.clearData();
+          this.spinner.hide();
+        }
+      );
+    }
   }
 }

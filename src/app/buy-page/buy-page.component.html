@@ -61,6 +61,7 @@
           (change)="onTotalBagsChange($event, totalBags);isTotalBagsValid=false;isAllFieldsCalculated=true;"
           class="form-control totalBagBox" name="totalBagsName" placeholder="Total Bags"
           [ngClass]="{'error-field': isTotalBagsValid}">
+          <!-- onTotalBagsChange($event, totalBags); -->
         <!-- required maxlength="3" minlength="1" #totalBagsName="ngModel" [ngClass]="{'error-field': totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)}" -->
         <!-- <span
           *ngIf="totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)"
@@ -83,7 +84,7 @@
           <li *ngFor="let data of bagWeightList; let eleIndex=index" class="weightItem">
             <input type="text" [(ngModel)]="data.weight" value="" class="form-control"
               (change)="onBagWeightChange($event, data);isAllFieldsCalculated=true;"
-              name="product-{{data.id}}" numbersOnly
+              name="product-{{data.id}}" numbersOnly maxlength="3"
               [ngClass]="{'error-field': !data.weight}">
           </li>
         </ul>

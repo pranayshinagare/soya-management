@@ -8,7 +8,6 @@ import { StockCheckComponent } from './stock-check/stock-check.component';
 import { SellListComponent } from './sell-list/sell-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-
 const routes: Routes = [
   { path: 'customers', component: CustomerListComponent },
   { path: 'buy-soyabean', component: BuyPageComponent },
