@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stock-check.component.scss']
 })
 export class StockCheckComponent implements OnInit {
-
-  constructor() { }
-
   ngOnInit() {
-  }
 
+  }
 }

@@ -1,3 +1,10 @@
 .filterWrapper {
   padding: 20px 0;
 }
+.customer-list {
+  font-size: 0.89rem;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background: #fff;
+}

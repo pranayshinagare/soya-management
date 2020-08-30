@@ -10,6 +10,7 @@ import { WebApiService } from '../web.api.services';
   styleUrls: ['./sell-page.component.scss']
 })
 export class SellPageComponent implements OnInit {
+  gstOnSoya: any = 5;
   sellBillId: any = null;
   customerName: any = '';
   vehicleNumber: any = '';
@@ -26,12 +27,26 @@ export class SellPageComponent implements OnInit {
   sellSoyaFormData: any = {};
   billNumber: any = '';
 
+  grandTotal: any = 0;
+  calculatedCgstRs: any = 0;
+  calculatedSgstRs: any = 0;
+  customerAddress: any = '';
+  customerState: any = '';
+  stateCode: any = '';
+  customerGstNumber: any = '';
+
   isVehicleNumber: any = false;
   isStandardSellRate: any = false;
   isCustomerNameValid: any = false;
   isTotalBagsValid: any = false;
   isTotalWeight: any = false;
   isAllFieldsCalculated: any = true;
+
+  isCustomerAddressValid: any = false;
+  isCustomerStateValid: any = false;
+  isStateCodeValid: any = false;
+  isCustomerGstNumberValid: any = false;
+
   editBill: any = '';
   constructor(private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
 
@@ -60,6 +75,13 @@ export class SellPageComponent implements OnInit {
     this.netPayAmount = editBill.netPayAmount;
     this.commentsOnSell = editBill.comments;
     this.isAllFieldsCalculated = false;
+    this.grandTotal = editBill.grandTotal;
+    this.calculatedCgstRs = editBill.calculatedCgstRs;
+    this.calculatedSgstRs = editBill.calculatedSgstRs;
+    this.customerAddress = editBill.customerAddress;
+    this.customerState = editBill.customerState;
+    this.stateCode = editBill.stateCode;
+    this.customerGstNumber = editBill.customerGstNumber;
   }
   onTotalBagChange = (event, totalBags) => {
     if (isNaN(Number(totalBags))) {
@@ -94,8 +116,11 @@ export class SellPageComponent implements OnInit {
     if (this.validateForm()) {
       this.netWeight = this.totalWeight - this.totalCutting;
       const decimalVal = (this.netWeight * Number(this.standardSellRate)) / 100;
-      this.totalAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(2));
+      this.totalAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(0));
       this.netPayAmount = this.totalAmount - this.carryCharge;
+      this.calculatedCgstRs = Number((this.netPayAmount * ((this.gstOnSoya / 2) / 100)).toFixed(0));
+      this.calculatedSgstRs = Number((this.netPayAmount * ((this.gstOnSoya / 2) / 100)).toFixed(0));
+      this.grandTotal = this.calculatedCgstRs + this.calculatedSgstRs + this.netPayAmount;
       this.isAllFieldsCalculated = false;
     }
   }
@@ -104,68 +129,70 @@ export class SellPageComponent implements OnInit {
     if (this.isAllFieldsCalculated) {
       this.toastr.warning('Please Calculate The Bill Before Saving');
     } else {
-      this.spinner.show();
-      const request = {
-        'date': this.todaysDate,
-        // 'sellBillId': this.sellBillId ? this.sellBillId : null,
-        'id': this.sellBillId ? this.sellBillId : null,
-        'vehicleNumber': this.vehicleNumber,
-        'standardRate': Number(this.standardSellRate),
-        'customerName': this.customerName,
-        'totalBags': Number(this.totalBags),
-        'totalWeight': Number(this.totalWeight),
-        'weightCutting': Number(this.totalCutting),
-        'netWeight': this.netWeight,
-        'totalAmount': this.totalAmount,
-        'carryCharge': this.carryCharge,
-        'netPayAmount': this.netPayAmount,
-        'comments': this.commentsOnSell
-      };
+      if (this.submitValidation()) {
+        this.spinner.show();
+        const request = {
+          'date': this.todaysDate,
+          'id': this.sellBillId ? this.sellBillId : null,
+          'vehicleNumber': this.vehicleNumber,
+          'standardRate': Number(this.standardSellRate),
+          'customerName': this.customerName,
+          'customerAddress': this.customerAddress,
+          'customerState': this.customerState,
+          'stateCode': this.stateCode,
+          'customerGstNumber': this.customerGstNumber,
+          'totalBags': Number(this.totalBags),
+          'totalWeight': Number(this.totalWeight),
+          'weightCutting': Number(this.totalCutting),
+          'netWeight': this.netWeight,
+          'totalAmount': this.totalAmount,
+          'carryCharge': this.carryCharge,
+          'netPayAmount': this.netPayAmount,
+          'comments': this.commentsOnSell,
+          'calculatedCgstRs': this.calculatedCgstRs,
+          'calculatedSgstRs': this.calculatedSgstRs,
+          'grandTotal': this.grandTotal
+        };
 
-      if (!this.sellBillId) {
-        this.configApi.saveSellBill(request).subscribe(
-          resp => {
-            this.spinner.hide();
-            this.clearData();
-            this.toastr.success('Data saved successfully');
-          },
-          error => {
-            this.toastr.error('Something Went Wrong');
-            this.spinner.hide();
-          }
-        );
-      } else {
-        this.configApi.updateSellBill(request).subscribe(
-          resp => {
-            this.spinner.hide();
-            this.clearData();
-            this.router.navigate(['sell-list']);
-            this.toastr.success('Data Updated Successfully');
-          },
-          error => {
-            this.toastr.error('Something Went Wrong');
-            this.spinner.hide();
-          }
-        );
+        if (!this.sellBillId) {
+          this.configApi.saveSellBill(request).subscribe(
+            resp => {
+              this.spinner.hide();
+              this.clearData();
+              this.toastr.success('Data saved successfully');
+            },
+            error => {
+              this.toastr.error('Something Went Wrong');
+              this.spinner.hide();
+            }
+          );
+        } else {
+          this.configApi.updateSellBill(request).subscribe(
+            resp => {
+              this.spinner.hide();
+              this.clearData();
+              this.router.navigate(['sell-list']);
+              this.toastr.success('Data Updated Successfully');
+            },
+            error => {
+              this.toastr.error('Something Went Wrong');
+              this.spinner.hide();
+            }
+          );
+        }
+        this.configApi.setData('');
       }
-      this.configApi.setData('');
     }
   }
 
   validateForm = () => {
     let isValid = true;
-    if (!this.vehicleNumber) {
-      this.isVehicleNumber = true;
-      isValid = false;
-    }
+
     if (!this.standardSellRate) {
       this.isStandardSellRate = true;
       isValid = false;
     }
-    if (!this.customerName) {
-      this.isCustomerNameValid = true;
-      isValid = false;
-    }
+
     if (!this.totalBags) {
       this.isTotalBagsValid = true;
       isValid = false;
@@ -178,6 +205,42 @@ export class SellPageComponent implements OnInit {
       this.toastr.warning('Please Check Highlighted Fields');
     }
     return isValid;
+  }
+
+  submitValidation = () => {
+    let isValid = true;
+
+    if (!this.customerName) {
+      this.isCustomerNameValid = true;
+      isValid = false;
+    }
+    if (!this.vehicleNumber) {
+      this.isVehicleNumber = true;
+      isValid = false;
+    }
+    if (!this.customerAddress) {
+      this.isCustomerAddressValid = true;
+      isValid = false;
+    }
+    if (!this.customerState) {
+      this.isCustomerStateValid = true;
+      isValid = false;
+    }
+    if (!this.stateCode) {
+      this.isStateCodeValid = true;
+      isValid = false;
+    }
+    if (!this.customerGstNumber) {
+      this.isCustomerGstNumberValid = true;
+      isValid = false;
+    }
+
+    if (!isValid) {
+      this.toastr.warning('Please Check Highlighted Fields');
+    }
+
+    return isValid;
+
   }
 
   onRateChange = (value) => {
@@ -201,7 +264,16 @@ export class SellPageComponent implements OnInit {
     this.standardSellRate = 0;
     this.getTodaysDate();
     this.isAllFieldsCalculated = true;
+
+    this.grandTotal = 0;
+    this.calculatedCgstRs = 0;
+    this.calculatedSgstRs = 0;
+    this.customerAddress = '';
+    this.customerState = '';
+    this.stateCode = '';
+    this.customerGstNumber = '';
   }
+
   getTodaysDate = () => {
     var today: any = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -211,10 +283,28 @@ export class SellPageComponent implements OnInit {
     today = dd + '/' + mm + '/' + yyyy;
     this.todaysDate = today;
   }
+
+  // document.getElementById('number').onkeyup = function () {
+  //   document.getElementById('words').innerHTML = amountInWords(document.getElementById('number').value);
+  // };
+  amountInWords = (num) => {
+    let a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '];
+    let b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    if ((num = num.toString()).length > 9) return 'overflow';
+    let n: any = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+    return str;
+  }
+
   printBill = () => {
     window.print();
   }
   cancelForm = () => {
-    window.location.reload();
+    this.router.navigate(['sell-list']);
   }
 }

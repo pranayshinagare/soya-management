@@ -21,7 +21,7 @@
   margin-left: 10px;
 }
 .error-field {
-  border: 2px solid red;
+  border: 2px solid #dc3545;
 }
 .error-message {
   font-size: 13px;
@@ -35,7 +35,17 @@
     font-weight: 500;
   }
 }
-
+.m-0-a {
+  margin: 0 auto;
+}
+.inline-block {
+  display: inline-block;
+}
+.custom-inline-input {
+  display: inline-block;
+  width: 80%;
+  margin-left: 7px;
+}
 @media print {
   .noprint {
     visibility: hidden;
@@ -55,5 +65,27 @@
   }
   .print-label {
     font-size: 0.8rem;
+  }
+  body {
+    font-size: 0.9rem;
+  }
+  .form-control {
+    font-size: 0.8rem;
+  }
+  .ml-20-no-print {
+    margin-left: 10px;
+  }
+  .borderless-box {
+    border: none;
+    border-bottom: 1px solid #999;
+    border-radius: 0;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: #000;
+  }
+  .invoice-header, tr.last-row {
+    p, h4 {
+      color: #000;
+    }
   }
 }

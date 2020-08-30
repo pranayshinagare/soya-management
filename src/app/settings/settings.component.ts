@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WebApiService } from '../web.api.services';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -19,11 +20,33 @@ export class SettingsComponent implements OnInit {
   isCarryRateValid: any = false;
 
   btnDisableFlag: any = false;
-  constructor(private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
+  constructor(private router: Router, private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
   ngOnInit() {
     this.getTodaysDate();
+    this.getGlobalData();
+
   }
 
+  getGlobalData = () => {
+    this.spinner.show();
+    this.configApi.getGlobalData().subscribe(
+      resp => {
+        this.todaysRate = resp.body['todayStdRate'];
+        this.carryCharge = resp.body['carryRate'];
+        this.weightCutting = resp.body['weightCutting'];
+        this.spinner.hide();
+        if (!this.todaysRate) {
+          this.toastr.error('Something Went Wrong');
+          this.router.navigate(['page-not-found']);
+        }
+      },
+      error => {
+        this.spinner.hide();
+        this.toastr.error('Something Went Wrong');
+        this.router.navigate(['page-not-found']);
+      }
+    );
+  }
   getTodaysDate = () => {
     var today: any = new Date();
     var dd = String(today.getDate()).padStart(2, '0');

@@ -7,6 +7,7 @@
 }
 .rateBox {
   width: 90px;
+  background: #fff;
 }
 .customerWrapper {
   padding: 15px 0;
@@ -26,6 +27,7 @@
   display: inline-block;
   width: 110px;
   margin-left: 10px;
+  background: #fff;
 }
 .customerWrapper {
   clear: both;
@@ -53,16 +55,27 @@
   display: inline-block;
   max-width: 200px;
   margin-left: 5px;
+  background: #fff;
 }
 .signSpace {
-  width: 100%;
-  border-top: 1px solid #000;
-  margin-top: 20px;
+  text-transform: capitalize;
 }
 .firmWrapper {
   padding: 10px 0;
+  h3 {
+    letter-spacing: 0.95px;
+    font-weight: 700;
+  }
 }
 .totalWeightWrapper .form-group {
   width: 50%;
   display: inline-block;
+}
+.totalWeightWrapper {
+  .weightBox {
+    max-width: 150px;
+  }
+}
+.form-control {
+  font-size: 0.93rem;
 }

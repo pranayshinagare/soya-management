@@ -42,21 +42,21 @@
     <table class="table table-striped customer-list">
       <thead>
         <tr>
-          <th>Bill No.</th>
+          <th>#Bill</th>
           <th style="width: 75px;">Date</th>
           <th style="width: 200px;">Customer Name</th>
           <th>Total Bags</th>
           <th>Moisture</th>
-          <th>Std. Rate(M.10%)</th>
-          <th>Cal. Rate</th>
+          <th>Std. Rate</th>
+          <th>Rate</th>
           <th>Total Weight</th>
-          <th>Weight Cutting</th>
-          <th>Extra Cutting</th>
+          <th>Cutting</th>
+          <th style="width: 25px;">Extra Cutting</th>
           <th>Net Weight</th>
           <th>Total Amount</th>
-          <th>Carry Charges</th>
+          <th>Carry</th>
           <th>Net Amount</th>
-          <th>Payment Mode</th>
+          <!-- <th>Payment Mode</th> -->
           <th>Edit</th>
         </tr>
       </thead>
@@ -65,7 +65,7 @@
           *ngFor="let item of customerData | slice: (customerDataPage-1) * customerDataPageSize : (customerDataPage-1) * customerDataPageSize + customerDataPageSize">
           <td>{{item.id}}</td>
           <td>{{item.date}}</td>
-          <td>{{item.customerName}}</td>
+          <td style="font-weight: 600;">{{item.customerName}}</td>
           <td>{{item.totalBags}}</td>
           <td>{{item.moisture}}</td>
           <td>{{item.standardRate}}</td>
@@ -77,12 +77,12 @@
           <td>{{item.totalAmount}}</td>
           <td>{{item.carryCharge}}</td>
           <td>{{item.netPayAmount}}</td>
-          <td class="text-center">
+          <!-- <td class="text-center">
             <i class="fa fa-money" aria-hidden="true" title="Cash"
               *ngIf="!item.chequeMode"></i>
             <i class="fa fa-credit-card" aria-hidden="true" title="Cheque"
               *ngIf="item.chequeMode"></i>
-          </td>
+          </td> -->
           <td class="text-center cursor-pointer" title="Edit">
             <i class="fa fa-pencil-square-o" aria-hidden="true"
               (click)="viewBill(item)"></i>

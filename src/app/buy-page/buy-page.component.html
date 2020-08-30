@@ -1,19 +1,20 @@
 <div class="container">
   <form>
     <div class="firmWrapper text-center">
-      <h4>Shivsphurthi Soyabean Center, Kasegaon</h4>
-      <p style="margin: 0;">A/p: Kasegaon, Near S.T Stand, Mob. 9423272768, 0987654321</p>
+      <h3>SHINGARE TRADING COMPANY</h3>
+      <p style="margin: 0;">A/p: Kasegaon, Tal: Walwa, Dist: Sangli. (Maharashtra) Mob. +91 9423272768</p>
+      <p>GSTIN: 27BRRPS4398J1ZO | PAN: BRRPS4398J</p>
     </div>
-    <div class="invoiceType text-center">
+    <!-- <div class="invoiceType text-center">
       <p>Soyabean Invoice</p>
-    </div>
+    </div> -->
     <div>
       <div class="rateBoxWrapper float-left">
         <label for="todayDate">Date: </label>
         <span> {{todaysDate}}</span>
         <label for="billId" class="label ml-10">Bill No: </label>
         <input type="text" readonly class="form-control todayRateBox" name="billId"
-          [(ngModel)]="billNumber" readonly style="margin-right: 10px;">
+          [(ngModel)]="billNumber" readonly>
       </div>
       <div class="rateBoxWrapper float-right">
         <label for="todayRateBoxId" class="label">Standard Rate: </label>
@@ -61,7 +62,7 @@
           (change)="onTotalBagsChange($event, totalBags);isTotalBagsValid=false;isAllFieldsCalculated=true;"
           class="form-control totalBagBox" name="totalBagsName" placeholder="Total Bags"
           [ngClass]="{'error-field': isTotalBagsValid}">
-          <!-- onTotalBagsChange($event, totalBags); -->
+        <!-- onTotalBagsChange($event, totalBags); -->
         <!-- required maxlength="3" minlength="1" #totalBagsName="ngModel" [ngClass]="{'error-field': totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)}" -->
         <!-- <span
           *ngIf="totalBagsName.invalid && (totalBagsName.dirty || totalBagsName.touched)"
@@ -79,7 +80,7 @@
       </div>
     </div>
     <div class="row form-group">
-      <div class="col-md-5 bagWeightWrapper">
+      <div class="col-md-5 bagWeightWrapper plr-0">
         <ul>
           <li *ngFor="let data of bagWeightList; let eleIndex=index" class="weightItem">
             <input type="text" [(ngModel)]="data.weight" value="" class="form-control"
@@ -88,22 +89,18 @@
               [ngClass]="{'error-field': !data.weight}">
           </li>
         </ul>
-
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 plr-0">
         <div>
-          <div class="form-group text-right print-hide-ele" style="padding-right: 46px;">
-            <button type="button" class="btn btn-primary" (click)="calculateBill()"
-              title="Calculate">Calculate</button>
-          </div>
           <div class="form-group">
             <label style="min-width:93px;">Total Amount:</label>
             <input type="text" [(ngModel)]="totalAmount" name="totalAmount"
-              class="form-control weightBox amountBox text-right" disabled>
+              class="form-control weightBox amountBox text-right ml-20-no-print" disabled>
           </div>
           <div class="form-group">
             <label style="min-width:100px;">Carry Charge:</label>
-            <input type="text" [(ngModel)]="carryCharge" (change)="isAllFieldsCalculated=true;" name="carryCharge"
+            <input type="text" [(ngModel)]="carryCharge"
+              (change)="isAllFieldsCalculated=true;" name="carryCharge"
               class="form-control weightBox amountBox text-right" disabled>
           </div>
           <div class="form-group">
@@ -111,20 +108,35 @@
             <input type="text" [(ngModel)]="netPayAmount" name="netPayAmountName"
               class="form-control weightBox amountBox text-right" disabled>
           </div>
+          <div class="form-group">
+            <label for="cashPaymentName" style="min-width:100px;">Cash:</label>
+            <input type="text" [(ngModel)]="cashPayment"
+              (change)="cashPaymentChange($event, cashPayment);isCashPaymentValid=false;isAllFieldsCalculated=true;" name="cashPaymentName"
+              class="form-control weightBox amountBox text-right" [ngClass]="{'error-field': isCashPaymentValid}" numbersOnly>
+          </div>
+          <div class="form-group">
+            <label for="chequeAmountName" style="min-width:100px;">Cheque Amt:</label>
+            <input type="text" [(ngModel)]="chequeAmount" name="chequeAmountName"
+              class="form-control weightBox amountBox text-right" disabled>
+          </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 plr-0">
         <div class="form-group">
           <label for="commentsOnBill">Comments</label>
-          <textarea class="form-control" [(ngModel)]="commentsOnBill" name="commentsOnBill"
-            rows="2"></textarea>
+          <textarea class="form-control" [(ngModel)]="commentsOnBill"
+            name="commentsOnBill" rows="2"></textarea>
+        </div>
+        <div class="form-group text-right print-hide-ele">
+          <button type="button" class="btn btn-primary" (click)="calculateBill()"
+            title="Calculate">Calculate</button>
         </div>
         <div class="form-group">
           <div class="custom-control custom-switch">
             <input type="checkbox" [(ngModel)]="isChequePayment"
               (change)="isAllFieldsCalculated=true;"
               class="custom-control-input print-hide-ele" id="isChequePaymentSwitch"
-              name="isChequePaymentSwitchName">
+              name="isChequePaymentSwitchName" disabled>
             <label class="custom-control-label" for="isChequePaymentSwitch">Cheque
               Payment</label>
           </div>
@@ -132,7 +144,7 @@
         <div *ngIf="isChequePayment">
           <label for="chequeNumberBoxName">Cheque Number</label>
           <input type="text" [(ngModel)]="chequeNumberBox"
-            (change)="isAllFieldsCalculated=true;isChequeNumberBox=false;"
+            (change)="isChequeNumberBox=false;"
             [ngClass]="{'error-field': isChequeNumberBox}" name="chequeNumberBoxName"
             class="form-control" placeholder="Cheque Number">
         </div>
@@ -143,7 +155,7 @@
         <div class="form-group">
           <label>Total Weight:</label>
           <input type="text" [(ngModel)]="totalWeight" name="totalWeight"
-            class="form-control weightBox" value="{{totalWeight}}" readonly>
+            class="form-control weightBox" value="{{totalWeight}}" style="margin-left: 9px;" readonly>
         </div>
         <div class="form-group">
           <label style="min-width:93px;">Cutting:</label>
@@ -163,11 +175,10 @@
             class="form-control weightBox" disabled>
         </div>
       </div>
-      <div class="col-md-1"></div>
-      <div class="col-md-4">
+      <div class="col-md-5 px-0">
         <div class="form-group">
-          <label for="signature">Signature: </label>
-          <div class="signSpace"></div>
+          <label for="signature">Invoice Value (In words) </label>
+          <div class="signSpace">{{amountInWords(netPayAmount)}}</div>
         </div>
         <div class="button-wrapper text-right print-hide-ele">
           <button type="button" (click)="printBill();" class="btn btn-primary"

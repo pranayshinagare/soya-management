@@ -28,6 +28,8 @@ export class BuyPageComponent implements OnInit {
   billNumber: any = '';
   chequeNumberBox: any = '';
   isChequePayment: any = false;
+  cashPayment: any = 0;
+  chequeAmount: any = 0;
 
   standardCarrying: any = 10;
   standardRate: any = 0;
@@ -38,6 +40,7 @@ export class BuyPageComponent implements OnInit {
   isTotalBagsValid: any = false;
   isAllFieldsCalculated: any = true;
   isChequeNumberBox: any = false;
+  isCashPaymentValid: any = false;
 
   editBill: any = '';
   customerBillId: any = null;
@@ -98,6 +101,8 @@ export class BuyPageComponent implements OnInit {
     this.commentsOnBill = editBill.comments;
     this.isChequePayment = editBill.chequeMode;
     this.chequeNumberBox = editBill.chequeNumber;
+    this.cashPayment = editBill.cashPayment;
+    this.chequeAmount = editBill.chequeAmount;
     this.isAllFieldsCalculated = false;
   }
 
@@ -134,6 +139,8 @@ export class BuyPageComponent implements OnInit {
         'netPayAmount': this.netPayAmount,
         'comments': this.commentsOnBill,
         'chequeMode': this.isChequePayment,
+        'cashPayment': this.cashPayment,
+        'chequeAmount': this.chequeAmount,
         'chequeNumber': this.isChequePayment ? this.chequeNumberBox : null
       };
 
@@ -183,6 +190,8 @@ export class BuyPageComponent implements OnInit {
     this.totalAmount = 0;
     this.carryCharge = 0;
     this.netPayAmount = 0;
+    this.chequeAmount = 0;
+    this.cashPayment = 0;
     this.commentsOnBill = '';
     // reset date and standard rate
     this.getTodaysDate();
@@ -217,7 +226,23 @@ export class BuyPageComponent implements OnInit {
     } else if (moistNum < 10) {
       totalMoist = 10;
     }
-    return stdRate - (totalMoist - 10) * ((stdRate + 200) / 100);
+    return Number((stdRate - (totalMoist - 10) * ((stdRate + 200) / 100)).toFixed(0));
+  }
+
+  cashPaymentChange = (event, cashPayment) => {
+    if (!isNaN(cashPayment)) {
+      if (Number(cashPayment) > Number(this.netPayAmount)) {
+        this.isCashPaymentValid = true;
+        this.toastr.error('Please Enter Valid Amount');
+      } else {
+        this.cashPayment = Number(cashPayment);
+        this.chequeAmount = Number(this.netPayAmount) - this.cashPayment;
+        this.isChequePayment = !!Number(this.chequeAmount);
+      }
+    } else {
+      this.cashPayment = 0;
+      this.chequeAmount = Number(this.netPayAmount) - this.cashPayment;
+    }
   }
 
   calculateCutting = () => {
@@ -233,17 +258,17 @@ export class BuyPageComponent implements OnInit {
 
   calculateTotalAmount = () => {
     const decimalVal = (this.netWeight * this.calculatedRate) / 100;
-    this.totalAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(2));
+    this.totalAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(0));
   }
 
   calculateCarryCharges = () => {
     const decimalVal = Number(this.totalBags) * Number(this.standardCarrying);
-    this.carryCharge = Number((Math.round(decimalVal * 100) / 100).toFixed(2));
+    this.carryCharge = Number((Math.round(decimalVal * 100) / 100).toFixed(0));
   }
 
   calculateNetAmount = () => {
     const decimalVal = this.totalAmount - this.carryCharge;
-    this.netPayAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(2));
+    this.netPayAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(0));
   }
 
   calculateBill = () => {
@@ -288,6 +313,12 @@ export class BuyPageComponent implements OnInit {
         isValid = false;
       }
     }
+
+    if (Number(this.cashPayment) > Number(this.netPayAmount)) {
+      this.isCashPaymentValid = true;
+      isValid = false;
+    }
+
 
     // let isListhasZero;
     // if (this.bagWeightList.length) {
@@ -334,10 +365,23 @@ export class BuyPageComponent implements OnInit {
     }
     console.log(this.bagWeightList);
   }
+  amountInWords = (num) => {
+    let a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '];
+    let b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    if ((num = num.toString()).length > 9) return 'overflow';
+    let n: any = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+    return str;
+  }
   printBill = () => {
     window.print();
   }
   cancelForm = () => {
-    window.location.reload();
+    this.router.navigate(['customers']);
   }
 }
