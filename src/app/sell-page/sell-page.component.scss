@@ -140,8 +140,13 @@
 }
 
 @media print {
+  .stateBox {
+    width: 60% !important;
+    margin-left: 0 !important;
+  }
   .print-heading-sell {
     font-size: 1.39rem;
+    color: #000;
   }
   .page {
     border: initial;
@@ -263,4 +268,8 @@ p.footer {
 }
 .ht-50 {
   height: 50px;
+}
+.stateBox {
+  width: 64% !important;
+  margin-left: 66px;
 }

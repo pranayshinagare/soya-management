@@ -38,7 +38,7 @@
             <input type="text" [(ngModel)]="customerState"
               [ngClass]="{'error-field': isCustomerStateValid}"
               (change)="isCustomerStateValid = false;"
-              class="form-control  custom-inline-input" name="customerStateName"
+              class="form-control  custom-inline-input stateBox" name="customerStateName"
               placeholder="State">
           </div>
           <div class="col-md-5 pl-0">
@@ -47,7 +47,7 @@
               [ngClass]="{'error-field': isStateCodeValid}"
               (change)="isStateCodeValid = false;"
               class="form-control  custom-inline-input" name="stateCodeName"
-              placeholder="State Code" style="width: 63%;">
+              placeholder="State Code" style="width: 61%;">
           </div>
         </div>
         <div class="form-group">

@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/soya-management/",
+    "public": "dist/soya-management",
     "ignore": [
       "firebase.json",
       "**/.*",

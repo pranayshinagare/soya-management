@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'https://json-api-analysis.herokuapp.com/';
 const getGlobalData = `${baseUrl}globalData`;
 const setGlobalData = `${baseUrl}globalData`;
 const saveCustomerBill = `${baseUrl}buyCustomerList`;
