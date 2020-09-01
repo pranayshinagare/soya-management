@@ -19,7 +19,7 @@ export class SellListComponent implements OnInit {
   customerDataPage = 1;
   customerDataPageSize = 10;
 
-  constructor(private calendar: NgbCalendar, private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
+  constructor(private calendar: NgbCalendar, public configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
   clearSelection = (event) => {
     this.billNumber = '';
     this.fromdDate = '';

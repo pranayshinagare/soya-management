@@ -62,9 +62,7 @@
         <h6 class="almost-gray">Invoice number:</h6>
         <p class="gray-ish"># {{sellBillId}}</p>
 
-        <h6 class="almost-gray">Date of Issue:</h6>
-        <p class="gray-ish">{{todaysDate}}</p>
-
+        
         <h6 class="almost-gray">Vehicle Number:</h6>
         <input type="text" class="form-control custom-input" name="vehicleNumberName"
           [(ngModel)]="vehicleNumber" [ngClass]="{'error-field': isVehicleNumber}"
@@ -72,6 +70,9 @@
           style="width: 70%;">
       </div>
       <div class="col-3 text-right total-field">
+        <h6 class="almost-gray">Date of Issue:</h6>
+        <p class="gray-ish">{{todaysDate}}</p>
+
         <!-- <h4 class="almost-gray">Invoice Total</h4>
         <h1 class="gray-ish">{{grandTotal}} <span class="curency">&#8377;</span></h1> -->
 
