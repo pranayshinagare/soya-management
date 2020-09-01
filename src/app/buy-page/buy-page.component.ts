@@ -116,64 +116,69 @@ export class BuyPageComponent implements OnInit {
   }
 
   submitCalculatedForm = (event) => {
-    if (this.isAllFieldsCalculated) {
-      this.toastr.warning('Please Calculate The Bill Before Saving');
+    if (this.isChequePayment && !this.chequeNumberBox) {
+      this.toastr.warning('Please Add Cheque Number');
+      this.isChequeNumberBox = true;
     } else {
-      this.spinner.show();
-      const request = {
-        'date': this.todaysDate,
-        'customerBillId': this.customerBillId ? this.customerBillId : null,
-        'id': this.customerBillId ? this.customerBillId : null,
-        'standardRate': this.standardRate,
-        'customerName': this.customerName,
-        'moisture': Number(this.moisture),
-        'calculatedRate': this.calculatedRate,
-        'totalBags': Number(this.totalBags),
-        'bagWeightList': this.bagWeightList,
-        'totalWeight': this.totalWeight,
-        'weightCutting': this.weightCutting,
-        'weightExtraCuting': Number(this.weightExtraCuting),
-        'netWeight': this.netWeight,
-        'totalAmount': this.totalAmount,
-        'carryCharge': this.carryCharge,
-        'netPayAmount': this.netPayAmount,
-        'comments': this.commentsOnBill,
-        'chequeMode': this.isChequePayment,
-        'cashPayment': this.cashPayment,
-        'chequeAmount': this.chequeAmount,
-        'chequeNumber': this.isChequePayment ? this.chequeNumberBox : null
-      };
-
-      if (!this.customerBillId) {
-        this.configApi.saveCustomerBill(request).subscribe(
-          resp => {
-            this.spinner.hide();
-            this.clearData();
-            this.toastr.success('Data saved successfully');
-          },
-          error => {
-            this.toastr.error('Something Went Wrong');
-            // this.clearData();
-            // this.router.navigate(['page-not-found']);
-            this.spinner.hide();
-          }
-        );
+      if (this.isAllFieldsCalculated) {
+        this.toastr.warning('Please Calculate The Bill Before Saving');
       } else {
-        this.configApi.updateCustomerBill(request).subscribe(
-          resp => {
-            this.spinner.hide();
-            this.clearData();
-            this.router.navigate(['customers']);
-            this.toastr.success('Data Updated Successfully');
-          },
-          error => {
-            this.toastr.error('Something Went Wrong');
-            // this.router.navigate(['page-not-found']);
-            this.spinner.hide();
-          }
-        );
+        this.spinner.show();
+        const request = {
+          'date': this.todaysDate,
+          'customerBillId': this.customerBillId ? this.customerBillId : null,
+          'id': this.customerBillId ? this.customerBillId : null,
+          'standardRate': this.standardRate,
+          'customerName': this.customerName,
+          'moisture': Number(this.moisture),
+          'calculatedRate': this.calculatedRate,
+          'totalBags': Number(this.totalBags),
+          'bagWeightList': this.bagWeightList,
+          'totalWeight': this.totalWeight,
+          'weightCutting': this.weightCutting,
+          'weightExtraCuting': Number(this.weightExtraCuting),
+          'netWeight': this.netWeight,
+          'totalAmount': this.totalAmount,
+          'carryCharge': this.carryCharge,
+          'netPayAmount': this.netPayAmount,
+          'comments': this.commentsOnBill,
+          'chequeMode': this.isChequePayment,
+          'cashPayment': this.cashPayment,
+          'chequeAmount': this.chequeAmount,
+          'chequeNumber': this.isChequePayment ? this.chequeNumberBox : null
+        };
+
+        if (!this.customerBillId) {
+          this.configApi.saveCustomerBill(request).subscribe(
+            resp => {
+              this.spinner.hide();
+              this.clearData();
+              this.toastr.success('Data saved successfully');
+            },
+            error => {
+              this.toastr.error('Something Went Wrong');
+              // this.clearData();
+              // this.router.navigate(['page-not-found']);
+              this.spinner.hide();
+            }
+          );
+        } else {
+          this.configApi.updateCustomerBill(request).subscribe(
+            resp => {
+              this.spinner.hide();
+              this.clearData();
+              this.router.navigate(['customers']);
+              this.toastr.success('Data Updated Successfully');
+            },
+            error => {
+              this.toastr.error('Something Went Wrong');
+              // this.router.navigate(['page-not-found']);
+              this.spinner.hide();
+            }
+          );
+        }
+        this.configApi.setData('');
       }
-      this.configApi.setData('');
     }
   }
 
@@ -194,6 +199,7 @@ export class BuyPageComponent implements OnInit {
     this.cashPayment = 0;
     this.commentsOnBill = '';
     this.chequeNumberBox = '';
+    this.isChequePayment = false;
     // reset date and standard rate
     this.getTodaysDate();
     this.getGlobalData();
@@ -270,7 +276,7 @@ export class BuyPageComponent implements OnInit {
   calculateNetAmount = () => {
     const decimalVal = this.totalAmount - this.carryCharge;
     this.netPayAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(0));
-    this.chequeAmount = this.netPayAmount- Number(this.cashPayment);
+    this.chequeAmount = this.netPayAmount - Number(this.cashPayment);
   }
 
   calculateBill = () => {
@@ -283,7 +289,12 @@ export class BuyPageComponent implements OnInit {
       this.calculateCarryCharges();
       this.calculateNetAmount();
       this.isAllFieldsCalculated = false;
+
+      if (this.chequeAmount && !this.isChequePayment) {
+        this.isChequePayment = true;
+      }
     }
+
   }
 
   emptyWeightList = (wtList) => {

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h3 class="ptb-15 mb-0">Sell Invoice</h3>
+  <h3 class="ptb-15 mb-0">Sell Invoices</h3>
   <form class="pb-20">
     <div class="form-row">
       <div class="form-group col-md-2">
@@ -25,17 +25,21 @@
       </div>
       <div class="form-group col-md-4">
         <label for="customerName">Invoice To Name</label>
-        <input type="text" class="form-control" name="customerName"
-          placeholder="Name" [(ngModel)]="customerName">
+        <input type="text" class="form-control" name="customerName" placeholder="Name"
+          [(ngModel)]="customerName">
       </div>
     </div>
     <div class="text-right">
-      <button type="button" routerLink="/sell-soyabean" (click)="configApi.setData('')" class="btn btn-primary mr-10">Add
+      <button type="button" title="Download Data in Excel" (click)="downloadDataExcel()"
+        class="btn btn-primary mr-10"><i class="fa fa-download" aria-hidden="true"></i>
+      </button>
+      <button type="button" routerLink="/sell-soyabean" (click)="configApi.setData('')"
+        class="btn btn-primary mr-10">Add
         New Entry</button>
-      <button type="submit" (click)="getCustomerList()"
-        class="btn btn-primary mr-10" disabled>Search</button>
-      <button type="button" class="btn btn-primary"
-        (click)="clearSelection($event)" disabled>Clear</button>
+      <button type="submit" (click)="getCustomerList()" class="btn btn-primary mr-10"
+        disabled>Search</button>
+      <button type="button" class="btn btn-primary" (click)="clearSelection($event)"
+        disabled>Clear</button>
     </div>
   </form>
   <div class="customerGrid">

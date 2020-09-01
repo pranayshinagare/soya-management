@@ -4,6 +4,7 @@ import { WebApiService } from '../web.api.services';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
+import exportFromJSON from 'export-from-json'
 
 @Component({
   selector: 'app-customer-list',
@@ -27,6 +28,56 @@ export class CustomerListComponent implements OnInit {
     this.customerName = '';
   }
 
+  createExcelData = (exData, fileName, exportType) => {
+    let exceData = [];
+    exData.forEach(element => {
+      let wtList = [];
+      element.bagWeightList.forEach(x => {
+        wtList.push(x.weight);
+      });
+      let weightList = wtList.join();
+      exceData.push({
+        'Bill No.': element.id,
+        'Date': element.date,
+        'Customer Name': element.customerName,
+        'Total Bags': element.totalBags,
+        'Moisture': element.moisture,
+        'Std. Rate': element.standardRate,
+        'Calc. Rate': element.calculatedRate,
+        "Weights": weightList,
+        'Total Weights': element.totalWeight,
+        'Weight Cutting': element.weightCutting,
+        'Extra Weight Cutting': element.weightExtraCuting,
+        'Net Weight': element.netWeight,
+        'Total Amount': element.totalAmount,
+        'Carry Charge': element.carryCharge,
+        'Net Payment': element.netPayAmount,
+        'Cheque Payment': element.chequeAmount,
+        'Cash Payment': element.cashPayment,
+        'Cheque Number': element.chequeNumber,
+        'Comments': element.comments
+      });
+    });
+    const data = exceData;
+    exportFromJSON({ data, fileName, exportType });
+  }
+
+  downloadDataExcel = () => {
+    this.spinner.show();
+    const fileName = 'customer_list';
+    const exportType = 'xls';
+    this.configApi.searchCustomers({}).subscribe(
+      resp => {
+        const data = resp.body;
+        this.createExcelData(data, fileName, exportType);
+        this.spinner.hide();
+      },
+      error => {
+        this.spinner.hide();
+        this.toastr.error('Something Went Wrong');
+      }
+    );
+  }
   getCustomerList = () => {
     const request = {
       'billNumber': this.billNumber,

@@ -4,6 +4,7 @@ import { WebApiService } from '../web.api.services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import exportFromJSON from 'export-from-json'
 
 @Component({
   selector: 'app-sell-list',
@@ -25,6 +26,45 @@ export class SellListComponent implements OnInit {
     this.fromdDate = '';
     this.toDate = '';
     this.customerName = '';
+  }
+
+  createExcelData = (exData, fileName, exportType) => {
+    let exceData = [];
+    exData.forEach(element => {
+      exceData.push({
+        'Bill No.': element.id,
+        'Date': element.date,
+        "Vehicle Number": element.vehicleNumber,
+        'Invoice To': element.customerName,
+        'Total Bags': element.totalBags,
+        'Rate': element.standardRate,
+        'Total Weight': element.totalWeight,
+        'Sub Total': element.netPayAmount,
+        "CGST": element.calculatedCgstRs,
+        "SGST": element.calculatedSgstRs,
+        "Grand Total": element.grandTotal,
+        'Comments': element.comments
+      });
+    });
+    const data = exceData;
+    exportFromJSON({ data, fileName, exportType });
+  }
+
+  downloadDataExcel = () => {
+    this.spinner.show();
+    const fileName = 'sell_list';
+    const exportType = 'xls';
+    this.configApi.sellBillList({}).subscribe(
+      resp => {
+        const data = resp.body;
+        this.createExcelData(data, fileName, exportType);
+        this.spinner.hide();
+      },
+      error => {
+        this.spinner.hide();
+        this.toastr.error('Something Went Wrong');
+      }
+    );
   }
 
   getCustomerList = () => {
