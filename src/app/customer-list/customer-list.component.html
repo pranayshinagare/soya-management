@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h3 class="ptb-15 mb-0">Bull Soya Invoice</h3>
+  <h3 class="ptb-15 mb-0">Buy Soya Invoice</h3>
   <form class="pb-20">
     <div class="form-row">
       <div class="form-group col-md-2">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="text-right">
-      <button type="button" routerLink="/buy-soyabean" class="btn btn-primary mr-10">Add
+      <button type="button" routerLink="/buy-soyabean" (click)="configApi.setData('')" class="btn btn-primary mr-10">Add
         New Entry</button>
       <button type="submit" (click)="getCustomerList()"
         class="btn btn-primary mr-10" disabled>Search</button>
@@ -46,16 +46,16 @@
           <th style="width: 75px;">Date</th>
           <th style="width: 200px;">Customer Name</th>
           <th>Total Bags</th>
-          <th>Moisture</th>
+          <th>M (%)</th>
           <th>Std. Rate</th>
-          <th>Rate</th>
+          <th>Rate <span class="currency">&#8377;</span></th>
           <th>Total Weight</th>
           <th>Cutting</th>
           <th style="width: 25px;">Extra Cutting</th>
           <th>Net Weight</th>
-          <th>Total Amount</th>
+          <th>Total Amount <span class="currency">&#8377;</span></th>
           <th>Carry</th>
-          <th>Net Amount</th>
+          <th>Net Amount <span class="currency">&#8377;</span></th>
           <!-- <th>Payment Mode</th> -->
           <th>Edit</th>
         </tr>

@@ -193,6 +193,7 @@ export class BuyPageComponent implements OnInit {
     this.chequeAmount = 0;
     this.cashPayment = 0;
     this.commentsOnBill = '';
+    this.chequeNumberBox = '';
     // reset date and standard rate
     this.getTodaysDate();
     this.getGlobalData();
@@ -269,6 +270,7 @@ export class BuyPageComponent implements OnInit {
   calculateNetAmount = () => {
     const decimalVal = this.totalAmount - this.carryCharge;
     this.netPayAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(0));
+    this.chequeAmount = this.netPayAmount- Number(this.cashPayment);
   }
 
   calculateBill = () => {
@@ -318,8 +320,6 @@ export class BuyPageComponent implements OnInit {
       this.isCashPaymentValid = true;
       isValid = false;
     }
-
-
     // let isListhasZero;
     // if (this.bagWeightList.length) {
     //   isListhasZero = this.bagWeightList.find(item => {
