@@ -9,28 +9,45 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" (click)="configApi.setData('')" routerLink="/customers" [routerLinkActive]="'active'">Customer List</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/customers"
+          [routerLinkActive]="'active'">Customer List</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" (click)="configApi.setData('')" routerLink="/buy-soyabean" [routerLinkActive]="'active'">Buy</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/buy-soyabean"
+          [routerLinkActive]="'active'">Buy</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="configApi.setData('')" routerLink="/sell-soyabean" [routerLinkActive]="'active'">Sell</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/sell-soyabean"
+          [routerLinkActive]="'active'">Sell</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="configApi.setData('')" routerLink="/sell-list" [routerLinkActive]="'active'">Selling List</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/sell-list"
+          [routerLinkActive]="'active'">Selling List</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="configApi.setData('')" routerLink="/settings" [routerLinkActive]="'active'">Settings</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/settings"
+          [routerLinkActive]="'active'">Settings</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="configApi.setData('')" routerLink="/stock" [routerLinkActive]="'active'">Stock</a>
+        <a class="nav-link" (click)="configApi.setData('')" routerLink="/stock"
+          [routerLinkActive]="'active'">Stock</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <a class="nav-link disabled" href="#">Login</a>
-      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+      <span class="nav-link mr-2 center-name">{{centerName}}</span>
+
+      <div class="row">
+        <div class="col">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownMenuButton"
+              ngbDropdownToggle>{{currentUserName}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+              <button ngbDropdownItem>{{userFullName}}</button>
+              <button ngbDropdownItem (click)="logout()">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </nav>

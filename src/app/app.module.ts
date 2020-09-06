@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,10 +15,13 @@ import { StockCheckComponent } from './stock-check/stock-check.component';
 import { NumberDirective } from 'src/directives/directive.numberOnly';
 import { NgbPaginationModule, NgbAlertModule, NgbDatepicker, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SellListComponent } from './sell-list/sell-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './login';
+import { BasicAuthInterceptor, ErrorInterceptor, fakeBackendProvider } from './_helpers';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     StockCheckComponent,
     NumberDirective,
     SellListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +50,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ToastContainerModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ReactiveFormsModule,
   ],
-  providers: [NumberDirective, NgbDatepicker],
+  providers: [
+    NumberDirective,
+    NgbDatepicker,
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

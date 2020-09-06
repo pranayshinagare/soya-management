@@ -4,5 +4,7 @@
     password: string;
     firstName: string;
     lastName: string;
+    center: string;
+    centerId: string;
     authdata?: string;
 }

@@ -48,6 +48,7 @@ export class SellPageComponent implements OnInit {
   isCustomerGstNumberValid: any = false;
 
   editBill: any = '';
+  centerName: any = '';
   constructor(private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
@@ -57,6 +58,8 @@ export class SellPageComponent implements OnInit {
     } else {
       this.getTodaysDate();
     }
+    const _lsUserData = JSON.parse(localStorage.getItem('currentUser'));
+    this.centerName = _lsUserData.center;
   }
 
   setEditBillData = (editBill) => {

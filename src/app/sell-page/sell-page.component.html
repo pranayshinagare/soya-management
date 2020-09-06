@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-5">
   <div class="row invoice-header px-3 py-2">
     <div class="col-5">
       <p class="mb-5">TAX INVOICE</p>
@@ -12,6 +12,7 @@
     <div class="col-3 text-right">
       <p>GSTIN: 27BRRPS4398J1ZO</p>
       <p>PAN: BRRPS4398J</p>
+      <p>Center: {{centerName}}</p>
     </div>
   </div>
   <form action="">
@@ -21,15 +22,15 @@
           <h6 class="almost-gray mb-1">Invoiced to:</h6>
           <input type="text" [(ngModel)]="customerName"
             [ngClass]="{'error-field': isCustomerNameValid}"
-            (change)="isCustomerNameValid = false;"
-            class="form-control  " name="customerName" placeholder="Name">
+            (change)="isCustomerNameValid = false;" class="form-control  "
+            name="customerName" placeholder="Name">
         </div>
         <div class="form-group">
           <h6 class="almost-gray mb-1">Address:</h6>
           <input type="text" [(ngModel)]="customerAddress"
             [ngClass]="{'error-field': isCustomerAddressValid}"
-            (change)="isCustomerAddressValid = false;"
-            class="form-control " name="customerAddressName" placeholder="Address">
+            (change)="isCustomerAddressValid = false;" class="form-control "
+            name="customerAddressName" placeholder="Address">
         </div>
         <div class="form-group row">
           <div class="col-md-7 pr-0">
@@ -54,20 +55,19 @@
           <h6 class="almost-gray mb-1">GSTIN:</h6>
           <input type="text" [(ngModel)]="customerGstNumber"
             [ngClass]="{'error-field': isCustomerGstNumberValid}"
-            (change)="isCustomerGstNumberValid = false;"
-            class="form-control " name="customerGstNumberName" placeholder="GSTIN">
+            (change)="isCustomerGstNumberValid = false;" class="form-control "
+            name="customerGstNumberName" placeholder="GSTIN">
         </div>
       </div>
       <div class="col-3 inv-mid">
         <h6 class="almost-gray">Invoice number:</h6>
         <p class="gray-ish"># {{sellBillId}}</p>
 
-        
+
         <h6 class="almost-gray">Vehicle Number:</h6>
         <input type="text" class="form-control custom-input" name="vehicleNumberName"
           [(ngModel)]="vehicleNumber" [ngClass]="{'error-field': isVehicleNumber}"
-          (change)="isVehicleNumber = false;"
-          style="width: 70%;">
+          (change)="isVehicleNumber = false;" style="width: 70%;">
       </div>
       <div class="col-3 text-right total-field">
         <h6 class="almost-gray">Date of Issue:</h6>
@@ -92,13 +92,12 @@
             <th scope="col gray-ish">Weight</th>
             <!-- <th scope="col gray-ish">Cutting</th> -->
             <!-- <th scope="col gray-ish">Net Weight</th> -->
-            <th scope="col gray-ish">Rate <span
-              class="currency">&#8377;</span></th>
+            <th scope="col gray-ish">Rate <span class="currency">&#8377;</span></th>
             <!-- <th scope="col gray-ish">GST %</th> -->
             <!-- <th scope="col gray-ish" class="d-none">carry</th> -->
 
             <th class="text-right" scope="col gray-ish">Amount <span
-              class="currency">&#8377;</span></th>
+                class="currency">&#8377;</span></th>
           </tr>
         </thead>
         <tbody>
@@ -161,7 +160,8 @@
     <!-- invoiced to details -->
     <div class="col-7 pt-2">
       <!-- <h4 class="gray-ish">Invoice Summary & Notes</h4> -->
-      <p class="pt-1 text-capital ht-50"><b>Invoice Value (In words) </b>{{amountInWords(grandTotal)}}</p>
+      <p class="pt-1 text-capital ht-50"><b>Invoice Value (In words)
+        </b>{{amountInWords(grandTotal)}}</p>
       <div class="bank-details">
         <div>
           <label for="bankName">Bank Name: </label> <span>State Bank of India. Branch:
@@ -201,7 +201,8 @@
         <tbody>
           <tr>
             <th scope="row gray-ish" class="pt-0 pb-0">Subtotal</th>
-            <td class="text-right pt-0 pb-0">{{netPayAmount}} <span class="currency ">&#8377;</span>
+            <td class="text-right pt-0 pb-0">{{netPayAmount}} <span
+                class="currency ">&#8377;</span>
             </td>
           </tr>
           <tr>
@@ -210,7 +211,7 @@
                 class="currency">&#8377;</span></td>
           </tr>
           <tr>
-            <th scope="row gray-ish"class="pt-0">SGST %</th>
+            <th scope="row gray-ish" class="pt-0">SGST %</th>
             <td class="text-right pt-0 pb-0">{{calculatedSgstRs}} <span
                 class="currency">&#8377;</span></td>
           </tr>

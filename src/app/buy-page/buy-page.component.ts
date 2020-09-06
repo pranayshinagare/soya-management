@@ -44,6 +44,7 @@ export class BuyPageComponent implements OnInit {
 
   editBill: any = '';
   customerBillId: any = null;
+  centerName: any = '';
   constructor(private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) {
     // router.events.subscribe((val) => {
     //   console.log(val instanceof NavigationEnd)
@@ -79,6 +80,8 @@ export class BuyPageComponent implements OnInit {
       this.getTodaysDate();
       this.getGlobalData();
     }
+    const _lsUserData = JSON.parse(localStorage.getItem('currentUser'));
+    this.centerName = _lsUserData.center;
   }
 
   setEditBillData = (editBill) => {
