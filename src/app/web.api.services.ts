@@ -37,8 +37,10 @@ export class WebApiService {
     //       console.log("Error occured");
     //     }
     //   );
-    return this.http.post<[]>(
-      setGlobalData, request, { observe: 'response' })
+    return this.http.put<[]>(
+      `${setGlobalData}/${request.id}`, request, { observe: 'response' })
+    // return this.http.put<[]>(
+    //   setGlobalData, request, { observe: 'response' })
   }
 
   saveCustomerBill = (request) => {

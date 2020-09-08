@@ -281,9 +281,12 @@
       "grandTotal": 495496
     }
   ],
-  "globalData": {
-    "todayStdRate": 3850,
-    "carryRate": 10,
-    "weightCutting": 2
-  }
+  "globalData": [
+    {
+      "id": 1,
+      "todayStdRate": 3900,
+      "carryRate": 10,
+      "weightCutting": 2
+    }
+  ]
 }

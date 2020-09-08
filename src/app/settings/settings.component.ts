@@ -30,10 +30,10 @@ export class SettingsComponent implements OnInit {
   getGlobalData = () => {
     this.spinner.show();
     this.configApi.getGlobalData().subscribe(
-      resp => {
-        this.todaysRate = resp.body['todayStdRate'];
-        this.carryCharge = resp.body['carryRate'];
-        this.weightCutting = resp.body['weightCutting'];
+      (resp: any) => {
+        this.todaysRate = resp.body[0]['todayStdRate'];
+        this.carryCharge = resp.body[0]['carryRate'];
+        this.weightCutting = resp.body[0]['weightCutting'];
         this.spinner.hide();
         if (!this.todaysRate) {
           this.toastr.error('Something Went Wrong');
@@ -78,6 +78,7 @@ export class SettingsComponent implements OnInit {
       this.btnDisableFlag = true;
       this.spinner.show();
       const req = {
+        "id": 1,
         "todayStdRate": Number(this.todaysRate) ? Number(this.todaysRate) : null,
         "carryRate": Number(this.carryCharge) ? Number(this.carryCharge) : 10,
         "weightCutting": Number(this.weightCutting) ? Number(this.weightCutting) : 2

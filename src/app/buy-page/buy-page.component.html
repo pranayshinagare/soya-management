@@ -1,7 +1,7 @@
-<div class="container mb-5">
+<div #buyContainer class="container mb-5 buy-ontainer">
   <form>
     <div class="firmWrapper text-center">
-      <h3>SHINGARE TRADING COMPANY</h3>
+      <h3 class="text-uppercase">Shingare Trading Company</h3>
       <p style="margin: 0;">A/p: Kasegaon, Tal: Walwa, Dist: Sangli. (Maharashtra) Mob. +91 9423272768</p>
       <p>GSTIN: 27BRRPS4398J1ZO | PAN: BRRPS4398J | Center: {{centerName}}</p>
     </div>
@@ -194,3 +194,4 @@
     </div>
   </form>
 </div>
+<div class="container mb-5" [innerHtml]="buy_copy.innerHTML"></div>
