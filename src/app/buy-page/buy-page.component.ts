@@ -54,10 +54,10 @@ export class BuyPageComponent implements OnInit {
   getGlobalData = () => {
     this.spinner.show();
     this.configApi.getGlobalData().subscribe(
-      resp => {
-        this.standardRate = resp.body['todayStdRate'];
-        this.standardCarrying = resp.body['carryRate'];
-        this.standardWeightCut = resp.body['weightCutting'];
+      (resp: any) => {
+        this.standardRate = resp.body[0]['todayStdRate'];
+        this.standardCarrying = resp.body[0]['carryRate'];
+        this.standardWeightCut = resp.body[0]['weightCutting'];
         this.spinner.hide();
         if (!this.standardRate) {
           this.toastr.error('Something Went Wrong');
