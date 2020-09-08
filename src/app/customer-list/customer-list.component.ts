@@ -50,7 +50,7 @@ export class CustomerListComponent implements OnInit {
         'Extra Weight Cutting': element.weightExtraCuting,
         'Net Weight': element.netWeight,
         'Total Amount': element.totalAmount,
-        'Carry Charge': element.carryCharge,
+        'Hamali': element.carryCharge,
         'Net Payment': element.netPayAmount,
         'Cheque Payment': element.chequeAmount,
         'Cash Payment': element.cashPayment,
