@@ -33,7 +33,7 @@
       <button type="button" title="Download Data in Excel" (click)="downloadDataExcel()"
         class="btn btn-primary mr-10"><i class="fa fa-download" aria-hidden="true"></i>
       </button>
-      <button type="button" routerLink="/buy-soyabean" (click)="configApi.setData('')"
+      <button type="button" routerLink="/buy-soyabean" (click)="configApi.setData('');configApi.toPrintBill(false);"
         class="btn btn-primary mr-10">Add
         New Entry</button>
       <button type="submit" (click)="getCustomerList()" class="btn btn-primary mr-10"
@@ -60,7 +60,7 @@
           <th>Total Amount <span class="currency">&#8377;</span></th>
           <th>Hamali</th>
           <th>Net Amount <span class="currency">&#8377;</span></th>
-          <!-- <th>Payment Mode</th> -->
+          <th>Print</th>
           <th>Edit</th>
         </tr>
       </thead>
@@ -87,9 +87,11 @@
             <i class="fa fa-credit-card" aria-hidden="true" title="Cheque"
               *ngIf="item.chequeMode"></i>
           </td> -->
-          <td class="text-center cursor-pointer" title="Edit">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"
-              (click)="viewBill(item)"></i>
+          <td class="text-center cursor-pointer"><i class="fa fa-print" aria-hidden="true"
+              title="Print" (click)="printBill(item)"></i></td>
+          <td class="text-center cursor-pointer" title="Edit"><i
+              class="fa fa-pencil-square-o" aria-hidden="true"
+              (click)="viewBill(item)"></i></td>
         </tr>
       </tbody>
     </table>

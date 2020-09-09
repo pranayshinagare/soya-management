@@ -26,14 +26,14 @@
             <input type="text" [(ngModel)]="customerName"
               [ngClass]="{'error-field': isCustomerNameValid}"
               (change)="isCustomerNameValid = false;" class="form-control  "
-              name="customerName" placeholder="Name">
+              name="customerName" placeholder="Name" [disabled]="isPrintBill">
           </div>
           <div class="form-group">
             <h6 class="almost-gray mb-1">Address:</h6>
             <input type="text" [(ngModel)]="customerAddress"
               [ngClass]="{'error-field': isCustomerAddressValid}"
               (change)="isCustomerAddressValid = false;" class="form-control "
-              name="customerAddressName" placeholder="Address">
+              name="customerAddressName" placeholder="Address" [disabled]="isPrintBill">
           </div>
           <div class="form-group row">
             <div class="col-md-7 pr-0">
@@ -43,7 +43,7 @@
                 [ngClass]="{'error-field': isCustomerStateValid}"
                 (change)="isCustomerStateValid = false;"
                 class="form-control  custom-inline-input stateBox"
-                name="customerStateName" placeholder="State">
+                name="customerStateName" placeholder="State" [disabled]="isPrintBill">
             </div>
             <div class="col-md-5 pl-0">
               <label for="stateCodeName" class="almost-gray inline-block">St. Code:
@@ -52,7 +52,7 @@
                 [ngClass]="{'error-field': isStateCodeValid}"
                 (change)="isStateCodeValid = false;"
                 class="form-control  custom-inline-input" name="stateCodeName"
-                placeholder="State Code" style="width: 61%;">
+                placeholder="State Code" style="width: 61%;" [disabled]="isPrintBill">
             </div>
           </div>
           <div class="form-group">
@@ -60,7 +60,7 @@
             <input type="text" [(ngModel)]="customerGstNumber"
               [ngClass]="{'error-field': isCustomerGstNumberValid}"
               (change)="isCustomerGstNumberValid = false;" class="form-control "
-              name="customerGstNumberName" placeholder="GSTIN">
+              name="customerGstNumberName" placeholder="GSTIN" [disabled]="isPrintBill">
           </div>
         </div>
         <div class="col-3 inv-mid">
@@ -71,7 +71,7 @@
           <h6 class="almost-gray">Vehicle Number:</h6>
           <input type="text" class="form-control custom-input" name="vehicleNumberName"
             [(ngModel)]="vehicleNumber" [ngClass]="{'error-field': isVehicleNumber}"
-            (change)="isVehicleNumber = false;" style="width: 70%;">
+            (change)="isVehicleNumber = false;" style="width: 70%;" [disabled]="isPrintBill">
         </div>
         <div class="col-3 text-right total-field">
           <h6 class="almost-gray">Date of Issue:</h6>
@@ -81,7 +81,7 @@
           <h1 class="gray-ish">{{grandTotal}} <span class="curency">&#8377;</span></h1> -->
 
           <button type="button" class="btn btn-primary print-hide-ele cal-btn"
-            (click)="calculateBill()">Calculate</button>
+            (click)="calculateBill()" [disabled]="isPrintBill">Calculate</button>
           <!-- <h5 class="almost-gray due-date">Due Date: 01 / 01 / 20 20</h5> -->
         </div>
       </div>
@@ -112,14 +112,14 @@
                   [ngClass]="{'error-field': isTotalBagsValid}"
                   class="form-control totalBagBox" name="totalBags"
                   (change)="onTotalBagChange($event, totalBags);isTotalBagsValid=false;isAllFieldsCalculated=true;"
-                  numbersOnly maxlength="3">
+                  numbersOnly maxlength="3" [disabled]="isPrintBill">
               </td>
               <td>
                 <input type="text" [(ngModel)]="totalWeight" numbersOnly
                   (change)="onTotalWeightChange($event, totalWeight);isTotalWeight=false;isAllFieldsCalculated=true;"
                   class="form-control weightBox"
                   [ngClass]="{'error-field': isTotalWeight}" name="totalWeight"
-                  placeholder="Total Weight" numbersOnly style="width: 110px;">
+                  placeholder="Total Weight" numbersOnly style="width: 110px;" [disabled]="isPrintBill">
               </td>
               <!-- <td>
                 <input type="text" [(ngModel)]="totalCutting" numbersOnly
@@ -136,7 +136,7 @@
                   [ngClass]="{'error-field': isStandardSellRate}"
                   (change)="onRateChange(standardSellRate);isStandardSellRate = false;isAllFieldsCalculated=true;"
                   name="todayRateBoxName" placeholder="Standard Rate of Sell"
-                  [(ngModel)]="standardSellRate" numbersOnly style="width: 95px;">
+                  [(ngModel)]="standardSellRate" numbersOnly style="width: 95px;" [disabled]="isPrintBill">
               </td>
               <!-- <td>
                 <input type="text" [(ngModel)]="gstOnSoya" name="gstOnSoyaName"
@@ -187,11 +187,11 @@
             for SHINAGARE TRADING COMPANY <span style="height:10px;width: 30px;border-bottom: 1px solid #000;"></span>
           </div> -->
           <div class="button-wrapper print-hide-ele float-right">
-            <button type="button" (click)="printBill();" class="btn btn-primary"
+            <!-- <button type="button" (click)="printBill();" class="btn btn-primary"
               title="Print"><i class="fa fa-print" aria-hidden="true"></i>
-            </button>
+            </button> -->
             <button type="submit" (click)="submitCalculatedForm()"
-              style="margin-left: 10px;" class="btn btn-primary">Save</button>
+              style="margin-left: 10px;" class="btn btn-primary" [disabled]="isPrintBill">Save</button>
             <button type="button" (click)="cancelForm()" class="btn btn-primary"
               style="margin-left: 10px;">Cancel</button>
           </div>

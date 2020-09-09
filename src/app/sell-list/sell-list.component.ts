@@ -88,6 +88,13 @@ export class SellListComponent implements OnInit {
     );
   }
 
+  printBill = (currentBill) => {
+    const isBillPrint = true;
+    this.configApi.toPrintBill(isBillPrint);
+    this.configApi.setData(currentBill);
+    this.router.navigate(['sell-soyabean']);
+  }
+
   viewBill = (currentBill) => {
     this.configApi.setData(currentBill);
     this.router.navigate(['sell-soyabean']);

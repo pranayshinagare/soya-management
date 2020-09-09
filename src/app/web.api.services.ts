@@ -80,5 +80,14 @@ export class WebApiService {
   getData = () => {
     return this.componentData;
   }
+
+  isPrintBill = false;
+  toPrintBill = (isPrint) => {
+    this.isPrintBill = isPrint;
+  }
+
+  fromPrintBill = () => {
+    return this.isPrintBill;
+  }
 }
 

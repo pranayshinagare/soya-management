@@ -51,11 +51,18 @@ export class SellPageComponent implements OnInit {
   centerName: any = '';
   isPrint: any = false;
   forShowOnly: any = null;
+  isPrintBill: Boolean = false;
   constructor(private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
     this.editBill = this.configApi.getData();
-    if (this.editBill) {
+    this.isPrintBill = this.configApi.fromPrintBill();
+    
+    if (this.editBill || this.isPrintBill) {
+      if (this.isPrintBill) {
+        this.printBill();
+        this.configApi.toPrintBill(false);
+      }
       this.setEditBillData(this.editBill);
     } else {
       this.getTodaysDate();

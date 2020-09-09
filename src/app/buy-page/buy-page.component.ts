@@ -43,6 +43,7 @@ export class BuyPageComponent implements OnInit {
   isCashPaymentValid: any = false;
 
   editBill: any = '';
+  isPrintBill: Boolean = false;
   customerBillId: any = null;
   centerName: any = '';
   isPrint: any = false;
@@ -76,7 +77,13 @@ export class BuyPageComponent implements OnInit {
 
   ngOnInit() {
     this.editBill = this.configApi.getData();
-    if (this.editBill) {
+    this.isPrintBill = this.configApi.fromPrintBill();
+
+    if (this.editBill || this.isPrintBill) {
+      if (this.isPrintBill) {
+        this.printBill();
+        this.configApi.toPrintBill(false);
+      }
       this.setEditBillData(this.editBill);
     } else {
       this.getTodaysDate();
