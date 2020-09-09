@@ -45,6 +45,8 @@ export class BuyPageComponent implements OnInit {
   editBill: any = '';
   customerBillId: any = null;
   centerName: any = '';
+  isPrint: any = false;
+  forShowOnly: any = null;
   constructor(private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) {
     // router.events.subscribe((val) => {
     //   console.log(val instanceof NavigationEnd)
@@ -379,6 +381,7 @@ export class BuyPageComponent implements OnInit {
     }
     console.log(this.bagWeightList);
   }
+
   amountInWords = (num) => {
     let a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '];
     let b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
@@ -392,8 +395,13 @@ export class BuyPageComponent implements OnInit {
     str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
     return str;
   }
+
   printBill = () => {
-    window.print();
+    this.isPrint = true;
+    setTimeout(() => {
+      window.print();
+      this.isPrint = false;
+    });
   }
   cancelForm = () => {
     this.router.navigate(['customers']);

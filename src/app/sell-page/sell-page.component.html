@@ -1,231 +1,236 @@
-<div class="container mb-5 mb-print">
-  <div class="row invoice-header px-3 py-2">
-    <div class="col-5">
-      <p class="mb-5">TAX INVOICE</p>
-      <h3 class="mb-0 print-heading-sell">SHINAGARE TRADING COMPANY</h3>
+<div *ngIf="forShowOnly; else printDiv"></div>
+<div *ngIf="!isPrint; else printDiv"></div>
+<ng-template #printDiv>
+  <div class="container mb-5 mb-print" [ngClass]="{'print-border': isPrint}">
+    <div class="row invoice-header px-3 py-2">
+      <div class="col-5">
+        <p class="mb-5">TAX INVOICE</p>
+        <h3 class="mb-0 print-heading-sell">SHINAGARE TRADING COMPANY</h3>
+      </div>
+      <div class="col-4 text-right">
+        <p>A/p: Kasegaon, Tal: Walwa</p>
+        <p>Dist: Sangli, Maharashtra</p>
+        <p class="mb-0">M. +91 9423272768</p>
+      </div>
+      <div class="col-3 text-right">
+        <p>GSTIN: 27BRRPS4398J1ZO</p>
+        <p>PAN: BRRPS4398J</p>
+        <p>Center: {{centerName}}</p>
+      </div>
     </div>
-    <div class="col-4 text-right">
-      <p>A/p: Kasegaon, Tal: Walwa</p>
-      <p>Dist: Sangli, Maharashtra</p>
-      <p class="mb-0">M. +91 9423272768</p>
-    </div>
-    <div class="col-3 text-right">
-      <p>GSTIN: 27BRRPS4398J1ZO</p>
-      <p>PAN: BRRPS4398J</p>
-      <p>Center: {{centerName}}</p>
-    </div>
-  </div>
-  <form action="">
-    <div class="invoice-content row pt-4">
-      <div class="col-6 left-side">
-        <div class="form-group">
-          <h6 class="almost-gray mb-1">Invoiced to:</h6>
-          <input type="text" [(ngModel)]="customerName"
-            [ngClass]="{'error-field': isCustomerNameValid}"
-            (change)="isCustomerNameValid = false;" class="form-control  "
-            name="customerName" placeholder="Name">
-        </div>
-        <div class="form-group">
-          <h6 class="almost-gray mb-1">Address:</h6>
-          <input type="text" [(ngModel)]="customerAddress"
-            [ngClass]="{'error-field': isCustomerAddressValid}"
-            (change)="isCustomerAddressValid = false;" class="form-control "
-            name="customerAddressName" placeholder="Address">
-        </div>
-        <div class="form-group row">
-          <div class="col-md-7 pr-0">
-            <label for="customerStateName" class="almost-gray inline-block">State:
-            </label>
-            <input type="text" [(ngModel)]="customerState"
-              [ngClass]="{'error-field': isCustomerStateValid}"
-              (change)="isCustomerStateValid = false;"
-              class="form-control  custom-inline-input stateBox" name="customerStateName"
-              placeholder="State">
+    <form action="">
+      <div class="invoice-content row pt-4">
+        <div class="col-6 left-side">
+          <div class="form-group">
+            <h6 class="almost-gray mb-1">Invoiced to:</h6>
+            <input type="text" [(ngModel)]="customerName"
+              [ngClass]="{'error-field': isCustomerNameValid}"
+              (change)="isCustomerNameValid = false;" class="form-control  "
+              name="customerName" placeholder="Name">
           </div>
-          <div class="col-md-5 pl-0">
-            <label for="stateCodeName" class="almost-gray inline-block">St. Code: </label>
-            <input type="text" [(ngModel)]="stateCode"
-              [ngClass]="{'error-field': isStateCodeValid}"
-              (change)="isStateCodeValid = false;"
-              class="form-control  custom-inline-input" name="stateCodeName"
-              placeholder="State Code" style="width: 61%;">
+          <div class="form-group">
+            <h6 class="almost-gray mb-1">Address:</h6>
+            <input type="text" [(ngModel)]="customerAddress"
+              [ngClass]="{'error-field': isCustomerAddressValid}"
+              (change)="isCustomerAddressValid = false;" class="form-control "
+              name="customerAddressName" placeholder="Address">
+          </div>
+          <div class="form-group row">
+            <div class="col-md-7 pr-0">
+              <label for="customerStateName" class="almost-gray inline-block">State:
+              </label>
+              <input type="text" [(ngModel)]="customerState"
+                [ngClass]="{'error-field': isCustomerStateValid}"
+                (change)="isCustomerStateValid = false;"
+                class="form-control  custom-inline-input stateBox"
+                name="customerStateName" placeholder="State">
+            </div>
+            <div class="col-md-5 pl-0">
+              <label for="stateCodeName" class="almost-gray inline-block">St. Code:
+              </label>
+              <input type="text" [(ngModel)]="stateCode"
+                [ngClass]="{'error-field': isStateCodeValid}"
+                (change)="isStateCodeValid = false;"
+                class="form-control  custom-inline-input" name="stateCodeName"
+                placeholder="State Code" style="width: 61%;">
+            </div>
+          </div>
+          <div class="form-group">
+            <h6 class="almost-gray mb-1">GSTIN:</h6>
+            <input type="text" [(ngModel)]="customerGstNumber"
+              [ngClass]="{'error-field': isCustomerGstNumberValid}"
+              (change)="isCustomerGstNumberValid = false;" class="form-control "
+              name="customerGstNumberName" placeholder="GSTIN">
           </div>
         </div>
-        <div class="form-group">
-          <h6 class="almost-gray mb-1">GSTIN:</h6>
-          <input type="text" [(ngModel)]="customerGstNumber"
-            [ngClass]="{'error-field': isCustomerGstNumberValid}"
-            (change)="isCustomerGstNumberValid = false;" class="form-control "
-            name="customerGstNumberName" placeholder="GSTIN">
+        <div class="col-3 inv-mid">
+          <h6 class="almost-gray">Invoice number:</h6>
+          <p class="gray-ish"># {{sellBillId}}</p>
+
+
+          <h6 class="almost-gray">Vehicle Number:</h6>
+          <input type="text" class="form-control custom-input" name="vehicleNumberName"
+            [(ngModel)]="vehicleNumber" [ngClass]="{'error-field': isVehicleNumber}"
+            (change)="isVehicleNumber = false;" style="width: 70%;">
+        </div>
+        <div class="col-3 text-right total-field">
+          <h6 class="almost-gray">Date of Issue:</h6>
+          <p class="gray-ish">{{todaysDate}}</p>
+
+          <!-- <h4 class="almost-gray">Invoice Total</h4>
+          <h1 class="gray-ish">{{grandTotal}} <span class="curency">&#8377;</span></h1> -->
+
+          <button type="button" class="btn btn-primary print-hide-ele cal-btn"
+            (click)="calculateBill()">Calculate</button>
+          <!-- <h5 class="almost-gray due-date">Due Date: 01 / 01 / 20 20</h5> -->
         </div>
       </div>
-      <div class="col-3 inv-mid">
-        <h6 class="almost-gray">Invoice number:</h6>
-        <p class="gray-ish"># {{sellBillId}}</p>
+    </form>
+    <div class="row mt-3">
+      <div class="col-11 invoice-table pt-1 m-0-a">
+        <table class="table">
+          <thead class="thead splitForPrint">
+            <tr>
+              <th scope="col gray-ish">Item</th>
+              <th scope="col gray-ish">Qty.</th>
+              <th scope="col gray-ish">Weight</th>
+              <!-- <th scope="col gray-ish">Cutting</th> -->
+              <!-- <th scope="col gray-ish">Net Weight</th> -->
+              <th scope="col gray-ish">Rate <span class="currency">&#8377;</span></th>
+              <!-- <th scope="col gray-ish">GST %</th> -->
+              <!-- <th scope="col gray-ish" class="d-none">carry</th> -->
 
-
-        <h6 class="almost-gray">Vehicle Number:</h6>
-        <input type="text" class="form-control custom-input" name="vehicleNumberName"
-          [(ngModel)]="vehicleNumber" [ngClass]="{'error-field': isVehicleNumber}"
-          (change)="isVehicleNumber = false;" style="width: 70%;">
-      </div>
-      <div class="col-3 text-right total-field">
-        <h6 class="almost-gray">Date of Issue:</h6>
-        <p class="gray-ish">{{todaysDate}}</p>
-
-        <!-- <h4 class="almost-gray">Invoice Total</h4>
-        <h1 class="gray-ish">{{grandTotal}} <span class="curency">&#8377;</span></h1> -->
-
-        <button type="button" class="btn btn-primary print-hide-ele cal-btn"
-          (click)="calculateBill()">Calculate</button>
-        <!-- <h5 class="almost-gray due-date">Due Date: 01 / 01 / 20 20</h5> -->
+              <th class="text-right" scope="col gray-ish">Amount <span
+                  class="currency">&#8377;</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="item">Soyabean</td>
+              <td>
+                <input type="text" [(ngModel)]="totalBags"
+                  [ngClass]="{'error-field': isTotalBagsValid}"
+                  class="form-control totalBagBox" name="totalBags"
+                  (change)="onTotalBagChange($event, totalBags);isTotalBagsValid=false;isAllFieldsCalculated=true;"
+                  numbersOnly maxlength="3">
+              </td>
+              <td>
+                <input type="text" [(ngModel)]="totalWeight" numbersOnly
+                  (change)="onTotalWeightChange($event, totalWeight);isTotalWeight=false;isAllFieldsCalculated=true;"
+                  class="form-control weightBox"
+                  [ngClass]="{'error-field': isTotalWeight}" name="totalWeight"
+                  placeholder="Total Weight" numbersOnly style="width: 110px;">
+              </td>
+              <!-- <td>
+                <input type="text" [(ngModel)]="totalCutting" numbersOnly
+                  (change)="onTotalWeightCutting($event, totalCutting);isAllFieldsCalculated=true;"
+                  class="form-control totalBagBox" name="totalCutting"
+                  placeholder="Cutting Weight" numbersOnly>
+              </td> -->
+              <!-- <td>
+                <input type="text" [(ngModel)]="netWeight" name="netWeight"
+                  class="form-control" disabled style="width: 85px;">
+              </td> -->
+              <td>
+                <input type="text" class="form-control"
+                  [ngClass]="{'error-field': isStandardSellRate}"
+                  (change)="onRateChange(standardSellRate);isStandardSellRate = false;isAllFieldsCalculated=true;"
+                  name="todayRateBoxName" placeholder="Standard Rate of Sell"
+                  [(ngModel)]="standardSellRate" numbersOnly style="width: 95px;">
+              </td>
+              <!-- <td>
+                <input type="text" [(ngModel)]="gstOnSoya" name="gstOnSoyaName"
+                  class="form-control" disabled style="width: 50px;">
+              </td> -->
+              <!-- <td class="d-none">
+                <input type="text" [(ngModel)]="carryCharge"
+                (change)="onCarryChargeChange($event, carryCharge);isAllFieldsCalculated=true;"
+                name="carryCharge" class="form-control weightBox amountBox" numbersOnly>
+              </td> -->
+              <td class="text-right">
+                <!-- <input type="text" [(ngModel)]="totalAmount" name="totalAmount"
+                  class="form-control weightBox amountBox final-amount" disabled> <span
+                  class="currency">&#8377;</span> -->
+                <input type="text" [(ngModel)]="netPayAmount" name="netPayAmount"
+                  class="form-control weightBox final-amount" disabled> <span
+                  class="currency">&#8377;</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </form>
-  <div class="row mt-3">
-    <div class="col-11 invoice-table pt-1 m-0-a">
-      <table class="table">
-        <thead class="thead splitForPrint">
-          <tr>
-            <th scope="col gray-ish">Item</th>
-            <th scope="col gray-ish">Qty.</th>
-            <th scope="col gray-ish">Weight</th>
-            <!-- <th scope="col gray-ish">Cutting</th> -->
-            <!-- <th scope="col gray-ish">Net Weight</th> -->
-            <th scope="col gray-ish">Rate <span class="currency">&#8377;</span></th>
-            <!-- <th scope="col gray-ish">GST %</th> -->
-            <!-- <th scope="col gray-ish" class="d-none">carry</th> -->
-
-            <th class="text-right" scope="col gray-ish">Amount <span
-                class="currency">&#8377;</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="item">Soyabean</td>
-            <td>
-              <input type="text" [(ngModel)]="totalBags"
-                [ngClass]="{'error-field': isTotalBagsValid}"
-                class="form-control totalBagBox" name="totalBags"
-                (change)="onTotalBagChange($event, totalBags);isTotalBagsValid=false;isAllFieldsCalculated=true;"
-                numbersOnly maxlength="3">
-            </td>
-            <td>
-              <input type="text" [(ngModel)]="totalWeight" numbersOnly
-                (change)="onTotalWeightChange($event, totalWeight);isTotalWeight=false;isAllFieldsCalculated=true;"
-                class="form-control weightBox" [ngClass]="{'error-field': isTotalWeight}"
-                name="totalWeight" placeholder="Total Weight" numbersOnly
-                style="width: 110px;">
-            </td>
-            <!-- <td>
-              <input type="text" [(ngModel)]="totalCutting" numbersOnly
-                (change)="onTotalWeightCutting($event, totalCutting);isAllFieldsCalculated=true;"
-                class="form-control totalBagBox" name="totalCutting"
-                placeholder="Cutting Weight" numbersOnly>
-            </td> -->
-            <!-- <td>
-              <input type="text" [(ngModel)]="netWeight" name="netWeight"
-                class="form-control" disabled style="width: 85px;">
-            </td> -->
-            <td>
-              <input type="text" class="form-control"
-                [ngClass]="{'error-field': isStandardSellRate}"
-                (change)="onRateChange(standardSellRate);isStandardSellRate = false;isAllFieldsCalculated=true;"
-                name="todayRateBoxName" placeholder="Standard Rate of Sell"
-                [(ngModel)]="standardSellRate" numbersOnly style="width: 95px;">
-            </td>
-            <!-- <td>
-              <input type="text" [(ngModel)]="gstOnSoya" name="gstOnSoyaName"
-                class="form-control" disabled style="width: 50px;">
-            </td> -->
-            <!-- <td class="d-none">
-              <input type="text" [(ngModel)]="carryCharge"
-              (change)="onCarryChargeChange($event, carryCharge);isAllFieldsCalculated=true;"
-              name="carryCharge" class="form-control weightBox amountBox" numbersOnly>
-            </td> -->
-            <td class="text-right">
-              <!-- <input type="text" [(ngModel)]="totalAmount" name="totalAmount"
-                class="form-control weightBox amountBox final-amount" disabled> <span
-                class="currency">&#8377;</span> -->
-              <input type="text" [(ngModel)]="netPayAmount" name="netPayAmount"
-                class="form-control weightBox final-amount" disabled> <span
-                class="currency">&#8377;</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="row invoice_details">
-    <!-- invoiced to details -->
-    <div class="col-7 pt-2">
-      <!-- <h4 class="gray-ish">Invoice Summary & Notes</h4> -->
-      <p class="pt-1 text-capital ht-50"><b>Invoice Value (In words)
-        </b>{{amountInWords(grandTotal)}}</p>
-      <div class="bank-details">
+    <div class="row invoice_details">
+      <!-- invoiced to details -->
+      <div class="col-7 pt-2">
+        <!-- <h4 class="gray-ish">Invoice Summary & Notes</h4> -->
+        <p class="pt-1 text-capital ht-50"><b>Invoice Value (In words)
+          </b>{{amountInWords(grandTotal)}}</p>
+        <div class="bank-details">
+          <div>
+            <label for="bankName">Bank Name: </label> <span>Rajarambapu Sahakari bank ltd.
+              Branch: Kasegaon</span>
+          </div>
+          <div>
+            <div class="float-left">
+              <label for="bankAcNumber">Bank Account No: </label>
+              <span>007410500000371</span>
+            </div>
+            <div class="float-right">
+              <label for="bankIfscNumber">Bank Branch IFSC: </label>
+              <span>RRBP0000007</span>
+            </div>
+          </div>
+        </div>
         <div>
-          <label for="bankName">Bank Name: </label> <span>Rajarambapu Sahakari bank ltd.
-            Branch: Kasegaon</span>
-        </div>
-        <div>
-          <div class="float-left">
-            <label for="bankAcNumber">Bank Account No: </label>
-            <span>007410500000371</span>
-          </div>
-          <div class="float-right">
-            <label for="bankIfscNumber">Bank Branch IFSC: </label>
-            <span>RRBP0000007</span>
+          <!-- <div class="float-left">
+            for SHINAGARE TRADING COMPANY <span style="height:10px;width: 30px;border-bottom: 1px solid #000;"></span>
+          </div> -->
+          <div class="button-wrapper print-hide-ele float-right">
+            <button type="button" (click)="printBill();" class="btn btn-primary"
+              title="Print"><i class="fa fa-print" aria-hidden="true"></i>
+            </button>
+            <button type="submit" (click)="submitCalculatedForm()"
+              style="margin-left: 10px;" class="btn btn-primary">Submit</button>
+            <button type="button" (click)="cancelForm()" class="btn btn-primary"
+              style="margin-left: 10px;">Cancel</button>
           </div>
         </div>
       </div>
-      <div>
-        <!-- <div class="float-left">
-          for SHINAGARE TRADING COMPANY <span style="height:10px;width: 30px;border-bottom: 1px solid #000;"></span>
-        </div> -->
-        <div class="button-wrapper print-hide-ele float-right">
-          <button type="button" (click)="printBill();" class="btn btn-primary"
-            title="Print"><i class="fa fa-print" aria-hidden="true"></i>
-          </button>
-          <button type="submit" (click)="submitCalculatedForm()"
-            style="margin-left: 10px;" class="btn btn-primary">Submit</button>
-          <button type="button" (click)="cancelForm()" class="btn btn-primary"
-            style="margin-left: 10px;">Cancel</button>
-        </div>
+      <!-- <div class="col-1"></div> -->
+      <!-- Invoice assets and total -->
+      <div class="col-5 pr-4">
+        <table class="table table-borderless"
+          style="border-left: 3px solid #ff4d4d;margin-top: 8px;">
+          <tbody>
+            <tr>
+              <th scope="row gray-ish" class="pt-0 pb-0">Subtotal</th>
+              <td class="text-right pt-0 pb-0">{{netPayAmount}} <span
+                  class="currency ">&#8377;</span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row gray-ish">CGST %</th>
+              <td class="text-right">{{calculatedCgstRs}} <span
+                  class="currency">&#8377;</span></td>
+            </tr>
+            <tr>
+              <th scope="row gray-ish" class="pt-0">SGST %</th>
+              <td class="text-right pt-0 pb-0">{{calculatedSgstRs}} <span
+                  class="currency">&#8377;</span></td>
+            </tr>
+            <tr class="last-row">
+              <th scope="row">
+                <h4>Total</h4>
+              </th>
+              <td class="text-right">
+                <h4><span class="currency">&#8377;</span> {{grandTotal}}</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <!-- <div class="col-1"></div> -->
-    <!-- Invoice assets and total -->
-    <div class="col-5 pr-4">
-      <table class="table table-borderless"
-        style="border-left: 3px solid #ff4d4d;margin-top: 8px;">
-        <tbody>
-          <tr>
-            <th scope="row gray-ish" class="pt-0 pb-0">Subtotal</th>
-            <td class="text-right pt-0 pb-0">{{netPayAmount}} <span
-                class="currency ">&#8377;</span>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row gray-ish">CGST %</th>
-            <td class="text-right">{{calculatedCgstRs}} <span
-                class="currency">&#8377;</span></td>
-          </tr>
-          <tr>
-            <th scope="row gray-ish" class="pt-0">SGST %</th>
-            <td class="text-right pt-0 pb-0">{{calculatedSgstRs}} <span
-                class="currency">&#8377;</span></td>
-          </tr>
-          <tr class="last-row">
-            <th scope="row">
-              <h4>Total</h4>
-            </th>
-            <td class="text-right">
-              <h4><span class="currency">&#8377;</span> {{grandTotal}}</h4>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <p><em> Subject to Islampur Jurisdiction</em></p>
   </div>
-  <p><em> Subject to Islampur Jurisdiction</em></p>
-</div>
+</ng-template>

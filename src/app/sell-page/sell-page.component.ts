@@ -49,6 +49,8 @@ export class SellPageComponent implements OnInit {
 
   editBill: any = '';
   centerName: any = '';
+  isPrint: any = false;
+  forShowOnly: any = null;
   constructor(private configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
@@ -305,7 +307,11 @@ export class SellPageComponent implements OnInit {
   }
 
   printBill = () => {
-    window.print();
+    this.isPrint = true;
+    setTimeout(() => {
+      window.print();
+      this.isPrint = false;
+    });
   }
   cancelForm = () => {
     this.router.navigate(['sell-list']);
