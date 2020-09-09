@@ -62,13 +62,13 @@ export class BuyPageComponent implements OnInit {
         this.standardWeightCut = resp.body[0]['weightCutting'];
         this.spinner.hide();
         if (!this.standardRate) {
-          this.toastr.error('Something Went Wrong');
+          this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
           this.router.navigate(['page-not-found']);
         }
       },
       error => {
         this.spinner.hide();
-        this.toastr.error('Something Went Wrong');
+        this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
         this.router.navigate(['page-not-found']);
       }
     );
@@ -122,11 +122,11 @@ export class BuyPageComponent implements OnInit {
 
   submitCalculatedForm = (event) => {
     if (this.isChequePayment && !this.chequeNumberBox) {
-      this.toastr.warning('Please Add Cheque Number');
+      this.toastr.warning('Please Add Cheque Number', '', { timeOut: 1200 });
       this.isChequeNumberBox = true;
     } else {
       if (this.isAllFieldsCalculated) {
-        this.toastr.warning('Please Calculate The Bill Before Saving');
+        this.toastr.warning('Please Calculate The Bill Before Saving', '', { timeOut: 1200 });
       } else {
         this.spinner.show();
         const request = {
@@ -158,10 +158,10 @@ export class BuyPageComponent implements OnInit {
             resp => {
               this.spinner.hide();
               this.clearData();
-              this.toastr.success('Data saved successfully');
+              this.toastr.success('Data saved successfully', '', { timeOut: 1200 });
             },
             error => {
-              this.toastr.error('Something Went Wrong');
+              this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
               // this.clearData();
               // this.router.navigate(['page-not-found']);
               this.spinner.hide();
@@ -173,10 +173,10 @@ export class BuyPageComponent implements OnInit {
               this.spinner.hide();
               this.clearData();
               this.router.navigate(['customers']);
-              this.toastr.success('Data Updated Successfully');
+              this.toastr.success('Data Updated Successfully', '', { timeOut: 1200 });
             },
             error => {
-              this.toastr.error('Something Went Wrong');
+              this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
               // this.router.navigate(['page-not-found']);
               this.spinner.hide();
             }
@@ -245,7 +245,7 @@ export class BuyPageComponent implements OnInit {
     if (!isNaN(cashPayment)) {
       if (Number(cashPayment) > Number(this.netPayAmount)) {
         this.isCashPaymentValid = true;
-        this.toastr.error('Please Enter Valid Amount');
+        this.toastr.error('Please Enter Valid Amount', '', { timeOut: 1200 });
       } else {
         this.cashPayment = Number(cashPayment);
         this.chequeAmount = Number(this.netPayAmount) - this.cashPayment;
@@ -347,7 +347,7 @@ export class BuyPageComponent implements OnInit {
     // }
 
     if (!isValid) {
-      this.toastr.warning('Please Check Highlighted Fields');
+      this.toastr.warning('Please Check Highlighted Fields', '', { timeOut: 1200 });
     }
     return isValid;
   }

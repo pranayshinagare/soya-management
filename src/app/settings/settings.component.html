@@ -8,32 +8,30 @@
       <div class="col-md-3">
         <div class="form-group">
           <label for="todaysRateSetting">Today's Rate (M.10%)</label>
-          <input type="text" [(ngModel)]="todaysRate" class="form-control" name="todaysRateSetting"
-            aria-describedby="todaysRateSettingHelp" placeholder="Enter Rate" numbersOnly
-           >
+          <input type="text" [(ngModel)]="todaysRate" class="form-control"
+            name="todaysRateSetting" aria-describedby="todaysRateSettingHelp"
+            placeholder="Enter Rate" numbersOnly>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
           <label for="carryCharges">Hamali/Bag</label>
-          <input type="text" [(ngModel)]="carryCharge" class="form-control" name="carryCharges"
-            aria-describedby="carryChargesHelp" placeholder="Hamaali" numbersOnly
-           >
+          <input type="text" [(ngModel)]="carryCharge" class="form-control"
+            name="carryCharges" aria-describedby="carryChargesHelp" placeholder="Hamaali"
+            numbersOnly>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
           <label for="weightCut">Weight Cut/Bag</label>
-          <input type="text" [(ngModel)]="weightCutting" class="form-control" name="weightCut"
-            aria-describedby="weightCutHelp" placeholder="Weight Cut" numbersOnly>
+          <input type="text" [(ngModel)]="weightCutting" class="form-control"
+            name="weightCut" aria-describedby="weightCutHelp" placeholder="Weight Cut"
+            numbersOnly>
         </div>
       </div>
       <div class="col-md-3"></div>
     </div>
-    <!-- <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div> -->
-    <button type="submit" (click)="submitData()" class="btn btn-primary" name="submitBtn" [disabled]="btnDisableFlag">Submit</button>
+    <button type="submit" (click)="submitData()" class="btn btn-primary" name="submitBtn"
+      [disabled]="btnDisableFlag">Save</button>
   </form>
 </div>

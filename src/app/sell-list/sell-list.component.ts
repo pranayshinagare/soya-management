@@ -62,7 +62,7 @@ export class SellListComponent implements OnInit {
       },
       error => {
         this.spinner.hide();
-        this.toastr.error('Something Went Wrong');
+        this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
       }
     );
   }
@@ -83,7 +83,7 @@ export class SellListComponent implements OnInit {
       error => {
         this.spinner.hide();
         this.customerData = [];
-        this.toastr.error('Something Went Wrong');
+        this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
       }
     );
   }

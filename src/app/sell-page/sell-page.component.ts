@@ -132,7 +132,7 @@ export class SellPageComponent implements OnInit {
 
   submitCalculatedForm = () => {
     if (this.isAllFieldsCalculated) {
-      this.toastr.warning('Please Calculate The Bill Before Saving');
+      this.toastr.warning('Please Calculate The Bill Before Saving', '', { timeOut: 1200 });
     } else {
       if (this.submitValidation()) {
         this.spinner.show();
@@ -164,10 +164,10 @@ export class SellPageComponent implements OnInit {
             resp => {
               this.spinner.hide();
               this.clearData();
-              this.toastr.success('Data saved successfully');
+              this.toastr.success('Data saved successfully', '', { timeOut: 1200 });
             },
             error => {
-              this.toastr.error('Something Went Wrong');
+              this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
               this.spinner.hide();
             }
           );
@@ -177,10 +177,10 @@ export class SellPageComponent implements OnInit {
               this.spinner.hide();
               this.clearData();
               this.router.navigate(['sell-list']);
-              this.toastr.success('Data Updated Successfully');
+              this.toastr.success('Data Updated Successfully', '', { timeOut: 1200 });
             },
             error => {
-              this.toastr.error('Something Went Wrong');
+              this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
               this.spinner.hide();
             }
           );
@@ -207,7 +207,7 @@ export class SellPageComponent implements OnInit {
       isValid = false;
     }
     if (!isValid) {
-      this.toastr.warning('Please Check Highlighted Fields');
+      this.toastr.warning('Please Check Highlighted Fields', '', { timeOut: 1200 });
     }
     return isValid;
   }
@@ -241,7 +241,7 @@ export class SellPageComponent implements OnInit {
     }
 
     if (!isValid) {
-      this.toastr.warning('Please Check Highlighted Fields');
+      this.toastr.warning('Please Check Highlighted Fields', '', { timeOut: 1200 });
     }
 
     return isValid;

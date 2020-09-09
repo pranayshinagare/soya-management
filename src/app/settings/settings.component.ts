@@ -24,7 +24,6 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.getTodaysDate();
     this.getGlobalData();
-
   }
 
   getGlobalData = () => {
@@ -36,13 +35,13 @@ export class SettingsComponent implements OnInit {
         this.weightCutting = resp.body[0]['weightCutting'];
         this.spinner.hide();
         if (!this.todaysRate) {
-          this.toastr.error('Something Went Wrong');
+          this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
           this.router.navigate(['page-not-found']);
         }
       },
       error => {
         this.spinner.hide();
-        this.toastr.error('Something Went Wrong');
+        this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
         this.router.navigate(['page-not-found']);
       }
     );
@@ -60,7 +59,7 @@ export class SettingsComponent implements OnInit {
   validateFields = () => {
     let isValid = true;
     if (!this.todaysRate) {
-      this.toastr.error('Please Enter Valid Data');
+      this.toastr.error('Please Enter Valid Data', '', { timeOut: 1200 });
       isValid = false;
     }
     return isValid;
@@ -87,11 +86,11 @@ export class SettingsComponent implements OnInit {
       this.configApi.setGlobalData(req).subscribe(
         resp => {
           this.spinner.hide();
-          this.toastr.success('Data saved successfully');
+          this.toastr.success('Data saved successfully', '', { timeOut: 1200 });
           this.btnDisableFlag = false;
         },
         error => {
-          this.toastr.error('Something Went Wrong');
+          this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
           this.btnDisableFlag = false;
           // this.clearData();
           this.spinner.hide();
