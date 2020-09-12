@@ -172,6 +172,7 @@ export class SellPageComponent implements OnInit {
               this.spinner.hide();
               this.clearData();
               this.toastr.success('Data saved successfully', '', { timeOut: 1200 });
+              this.router.navigate(['sell-list']);
             },
             error => {
               this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });

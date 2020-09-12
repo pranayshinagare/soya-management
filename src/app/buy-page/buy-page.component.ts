@@ -166,6 +166,7 @@ export class BuyPageComponent implements OnInit {
               this.spinner.hide();
               this.clearData();
               this.toastr.success('Data saved successfully', '', { timeOut: 1200 });
+              this.router.navigate(['customers']);
             },
             error => {
               this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });

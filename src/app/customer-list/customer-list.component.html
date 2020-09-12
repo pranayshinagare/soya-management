@@ -33,7 +33,8 @@
       <button type="button" title="Download Data in Excel" (click)="downloadDataExcel()"
         class="btn btn-primary mr-10"><i class="fa fa-download" aria-hidden="true"></i>
       </button>
-      <button type="button" routerLink="/buy-soyabean" (click)="configApi.setData('');configApi.toPrintBill(false);"
+      <button type="button" routerLink="/buy-soyabean"
+        (click)="configApi.setData('');configApi.toPrintBill(false);"
         class="btn btn-primary mr-10">Add
         New Entry</button>
       <button type="submit" (click)="getCustomerList()" class="btn btn-primary mr-10"
@@ -48,18 +49,18 @@
         <tr>
           <th>#Bill</th>
           <th style="width: 75px;">Date</th>
-          <th style="width: 200px;">Customer Name</th>
+          <th style="width: 240px;">Customer Name</th>
           <th>Total Bags</th>
-          <th>M (%)</th>
-          <th>Std. Rate</th>
-          <th>Rate <span class="currency">&#8377;</span></th>
+          <th>M(%)</th>
+          <th>Std.Rate</th>
+          <th>Rate&nbsp;<span class="currency">&#8377;</span></th>
           <th>Total Weight</th>
           <th>Cutting</th>
           <th style="width: 25px;">Extra Cutting</th>
           <th>Net Weight</th>
-          <th>Total Amount <span class="currency">&#8377;</span></th>
+          <th>Total Amount&nbsp;<span class="currency">&#8377;</span></th>
           <th>Hamali</th>
-          <th>Net Amount <span class="currency">&#8377;</span></th>
+          <th>Net Amount<span class="currency">&#8377;</span></th>
           <th>Print</th>
           <th>Edit</th>
         </tr>
@@ -87,11 +88,10 @@
             <i class="fa fa-credit-card" aria-hidden="true" title="Cheque"
               *ngIf="item.chequeMode"></i>
           </td> -->
-          <td class="text-center cursor-pointer"><i class="fa fa-print" aria-hidden="true"
-              title="Print" (click)="printBill(item)"></i></td>
-          <td class="text-center cursor-pointer" title="Edit"><i
-              class="fa fa-pencil-square-o" aria-hidden="true"
-              (click)="viewBill(item)"></i></td>
+          <td class="text-center cursor-pointer" title="Print" (click)="printBill(item)">
+            <i class="fa fa-print" aria-hidden="true"></i></td>
+          <td class="text-center cursor-pointer" title="Edit" (click)="viewBill(item)"><i
+              class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
         </tr>
       </tbody>
     </table>

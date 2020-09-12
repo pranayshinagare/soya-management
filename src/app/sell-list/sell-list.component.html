@@ -33,7 +33,8 @@
       <button type="button" title="Download Data in Excel" (click)="downloadDataExcel()"
         class="btn btn-primary mr-10"><i class="fa fa-download" aria-hidden="true"></i>
       </button>
-      <button type="button" routerLink="/sell-soyabean" (click)="configApi.setData('');configApi.toPrintBill(false);"
+      <button type="button" routerLink="/sell-soyabean"
+        (click)="configApi.setData('');configApi.toPrintBill(false);"
         class="btn btn-primary mr-10">Add
         New Entry</button>
       <button type="submit" (click)="getCustomerList()" class="btn btn-primary mr-10"
@@ -51,13 +52,13 @@
           <th style="width: 110px;">Vehicle No.</th>
           <th style="width: 200px;">Invoice To</th>
           <th>Total Bags</th>
-          <th>Rate <span class="currency">&#8377;</span></th>
+          <th>Rate&nbsp;<span class="currency">&#8377;</span></th>
           <th>Weight</th>
           <!-- <th>Cutting</th> -->
           <!-- <th>Net Weight</th> -->
-          <th>GST <span class="currency">&#8377;</span></th>
-          <th>Amount <span class="currency">&#8377;</span></th>
-          <th>Grand Amount <span class="currency">&#8377;</span></th>
+          <th>GST&nbsp;<span class="currency">&#8377;</span></th>
+          <th>Amount&nbsp;<span class="currency">&#8377;</span></th>
+          <th>Grand Amount&nbsp;<span class="currency">&#8377;</span></th>
           <th class="text-center">Print</th>
           <th class="text-center">Edit</th>
         </tr>
@@ -81,11 +82,10 @@
           <td>{{item.totalAmount}}</td>
           <!-- <td>{{item.carryCharge}}</td> -->
           <td>{{item.grandTotal}}</td>
-          <td class="text-center cursor-pointer"><i class="fa fa-print" aria-hidden="true"
-              title="Print" (click)="printBill(item)"></i></td>
-          <td class="text-center cursor-pointer" title="Edit">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"
-              (click)="viewBill(item)"></i></td>
+          <td class="text-center cursor-pointer" title="Print" (click)="printBill(item)">
+            <i class="fa fa-print" aria-hidden="true"></i></td>
+          <td class="text-center cursor-pointer" title="Edit" (click)="viewBill(item)"><i
+              class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
         </tr>
       </tbody>
     </table>

@@ -1,14 +1,19 @@
+"start": "json-server --watch api.json & ng serve --host lvh.me --disable-host-check",
+const baseUrl = 'http://localhost:3000/';
+
+https://json-api-analysis.herokuapp.com/
+
 {
   "buyCustomerList": [
     {
       "date": "12/09/2020",
-      "customerBillId": 1,
+      "customerBillId": null,
       "id": 1,
       "standardRate": 2900,
       "customerName": "Aniket Shingare. Mhaswal mala",
       "moisture": 18,
       "calculatedRate": 2652,
-      "totalBags": 3,
+      "totalBags": 4,
       "bagWeightList": [
         {
           "id": 1,
@@ -21,20 +26,24 @@
         {
           "id": 3,
           "weight": 110
+        },
+        {
+          "id": 4,
+          "weight": 80
         }
       ],
-      "totalWeight": 302,
-      "weightCutting": 6.04,
+      "totalWeight": 382,
+      "weightCutting": 7.64,
       "weightExtraCuting": 0,
-      "netWeight": 295.96,
-      "totalAmount": 7849,
-      "carryCharge": 30,
-      "netPayAmount": 7819,
+      "netWeight": 374.36,
+      "totalAmount": 9928,
+      "carryCharge": 40,
+      "netPayAmount": 9888,
       "comments": "dagi, keta",
-      "chequeMode": true,
-      "cashPayment": 19,
-      "chequeAmount": 7800,
-      "chequeNumber": "78003333"
+      "chequeMode": false,
+      "cashPayment": 9888,
+      "chequeAmount": 0,
+      "chequeNumber": null
     },
     {
       "date": "12/09/2020",
@@ -52,49 +61,21 @@
         },
         {
           "id": 2,
-          "weight": 221
+          "weight": 112
         }
       ],
-      "totalWeight": 323,
-      "weightCutting": 6.46,
+      "totalWeight": 214,
+      "weightCutting": 4.28,
       "weightExtraCuting": 0,
-      "netWeight": 316.54,
-      "totalAmount": 8787,
+      "netWeight": 209.72,
+      "totalAmount": 5822,
       "carryCharge": 20,
-      "netPayAmount": 8767,
+      "netPayAmount": 5802,
       "comments": "rokh. over",
-      "chequeMode": true,
-      "cashPayment": 0,
-      "chequeAmount": 8767,
-      "chequeNumber": "5802"
-    },
-    {
-      "date": "12/09/2020",
-      "customerBillId": 3,
-      "id": 3,
-      "standardRate": 2900,
-      "customerName": "Prana",
-      "moisture": 12,
-      "calculatedRate": 2838,
-      "totalBags": 1,
-      "bagWeightList": [
-        {
-          "id": 1,
-          "weight": 102
-        }
-      ],
-      "totalWeight": 102,
-      "weightCutting": 2.04,
-      "weightExtraCuting": 0,
-      "netWeight": 99.96,
-      "totalAmount": 2837,
-      "carryCharge": 10,
-      "netPayAmount": 2827,
-      "comments": "",
-      "chequeMode": true,
-      "cashPayment": 0,
-      "chequeAmount": 2827,
-      "chequeNumber": "123"
+      "chequeMode": false,
+      "cashPayment": 5802,
+      "chequeAmount": 0,
+      "chequeNumber": null
     }
   ],
   "sellList": [

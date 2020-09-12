@@ -35,7 +35,7 @@ export class CustomerListComponent implements OnInit {
       element.bagWeightList.forEach(x => {
         wtList.push(x.weight);
       });
-      let weightList = wtList.join();
+      let weightList = wtList.join(', ');
       exceData.push({
         'Bill No.': element.id,
         'Date': element.date,
@@ -52,9 +52,9 @@ export class CustomerListComponent implements OnInit {
         'Total Amount': element.totalAmount,
         'Hamali': element.carryCharge,
         'Net Payment': element.netPayAmount,
-        'Cheque Payment': element.chequeAmount,
         'Cash Payment': element.cashPayment,
-        'Cheque Number': element.chequeNumber,
+        'Cheque Payment': element.chequeAmount,
+        'Cheque Number': element.chequeNumber ? element.chequeNumber : '',
         'Comments': element.comments
       });
     });
