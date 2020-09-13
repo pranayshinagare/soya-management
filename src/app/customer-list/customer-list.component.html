@@ -68,7 +68,7 @@
       <tbody>
         <tr
           *ngFor="let item of customerData | slice: (customerDataPage-1) * customerDataPageSize : (customerDataPage-1) * customerDataPageSize + customerDataPageSize">
-          <td>{{item.id}}</td>
+          <td>{{centerId}} {{item.id}}</td>
           <td>{{item.date}}</td>
           <td style="font-weight: 600;">{{item.customerName}}</td>
           <td>{{item.totalBags}}</td>

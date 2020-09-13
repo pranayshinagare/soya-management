@@ -19,6 +19,7 @@ export class SellListComponent implements OnInit {
   customerData: any = [];
   customerDataPage = 1;
   customerDataPageSize = 10;
+  centerId: any = '';
 
   constructor(private calendar: NgbCalendar, public configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
   clearSelection = (event) => {
@@ -30,9 +31,10 @@ export class SellListComponent implements OnInit {
 
   createExcelData = (exData, fileName, exportType) => {
     let exceData = [];
+    const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
     exData.forEach(element => {
       exceData.push({
-        'Bill No.': element.id,
+        'Bill No.': `${localCurrentUser.centerId} ${element.id}`,
         'Date': element.date,
         "Vehicle Number": element.vehicleNumber,
         'Invoice To': element.customerName,
@@ -78,6 +80,8 @@ export class SellListComponent implements OnInit {
     this.configApi.sellBillList(request).subscribe(
       resp => {
         this.customerData = resp.body;
+        const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.centerId = localCurrentUser.centerId;
         this.spinner.hide();
       },
       error => {

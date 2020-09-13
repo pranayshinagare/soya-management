@@ -73,7 +73,7 @@
       "customerBillId": 3,
       "id": 3,
       "standardRate": 2900,
-      "customerName": "Prana",
+      "customerName": "Pranay shingare",
       "moisture": 12,
       "calculatedRate": 2838,
       "totalBags": 1,
@@ -95,6 +95,338 @@
       "cashPayment": 0,
       "chequeAmount": 2827,
       "chequeNumber": "123"
+    },
+    {
+      "date": "13/09/2020",
+      "customerBillId": null,
+      "id": 4,
+      "standardRate": 2900,
+      "customerName": "sai shingare",
+      "moisture": 22,
+      "calculatedRate": 2404,
+      "totalBags": 4,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 90
+        },
+        {
+          "id": 3,
+          "weight": 80
+        },
+        {
+          "id": 4,
+          "weight": 90
+        }
+      ],
+      "totalWeight": 362,
+      "weightCutting": 7.24,
+      "weightExtraCuting": 0,
+      "netWeight": 354.76,
+      "totalAmount": 8528,
+      "carryCharge": 40,
+      "netPayAmount": 8488,
+      "comments": "",
+      "chequeMode": true,
+      "cashPayment": 0,
+      "chequeAmount": 8488,
+      "chequeNumber": "8488134"
+    },
+    {
+      "date": "13/09/2020",
+      "customerBillId": 5,
+      "id": 5,
+      "standardRate": 2900,
+      "customerName": "Kiran Patil",
+      "moisture": 16,
+      "calculatedRate": 2714,
+      "totalBags": 6,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 112
+        },
+        {
+          "id": 3,
+          "weight": 90
+        },
+        {
+          "id": 4,
+          "weight": 105
+        },
+        {
+          "id": 5,
+          "weight": 102
+        },
+        {
+          "id": 6,
+          "weight": 95
+        }
+      ],
+      "totalWeight": 606,
+      "weightCutting": 12.12,
+      "weightExtraCuting": 20,
+      "netWeight": 573.88,
+      "totalAmount": 15575,
+      "carryCharge": 60,
+      "netPayAmount": 15515,
+      "comments": "",
+      "chequeMode": false,
+      "cashPayment": 15515,
+      "chequeAmount": 0,
+      "chequeNumber": null
+    },
+    {
+      "date": "13/09/2020",
+      "customerBillId": 6,
+      "id": 6,
+      "standardRate": 2900,
+      "customerName": "Raju Patil Kasegaon",
+      "moisture": 16,
+      "calculatedRate": 2714,
+      "totalBags": 8,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 106
+        },
+        {
+          "id": 3,
+          "weight": 103
+        },
+        {
+          "id": 4,
+          "weight": 108
+        },
+        {
+          "id": 5,
+          "weight": 121
+        },
+        {
+          "id": 6,
+          "weight": 121
+        },
+        {
+          "id": 7,
+          "weight": 102
+        },
+        {
+          "id": 8,
+          "weight": 104
+        }
+      ],
+      "totalWeight": 867,
+      "weightCutting": 17.34,
+      "weightExtraCuting": 0,
+      "netWeight": 849.66,
+      "totalAmount": 23060,
+      "carryCharge": 80,
+      "netPayAmount": 22980,
+      "comments": "",
+      "chequeMode": false,
+      "cashPayment": 22980,
+      "chequeAmount": 0,
+      "chequeNumber": null
+    },
+    {
+      "date": "13/09/2020",
+      "customerBillId": null,
+      "id": 7,
+      "standardRate": 3700,
+      "customerName": "OM",
+      "moisture": 19,
+      "calculatedRate": 3310,
+      "totalBags": 2,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 111
+        }
+      ],
+      "totalWeight": 213,
+      "weightCutting": 4.26,
+      "weightExtraCuting": 0,
+      "netWeight": 208.74,
+      "totalAmount": 6909,
+      "carryCharge": 20,
+      "netPayAmount": 6889,
+      "comments": "",
+      "chequeMode": false,
+      "cashPayment": 6889,
+      "chequeAmount": 0,
+      "chequeNumber": null
+    },
+    {
+      "date": "13/09/2020",
+      "customerBillId": null,
+      "id": 8,
+      "standardRate": 3750,
+      "customerName": "Kiran Jadhav",
+      "moisture": 17,
+      "calculatedRate": 3474,
+      "totalBags": 6,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 105
+        },
+        {
+          "id": 3,
+          "weight": 90
+        },
+        {
+          "id": 4,
+          "weight": 112
+        },
+        {
+          "id": 5,
+          "weight": 102
+        },
+        {
+          "id": 6,
+          "weight": 104
+        }
+      ],
+      "totalWeight": 615,
+      "weightCutting": 12.3,
+      "weightExtraCuting": 0,
+      "netWeight": 602.7,
+      "totalAmount": 20938,
+      "carryCharge": 60,
+      "netPayAmount": 20878,
+      "comments": "",
+      "chequeMode": true,
+      "cashPayment": 378,
+      "chequeAmount": 20500,
+      "chequeNumber": "205003453"
+    },
+    {
+      "date": "13/09/2020",
+      "customerBillId": 9,
+      "id": 9,
+      "standardRate": 3600,
+      "customerName": "kiran jadhav Mala",
+      "moisture": 12,
+      "calculatedRate": 3524,
+      "totalBags": 5,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 122
+        },
+        {
+          "id": 3,
+          "weight": 102
+        },
+        {
+          "id": 4,
+          "weight": 102
+        },
+        {
+          "id": 5,
+          "weight": 101
+        }
+      ],
+      "totalWeight": 529,
+      "weightCutting": 10.58,
+      "weightExtraCuting": 0,
+      "netWeight": 518.42,
+      "totalAmount": 18269,
+      "carryCharge": 50,
+      "netPayAmount": 18219,
+      "comments": "retst",
+      "chequeMode": true,
+      "cashPayment": 219,
+      "chequeAmount": 18000,
+      "chequeNumber": "18219"
+    },
+    {
+      "date": "13/09/2020",
+      "customerBillId": null,
+      "id": 10,
+      "standardRate": 3600,
+      "customerName": "Ramrao patil",
+      "moisture": 19,
+      "calculatedRate": 3220,
+      "totalBags": 2,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 102
+        }
+      ],
+      "totalWeight": 204,
+      "weightCutting": 4.08,
+      "weightExtraCuting": 0,
+      "netWeight": 199.92,
+      "totalAmount": 6437,
+      "carryCharge": 20,
+      "netPayAmount": 6417,
+      "comments": "",
+      "chequeMode": false,
+      "cashPayment": 6417,
+      "chequeAmount": 0,
+      "chequeNumber": null
+    },
+    {
+      "date": "13/09/2020",
+      "customerBillId": null,
+      "id": 11,
+      "standardRate": 3600,
+      "customerName": "amol ghabak ",
+      "moisture": 12,
+      "calculatedRate": 3524,
+      "totalBags": 2,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 90
+        }
+      ],
+      "totalWeight": 192,
+      "weightCutting": 3.84,
+      "weightExtraCuting": 0,
+      "netWeight": 188.16,
+      "totalAmount": 6631,
+      "carryCharge": 20,
+      "netPayAmount": 6611,
+      "comments": "",
+      "chequeMode": true,
+      "cashPayment": 0,
+      "chequeAmount": 6611,
+      "chequeNumber": "433"
     }
   ],
   "sellList": [
@@ -141,12 +473,56 @@
       "calculatedCgstRs": 11840,
       "calculatedSgstRs": 11840,
       "grandTotal": 497291
+    },
+    {
+      "date": "13/09/2020",
+      "id": 3,
+      "vehicleNumber": "MTL662",
+      "standardRate": 3901,
+      "customerName": "Star Soya ",
+      "customerAddress": "PO.32 Chipari",
+      "customerState": "Maharashtra",
+      "stateCode": "27",
+      "customerGstNumber": "65476779897",
+      "totalBags": 120,
+      "totalWeight": 13000,
+      "weightCutting": 0,
+      "netWeight": 13000,
+      "totalAmount": 507130,
+      "carryCharge": 0,
+      "netPayAmount": 507130,
+      "comments": "",
+      "calculatedCgstRs": 12678,
+      "calculatedSgstRs": 12678,
+      "grandTotal": 532486
+    },
+    {
+      "date": "13/09/2020",
+      "id": 4,
+      "vehicleNumber": "MH10QS1234",
+      "standardRate": 3900,
+      "customerName": "STAR",
+      "customerAddress": "CHIPARI",
+      "customerState": "MH",
+      "stateCode": "28",
+      "customerGstNumber": "68372834987",
+      "totalBags": 100,
+      "totalWeight": 10000,
+      "weightCutting": 0,
+      "netWeight": 10000,
+      "totalAmount": 390000,
+      "carryCharge": 0,
+      "netPayAmount": 390000,
+      "comments": "",
+      "calculatedCgstRs": 9750,
+      "calculatedSgstRs": 9750,
+      "grandTotal": 409500
     }
   ],
   "globalData": [
     {
       "id": 1,
-      "todayStdRate": 2900,
+      "todayStdRate": 3600,
       "carryRate": 10,
       "weightCutting": 2
     }

@@ -94,7 +94,8 @@ export class BuyPageComponent implements OnInit {
   }
 
   setEditBillData = (editBill) => {
-    this.billNumber = editBill.id;
+    const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.billNumber = `${localCurrentUser.centerId} ${editBill.id}`;
     this.customerBillId = editBill.id;
     this.todaysDate = editBill.date;
     this.standardRate = editBill.standardRate;

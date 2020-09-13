@@ -72,7 +72,8 @@ export class SellPageComponent implements OnInit {
   }
 
   setEditBillData = (editBill) => {
-    this.billNumber = editBill.id;
+    const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.billNumber = `${localCurrentUser.centerId} ${editBill.id}`;
     this.vehicleNumber = editBill.vehicleNumber;
     this.sellBillId = editBill.id;
     this.todaysDate = editBill.date || this.todaysDate;

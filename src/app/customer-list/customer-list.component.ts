@@ -19,7 +19,7 @@ export class CustomerListComponent implements OnInit {
   customerData: any = [];
   customerDataPage = 1;
   customerDataPageSize = 10;
-
+  centerId: any = '';
   constructor(private calendar: NgbCalendar, public configApi: WebApiService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router) { }
   clearSelection = (event) => {
     this.billNumber = '';
@@ -36,8 +36,10 @@ export class CustomerListComponent implements OnInit {
         wtList.push(x.weight);
       });
       let weightList = wtList.join(', ');
+      const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+      // this.billNumber = `${localCurrentUser.centerId} ${editBill.id}`;
       exceData.push({
-        'Bill No.': element.id,
+        'Bill No.': `${localCurrentUser.centerId} ${element.id}`,
         'Date': element.date,
         'Customer Name': element.customerName,
         'Total Bags': element.totalBags,
@@ -89,6 +91,8 @@ export class CustomerListComponent implements OnInit {
     this.configApi.searchCustomers(request).subscribe(
       resp => {
         this.customerData = resp.body;
+        const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.centerId = localCurrentUser.centerId;
         this.spinner.hide();
       },
       error => {
