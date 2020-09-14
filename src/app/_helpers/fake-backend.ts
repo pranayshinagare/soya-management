@@ -14,15 +14,6 @@ const users: User[] = [
 		lastName: 'Shingare',
 		centerId: 'A',
 		center: 'Kasegaon Center'
-	},
-	{
-		id: 2,
-		username: 'hari.s',
-		password: 'Hari@123',
-		firstName: 'Hari',
-		lastName: 'Shingare',
-		centerId: 'B',
-		center: 'Kalamwadi Center'
 	}
 ];
 

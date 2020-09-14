@@ -241,9 +241,15 @@ export class BuyPageComponent implements OnInit {
   calculateActualRate = (stdRate, moisture) => {
     const moistNum = Number(moisture);
     let totalMoist = moistNum;
-    if (moistNum > 18) {
+    if (moistNum > 18 && moistNum <= 20) {
       const doubleMoist = moistNum - 18;
       totalMoist = (doubleMoist * 2) + 18;
+    } else if (moistNum > 20 && moistNum <= 22) {
+      const tripleMoist = (moistNum - 20) * 3;
+      totalMoist = tripleMoist + 22;
+    } else if (moistNum > 22) {
+      const forthMoist = (moistNum - 22) * 4;
+      totalMoist = forthMoist + 28;
     } else if (moistNum < 10) {
       totalMoist = 10;
     }
@@ -290,7 +296,7 @@ export class BuyPageComponent implements OnInit {
   calculateNetAmount = () => {
     const decimalVal = this.totalAmount - this.carryCharge;
     this.netPayAmount = Number((Math.round(decimalVal * 100) / 100).toFixed(0));
-    this.chequeAmount = this.netPayAmount - Number(this.cashPayment);
+    this.chequeAmount = (this.netPayAmount - Number(this.cashPayment)) > 0 ? this.netPayAmount - Number(this.cashPayment) : 0;
   }
 
   calculateBill = () => {

@@ -427,6 +427,66 @@
       "cashPayment": 0,
       "chequeAmount": 6611,
       "chequeNumber": "433"
+    },
+    {
+      "date": "14/09/2020",
+      "customerBillId": null,
+      "id": 12,
+      "standardRate": 3600,
+      "customerName": "Ganaji Thik, kubdaya abacha mala",
+      "moisture": 24,
+      "calculatedRate": 2688,
+      "totalBags": 1,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        }
+      ],
+      "totalWeight": 102,
+      "weightCutting": 2.04,
+      "weightExtraCuting": 0,
+      "netWeight": 99.96,
+      "totalAmount": 2687,
+      "carryCharge": 10,
+      "netPayAmount": 2677,
+      "comments": "",
+      "chequeMode": false,
+      "cashPayment": 2677,
+      "chequeAmount": 0,
+      "chequeNumber": null
+    },
+    {
+      "date": "14/09/2020",
+      "customerBillId": null,
+      "id": 13,
+      "standardRate": 3600,
+      "customerName": "amol",
+      "moisture": 29,
+      "calculatedRate": 2118,
+      "totalBags": 2,
+      "bagWeightList": [
+        {
+          "id": 1,
+          "weight": 102
+        },
+        {
+          "id": 2,
+          "weight": 13
+        }
+      ],
+      "totalWeight": 115,
+      "weightCutting": 2.3,
+      "weightExtraCuting": 0,
+      "netWeight": 112.7,
+      "totalAmount": 2387,
+      "carryCharge": 20,
+      "netPayAmount": 2367,
+      "comments": "",
+      "chequeMode": false,
+      "cashPayment": 2367,
+      "chequeAmount": 0,
+      "chequeNumber": null
     }
   ],
   "sellList": [
