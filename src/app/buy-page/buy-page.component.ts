@@ -241,15 +241,15 @@ export class BuyPageComponent implements OnInit {
   calculateActualRate = (stdRate, moisture) => {
     const moistNum = Number(moisture);
     let totalMoist = moistNum;
-    if (moistNum > 18 && moistNum <= 20) {
+    if (moistNum > 18 && moistNum <= 21) {
       const doubleMoist = moistNum - 18;
       totalMoist = (doubleMoist * 2) + 18;
-    } else if (moistNum > 20 && moistNum <= 22) {
-      const tripleMoist = (moistNum - 20) * 3;
-      totalMoist = tripleMoist + 22;
-    } else if (moistNum > 22) {
-      const forthMoist = (moistNum - 22) * 4;
-      totalMoist = forthMoist + 28;
+    } else if (moistNum > 21 && moistNum <= 23) {
+      const tripleMoist = (moistNum - 21) * 3;
+      totalMoist = tripleMoist + 24;
+    } else if (moistNum > 23) {
+      const forthMoist = (moistNum - 23) * 4;
+      totalMoist = forthMoist + 30;
     } else if (moistNum < 10) {
       totalMoist = 10;
     }
