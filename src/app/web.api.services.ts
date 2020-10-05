@@ -8,12 +8,12 @@ const baseUrl = 'http://localhost:3000/';
 const getGlobalData = `${baseUrl}globalData`;
 const setGlobalData = `${baseUrl}globalData`;
 const saveCustomerBill = `${baseUrl}buyCustomerList`;
-const customerList = `${baseUrl}buyCustomerList`;
+const customerList = `${baseUrl}buyCustomerList?_sort=id&_order=DESC`;
 const updateCustomerBill = `${baseUrl}buyCustomerList`;
 
 const saveSellBill = `${baseUrl}sellList`;
 const updateSellBill = `${baseUrl}sellList`;
-const sellBillList = `${baseUrl}sellList`;
+const sellBillList = `${baseUrl}sellList?_sort=id&_order=DESC`;
 
 @Injectable({
   providedIn: 'root'
