@@ -101,3 +101,15 @@
     margin-bottom: 0 !important;
   }
 }
+.bgImage {
+  // background-image: url("assets/images/login_bg.jpeg");
+}
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}

@@ -67,12 +67,12 @@ export class SellPageComponent implements OnInit {
     } else {
       this.getTodaysDate();
     }
-    const _lsUserData = JSON.parse(localStorage.getItem('currentUser'));
+    const _lsUserData = JSON.parse(localStorage.getItem('loggedInUser'));
     this.centerName = _lsUserData.center;
   }
 
   setEditBillData = (editBill) => {
-    const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const localCurrentUser = JSON.parse(localStorage.getItem('loggedInUser'));
     this.billNumber = `${localCurrentUser.centerId} ${editBill.id}`;
     this.vehicleNumber = editBill.vehicleNumber;
     this.sellBillId = editBill.id;

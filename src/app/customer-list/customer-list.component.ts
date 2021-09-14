@@ -36,7 +36,8 @@ export class CustomerListComponent implements OnInit {
         wtList.push(x.weight);
       });
       let weightList = wtList.join(', ');
-      const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+      // const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const localCurrentUser = JSON.parse(localStorage.getItem('loggedInUser'));
       // this.billNumber = `${localCurrentUser.centerId} ${editBill.id}`;
       exceData.push({
         'Bill No.': `${localCurrentUser.centerId} ${element.id}`,
@@ -91,7 +92,7 @@ export class CustomerListComponent implements OnInit {
     this.configApi.searchCustomers(request).subscribe(
       resp => {
         this.customerData = resp.body;
-        const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const localCurrentUser = JSON.parse(localStorage.getItem('loggedInUser'));
         this.centerId = localCurrentUser.centerId;
         this.spinner.hide();
       },

@@ -89,12 +89,12 @@ export class BuyPageComponent implements OnInit {
       this.getTodaysDate();
       this.getGlobalData();
     }
-    const _lsUserData = JSON.parse(localStorage.getItem('currentUser'));
+    const _lsUserData = JSON.parse(localStorage.getItem('loggedInUser'));
     this.centerName = _lsUserData.center;
   }
 
   setEditBillData = (editBill) => {
-    const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const localCurrentUser = JSON.parse(localStorage.getItem('loggedInUser'));
     this.billNumber = `${localCurrentUser.centerId} ${editBill.id}`;
     this.customerBillId = editBill.id;
     this.todaysDate = editBill.date;

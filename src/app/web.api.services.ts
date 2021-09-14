@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 const baseUrl = 'http://localhost:3000/';
+const serverUrl = 'https://itoitech.com/soyaapp/';
 const getGlobalData = `${baseUrl}globalData`;
 const setGlobalData = `${baseUrl}globalData`;
 const saveCustomerBill = `${baseUrl}buyCustomerList`;
@@ -27,6 +28,15 @@ export class WebApiService {
       `${getGlobalData}`, { observe: 'response' })
   }
 
+  getCenters(): Observable<HttpResponse<[]>> {
+    return this.http.get<[]>(
+      `${serverUrl}getcenter.php`, { observe: 'response' })
+  }
+  userLogin = (request) => {
+    console.log(request);
+    return this.http.post<[]>(
+      `${serverUrl}login.php`, request, { observe: 'response' })
+  }
   setGlobalData = (request) => {
     // this.http.post(setGlobalData, request)
     //   .subscribe(

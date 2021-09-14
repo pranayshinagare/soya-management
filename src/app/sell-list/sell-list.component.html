@@ -1,48 +1,57 @@
 <div class="container-fluid mb-5">
-  <h3 class="ptb-15 mb-0">Sell Invoices</h3>
-  <form class="pb-20">
-    <div class="form-row">
-      <div class="form-group col-md-2">
-        <label for="billNumber">Bill No</label>
-        <input type="text" class="form-control" [(ngModel)]="billNumber" name="billNumber"
-          placeholder="Bill Number">
-      </div>
-      <div class="form-group col-md-3">
-        <label for="fromDate1">From Date</label>
-        <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
-          [(ngModel)]="fromdDate" ngbDatepicker #f="ngbDatepicker" readonly>
-        <button type="button" class="btn btn-default calendar_icon" (click)="f.toggle()">
-          <i class="fa fa-calendar" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="form-group col-md-3">
-        <label for="toDate">To Date</label>
-        <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
-          [(ngModel)]="toDate" ngbDatepicker #t="ngbDatepicker" readonly>
-        <button type="button" class="btn btn-default calendar_icon" (click)="t.toggle()">
-          <i class="fa fa-calendar" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="customerName">Invoice To Name</label>
-        <input type="text" class="form-control" name="customerName" placeholder="Name"
-          [(ngModel)]="customerName">
-      </div>
+  <div class="row">
+    <div class="col-md-4">
+      <h3 class="ptb-15 mb-0">Sell Invoices</h3>
     </div>
-    <div class="text-right">
-      <button type="button" title="Download Data in Excel" (click)="downloadDataExcel()"
-        class="btn btn-primary mr-10"><i class="fa fa-download" aria-hidden="true"></i>
-      </button>
-      <button type="button" routerLink="/sell-soyabean"
-        (click)="configApi.setData('');configApi.toPrintBill(false);"
-        class="btn btn-primary mr-10">Add
-        New Entry</button>
-      <button type="submit" (click)="getCustomerList()" class="btn btn-primary mr-10"
-        disabled>Search</button>
-      <button type="button" class="btn btn-primary" (click)="clearSelection($event)"
-        disabled>Clear</button>
+    <div class="col-md-8">
+      <form class="pt-15">
+        <!-- filter search -->
+        <!-- <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="billNumber">Bill No</label>
+            <input type="text" class="form-control" [(ngModel)]="billNumber" name="billNumber"
+              placeholder="Bill Number">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="fromDate1">From Date</label>
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+              [(ngModel)]="fromdDate" ngbDatepicker #f="ngbDatepicker" readonly>
+            <button type="button" class="btn btn-default calendar_icon" (click)="f.toggle()">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="toDate">To Date</label>
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+              [(ngModel)]="toDate" ngbDatepicker #t="ngbDatepicker" readonly>
+            <button type="button" class="btn btn-default calendar_icon" (click)="t.toggle()">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="customerName">Customer Name</label>
+            <input type="text" class="form-control" name="customerName"
+              placeholder="Customer Name" [(ngModel)]="customerName">
+          </div>
+        </div> -->
+
+        <div class="text-right">
+          <button type="button" title="Download Data in Excel"
+            (click)="downloadDataExcel()" class="btn btn-primary mr-10"><i
+              class="fa fa-download" aria-hidden="true"></i>
+          </button>
+          <button type="button" routerLink="/sell-soyabean"
+            (click)="configApi.setData('');configApi.toPrintBill(false);"
+            class="btn btn-primary mr-10">Add
+            New Entry</button>
+          <!-- <button type="submit" (click)="getCustomerList()" class="btn btn-primary mr-10"
+            disabled>Search</button>
+          <button type="button" class="btn btn-primary" (click)="clearSelection($event)"
+            disabled>Clear</button> -->
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
   <div class="customerGrid">
     <table class="table table-striped customer-list">
       <thead>
@@ -83,7 +92,8 @@
           <!-- <td>{{item.carryCharge}}</td> -->
           <td>{{item.grandTotal}}</td>
           <td class="text-center cursor-pointer" title="Print" (click)="printBill(item)">
-            <i class="fa fa-print" aria-hidden="true"></i></td>
+            <i class="fa fa-print" aria-hidden="true"></i>
+          </td>
           <td class="text-center cursor-pointer" title="Edit" (click)="viewBill(item)"><i
               class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
         </tr>

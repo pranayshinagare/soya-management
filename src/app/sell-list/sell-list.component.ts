@@ -31,7 +31,7 @@ export class SellListComponent implements OnInit {
 
   createExcelData = (exData, fileName, exportType) => {
     let exceData = [];
-    const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const localCurrentUser = JSON.parse(localStorage.getItem('loggedInUser'));
     exData.forEach(element => {
       exceData.push({
         'Bill No.': `${localCurrentUser.centerId} ${element.id}`,
@@ -80,7 +80,7 @@ export class SellListComponent implements OnInit {
     this.configApi.sellBillList(request).subscribe(
       resp => {
         this.customerData = resp.body;
-        const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const localCurrentUser = JSON.parse(localStorage.getItem('loggedInUser'));
         this.centerId = localCurrentUser.centerId;
         this.spinner.hide();
       },
