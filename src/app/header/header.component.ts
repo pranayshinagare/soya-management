@@ -15,12 +15,10 @@ export class HeaderComponent implements OnInit {
   userFullName: any = '';
   centerName: any = '';
   ngOnInit() {
-    // const _lsUserData = JSON.parse(localStorage.getItem('currentUser'));
     const _lsUserData = JSON.parse(localStorage.getItem('loggedInUser'));
-    this.currentUserName = _lsUserData.userName;
-    this.userFullName = this.currentUserName;
-    // this.userFullName = `${_lsUserData.firstName} ${_lsUserData.lastName}`;
-    this.centerName = _lsUserData.center;
+    this.userFullName = `${_lsUserData.user_firstname} ${_lsUserData.user_lastname}`;
+    this.currentUserName = this.userFullName;
+    this.centerName = localStorage.getItem('centerName');
   }
 
   logout() {

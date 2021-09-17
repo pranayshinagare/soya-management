@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
 		// if (this.authenticationService.currentUserValue) {
 		// 	this.router.navigate(['/']);
 		// }
+		this.getCenters();
 	}
 
 	ngOnInit() {
@@ -42,7 +43,6 @@ export class LoginComponent implements OnInit {
 			password: ['', Validators.required],
 			center: ['', Validators.required]
 		});
-		this.getCenters();
 		// get return url from route parameters or default to '/'
 		// this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 	}
@@ -51,47 +51,40 @@ export class LoginComponent implements OnInit {
 		this.spinner.show();
 		this.configApi.getCenters().subscribe(
 			resp => {
-				console.log(resp.body);
-				this.centers = resp.body;
+				this.centers = resp.body['body'];
 				this.spinner.hide();
 			},
 			error => {
 				this.spinner.hide();
-				this.centers = [
-					{
-						'id': 1,
-						'name': 'Kasegaon'
-					},
-					{
-						'id': 2,
-						'name': 'Kalamwadi'
-					}
-				];
-				this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
+				this.toastr.error(error.body['message'], '', { timeOut: 1200 });
 			}
 		);
 	}
-
+	centerChange = (e) => {
+		const centerSelected = this.centers.find(x=>{
+			return x.id === this.center
+		});
+		localStorage.setItem('centerId', centerSelected.id);
+		localStorage.setItem('centerName', centerSelected.name);
+	}
 	getUserLogIn = (req) => {
 		this.spinner.show();
 		this.configApi.userLogin(req).subscribe(
 			resp => {
 				console.log(resp.body);
-				localStorage.setItem('isUserLoggedIn', 'true');
+				if (resp.body['success']) {
+					localStorage.setItem('isUserLoggedIn', 'true');
+					localStorage.setItem('loggedInUser', JSON.stringify(resp.body['body']));
+					this.router.navigate(['/customers']);
+				} else {
+					this.toastr.error(resp.body['message'], '', { timeOut: 1200 });
+				}
 				this.spinner.hide();
 			},
 			error => {
 				this.spinner.hide();
-				// localStorage.removeItem('isUserLoggedIn');
-				const loggedInUser = {
-					'userName': 'Santosh S',
-					'center': 'Kasegaon',
-					'centerId': 1
-				}
-				localStorage.setItem('isUserLoggedIn', 'true');
-				localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-				this.router.navigate(['/customers']);
-				this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
+				localStorage.removeItem('isUserLoggedIn');
+				this.toastr.error(error.body['message'], '', { timeOut: 1200 });
 			}
 		);
 	}
@@ -99,13 +92,18 @@ export class LoginComponent implements OnInit {
 	get f() { return this.loginForm.controls; }
 
 	onSubmit() {
-		this.submitted = true;
-		// stop here if form is invalid
-		if (this.loginForm.invalid) {
-			return;
-		}
-
-		this.getUserLogIn(this.loginForm.value);
+		setTimeout(x=> {
+			this.submitted = true;
+			// stop here if form is invalid
+			if (this.loginForm.invalid) {
+				return;
+			}
+			let req = {
+				"user_contact": this.loginForm.value.username,
+				"user_password": this.loginForm.value.password
+			}
+			this.getUserLogIn(req);
+		}, 300);
 		// this.loading = true;
 		// this.authenticationService.login(this.f.username.value, this.f.password.value)
 		// 	.pipe(first())

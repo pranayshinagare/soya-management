@@ -31,10 +31,9 @@ export class SellListComponent implements OnInit {
 
   createExcelData = (exData, fileName, exportType) => {
     let exceData = [];
-    const localCurrentUser = JSON.parse(localStorage.getItem('loggedInUser'));
     exData.forEach(element => {
       exceData.push({
-        'Bill No.': `${localCurrentUser.centerId} ${element.id}`,
+        'Bill No.': `${localStorage.getItem('centerId')} ${element.id}`,
         'Date': element.date,
         "Vehicle Number": element.vehicleNumber,
         'Invoice To': element.customerName,
@@ -56,38 +55,50 @@ export class SellListComponent implements OnInit {
     this.spinner.show();
     const fileName = 'sell_list';
     const exportType = 'xls';
-    this.configApi.sellBillList({}).subscribe(
+    const req = {
+      'centerid': localStorage.getItem('centerId')
+    }
+    this.configApi.sellBillList(req).subscribe(
       resp => {
-        const data = resp.body;
-        this.createExcelData(data, fileName, exportType);
+        if (resp.body['success']) {
+          this.createExcelData(resp.body['body'], fileName, exportType);
+        } else {
+          this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
+        }
         this.spinner.hide();
       },
       error => {
         this.spinner.hide();
-        this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
+        this.toastr.error(error.body['error'], '', { timeOut: 1200 });
       }
     );
   }
 
   getCustomerList = () => {
-    const request = {
-      'billNumber': this.billNumber,
-      'fromdDate': this.fromdDate,
-      'toDate': this.toDate,
-      'customerName': this.customerName
+    // const request = {
+    //   'billNumber': this.billNumber,
+    //   'fromdDate': this.fromdDate,
+    //   'toDate': this.toDate,
+    //   'customerName': this.customerName
+    // }
+    const req = {
+      'centerid': localStorage.getItem('centerId')
     }
     this.spinner.show();
-    this.configApi.sellBillList(request).subscribe(
+    this.configApi.sellBillList(req).subscribe(
       resp => {
-        this.customerData = resp.body;
-        const localCurrentUser = JSON.parse(localStorage.getItem('loggedInUser'));
-        this.centerId = localCurrentUser.centerId;
+        if (resp.body['success']) {
+          this.customerData = resp.body['body'];
+          this.centerId = localStorage.getItem('centerId')
+        } else {
+          this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
+        }
         this.spinner.hide();
       },
       error => {
         this.spinner.hide();
         this.customerData = [];
-        this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
+        this.toastr.error(error.body['error'], '', { timeOut: 1200 });
       }
     );
   }

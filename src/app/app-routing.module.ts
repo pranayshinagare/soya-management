@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'sell-list', component: SellListComponent },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', component: CustomerListComponent },
+  { path: '', component: LoginComponent },
   { path: '**', redirectTo: '' }
 ];
 

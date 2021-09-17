@@ -25,24 +25,25 @@ export class SettingsComponent implements OnInit {
     this.getTodaysDate();
     this.getGlobalData();
   }
-
   getGlobalData = () => {
     this.spinner.show();
-    this.configApi.getGlobalData().subscribe(
+    const req = {
+      'centerid': localStorage.getItem('centerId')
+    }
+    this.configApi.getGlobalData(req).subscribe(
       (resp: any) => {
-        this.todaysRate = resp.body[0]['todayStdRate'];
-        this.carryCharge = resp.body[0]['carryRate'];
-        this.weightCutting = resp.body[0]['weightCutting'];
-        this.spinner.hide();
-        if (!this.todaysRate) {
-          this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
-          this.router.navigate(['page-not-found']);
+        if (resp.body['success']) {
+          this.todaysRate = resp.body['body'][resp.body['body'].length-1]['todayStdRate'];
+          this.carryCharge = resp.body['body'][resp.body['body'].length-1]['carryRate'];
+          this.weightCutting = resp.body['body'][resp.body['body'].length-1]['weightCutting'];
+        } else {
+          this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
         }
+        this.spinner.hide();
       },
       error => {
         this.spinner.hide();
-        this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
-        this.router.navigate(['page-not-found']);
+        this.toastr.error(error.body['error'], '', { timeOut: 1200 });
       }
     );
   }
@@ -55,29 +56,26 @@ export class SettingsComponent implements OnInit {
     today = dd + '/' + mm + '/' + yyyy;
     this.todaysDate = today;
   }
-
   validateFields = () => {
     let isValid = true;
-    if (!this.todaysRate) {
+    if (!this.todaysRate || !this.carryCharge || !this.weightCutting) {
       this.toastr.error('Please Enter Valid Data', '', { timeOut: 1200 });
       isValid = false;
     }
     return isValid;
   }
-
   clearData = () => {
     this.todaysDate = '';
     this.todaysRate = '';
     this.carryCharge = '';
     this.weightCutting = '';
   }
-
   submitData = () => {
     if (!!this.validateFields()) {
       this.btnDisableFlag = true;
       this.spinner.show();
       const req = {
-        "id": 1,
+        "centerid": localStorage.getItem('centerId'),
         "todayStdRate": Number(this.todaysRate) ? Number(this.todaysRate) : null,
         "carryRate": Number(this.carryCharge) ? Number(this.carryCharge) : 10,
         "weightCutting": Number(this.weightCutting) ? Number(this.weightCutting) : 2
@@ -85,14 +83,17 @@ export class SettingsComponent implements OnInit {
 
       this.configApi.setGlobalData(req).subscribe(
         resp => {
+          if (resp.body['success']) {
+            this.toastr.success(resp.body['message'], '', { timeOut: 1200 });
+          } else {
+            this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
+          }
           this.spinner.hide();
-          this.toastr.success('Data saved successfully', '', { timeOut: 1200 });
           this.btnDisableFlag = false;
         },
         error => {
-          this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
+          this.toastr.error(error.body['error'], '', { timeOut: 1200 });
           this.btnDisableFlag = false;
-          // this.clearData();
           this.spinner.hide();
         }
       );

@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoginComponent } from './login';
 import { BasicAuthInterceptor, ErrorInterceptor, fakeBackendProvider } from './_helpers';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgbDatepicker,
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]

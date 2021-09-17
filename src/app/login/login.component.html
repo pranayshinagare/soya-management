@@ -25,7 +25,7 @@
 				<div class="form-group">
 					<label for="center">Center</label>
 					<select class="form-select form-control" formControlName="center"
-					[(ngModel)]="center" [ngClass]="{ 'is-invalid': submitted && f.center.errors }">
+					[(ngModel)]="center" [ngClass]="{ 'is-invalid': submitted && f.center.errors }" (change)="centerChange($event)">
 						<!-- <option selected>Open this select menu</option> -->
 						<option *ngFor="let center of centers" [value]="center.id">
 							{{center.name}}
