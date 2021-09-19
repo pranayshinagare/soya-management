@@ -67,11 +67,13 @@ export class SellPageComponent implements OnInit {
     } else {
       this.getTodaysDate();
     }
-    this.centerName = localStorage.getItem('centerName');
+    const _lsUserData = JSON.parse(localStorage.getItem('currentUser'));
+    this.centerName = _lsUserData.center;
   }
 
   setEditBillData = (editBill) => {
-    this.billNumber = `${localStorage.getItem('centerId')} ${editBill.id}`;
+    const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.billNumber = `${localCurrentUser.centerId} ${editBill.id}`;
     this.vehicleNumber = editBill.vehicleNumber;
     this.sellBillId = editBill.id;
     this.todaysDate = editBill.date || this.todaysDate;
@@ -155,48 +157,39 @@ export class SellPageComponent implements OnInit {
           'totalBags': Number(this.totalBags),
           'totalWeight': Number(this.totalWeight),
           'weightCutting': Number(this.totalCutting),
-          'netWeight': Number(this.netWeight),
-          'totalAmount': Number(this.totalAmount),
-          'carryCharge': Number(this.carryCharge),
-          'netPayAmount': Number(this.netPayAmount),
+          'netWeight': this.netWeight,
+          'totalAmount': this.totalAmount,
+          'carryCharge': this.carryCharge,
+          'netPayAmount': this.netPayAmount,
           'comments': this.commentsOnSell,
-          'calculatedCgstRs': Number(this.calculatedCgstRs),
-          'calculatedSgstRs': Number(this.calculatedSgstRs),
-          'grandTotal': Number(this.grandTotal),
-          'centerid': localStorage.getItem('centerId')
+          'calculatedCgstRs': this.calculatedCgstRs,
+          'calculatedSgstRs': this.calculatedSgstRs,
+          'grandTotal': this.grandTotal
         };
 
         if (!this.sellBillId) {
           this.configApi.saveSellBill(request).subscribe(
             resp => {
-              if (resp.body['success']) {
-                this.clearData();
-                this.toastr.success(resp.body['message'], '', { timeOut: 1200 });
-                this.router.navigate(['sell-list']);
-              } else {
-                this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
-              }
               this.spinner.hide();
+              this.clearData();
+              this.toastr.success('Data saved successfully', '', { timeOut: 1200 });
+              this.router.navigate(['sell-list']);
             },
             error => {
-              this.toastr.error(error.body['error'], '', { timeOut: 1200 });
+              this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
               this.spinner.hide();
             }
           );
         } else {
           this.configApi.updateSellBill(request).subscribe(
             resp => {
-              if (resp.body['success']) {
-                this.clearData();
-                this.toastr.success(resp.body['message'], '', { timeOut: 1200 });
-                this.router.navigate(['sell-list']);
-              } else {
-                this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
-              }
               this.spinner.hide();
+              this.clearData();
+              this.router.navigate(['sell-list']);
+              this.toastr.success('Data Updated Successfully', '', { timeOut: 1200 });
             },
             error => {
-              this.toastr.error(error.body['error'], '', { timeOut: 1200 });
+              this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
               this.spinner.hide();
             }
           );

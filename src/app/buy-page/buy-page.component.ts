@@ -56,29 +56,20 @@ export class BuyPageComponent implements OnInit {
 
   getGlobalData = () => {
     this.spinner.show();
-    const req = {
-      'centerid': localStorage.getItem('centerId')
-    }
-    this.configApi.getGlobalData(req).subscribe(
+    this.configApi.getGlobalData().subscribe(
       (resp: any) => {
-        if (resp.body['success']) {
-          this.standardRate = resp.body['body'][resp.body['body'].length - 1]['todayStdRate'];
-          this.standardCarrying = resp.body['body'][resp.body['body'].length - 1]['carryRate'];
-          this.standardWeightCut = resp.body['body'][resp.body['body'].length - 1]['weightCutting'];
-          if (!this.standardRate) {
-            this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
-            // this.router.navigate(['page-not-found']);
-          }
-        } else {
-          this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
+        this.standardRate = resp.body[0]['todayStdRate'];
+        this.standardCarrying = resp.body[0]['carryRate'];
+        this.standardWeightCut = resp.body[0]['weightCutting'];
+        this.spinner.hide();
+        if (!this.standardRate) {
+          this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
           this.router.navigate(['page-not-found']);
         }
-        this.spinner.hide();
       },
       error => {
         this.spinner.hide();
-        // this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
-        this.toastr.error(error.body['error'], '', { timeOut: 1200 });
+        this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
         this.router.navigate(['page-not-found']);
       }
     );
@@ -98,38 +89,34 @@ export class BuyPageComponent implements OnInit {
       this.getTodaysDate();
       this.getGlobalData();
     }
-    this.centerName = localStorage.getItem('centerName');
+    const _lsUserData = JSON.parse(localStorage.getItem('currentUser'));
+    this.centerName = _lsUserData.center;
   }
 
   setEditBillData = (editBill) => {
-    this.billNumber = `${localStorage.getItem('centerId')} ${editBill.id}`;
+    const localCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.billNumber = `${localCurrentUser.centerId} ${editBill.id}`;
     this.customerBillId = editBill.id;
     this.todaysDate = editBill.date;
-    this.standardRate = Number(editBill.standardRate);
+    this.standardRate = editBill.standardRate;
     this.customerName = editBill.customerName;
     this.moisture = editBill.moisture;
-    this.calculatedRate = Number(editBill.calculatedRate);
-    this.totalBags = Number(editBill.totalBags);
-    this.bagWeightList = editBill.bagWeightList.map((x,i) => {
-      return {id: i, weight: x};
-    });
-    this.totalWeight = Number(editBill.totalWeight);
-    this.weightCutting = Number(editBill.weightCutting);
-    this.weightExtraCuting = Number(editBill.weightExtraCuting);
-    this.netWeight = Number(editBill.netWeight);
-    this.totalAmount = Number(editBill.totalAmount);
-    this.carryCharge = Number(editBill.carryCharge);
-    this.netPayAmount = Number(editBill.netPayAmount);
+    this.calculatedRate = editBill.calculatedRate;
+    this.totalBags = editBill.totalBags;
+    this.bagWeightList = editBill.bagWeightList;
+    this.totalWeight = editBill.totalWeight;
+    this.weightCutting = editBill.weightCutting;
+    this.weightExtraCuting = editBill.weightExtraCuting;
+    this.netWeight = editBill.netWeight;
+    this.totalAmount = editBill.totalAmount;
+    this.carryCharge = editBill.carryCharge;
+    this.netPayAmount = editBill.netPayAmount;
     this.commentsOnBill = editBill.comments;
     this.isChequePayment = editBill.chequeMode;
     this.chequeNumberBox = editBill.chequeNumber;
-    this.cashPayment = Number(editBill.cashPayment);
-    this.chequeAmount = Number(editBill.chequeAmount);
+    this.cashPayment = editBill.cashPayment;
+    this.chequeAmount = editBill.chequeAmount;
     this.isAllFieldsCalculated = false;
-
-    // accepting fields - todo
-    this.standardCarrying = Number(editBill.standardCarrying) || 10;
-    this.standardWeightCut = Number(editBill.standardWeightCut) || 2;
   }
 
   onBagWeightChange = (event, item) => {
@@ -152,14 +139,14 @@ export class BuyPageComponent implements OnInit {
         this.spinner.show();
         const request = {
           'date': this.todaysDate,
-          'customerBillId': this.customerBillId ? this.customerBillId : '1',
+          'customerBillId': this.customerBillId ? this.customerBillId : null,
           'id': this.customerBillId ? this.customerBillId : null,
-          'standardRate': Number(this.standardRate),
+          'standardRate': this.standardRate,
           'customerName': this.customerName,
           'moisture': Number(this.moisture),
           'calculatedRate': this.calculatedRate,
           'totalBags': Number(this.totalBags),
-          'bagWeightList': this.bagWeightList.map(x=>{return x.weight}),
+          'bagWeightList': this.bagWeightList,
           'totalWeight': this.totalWeight,
           'weightCutting': this.weightCutting,
           'weightExtraCuting': Number(this.weightExtraCuting),
@@ -171,45 +158,36 @@ export class BuyPageComponent implements OnInit {
           'chequeMode': this.isChequePayment,
           'cashPayment': this.cashPayment,
           'chequeAmount': this.chequeAmount,
-          'chequeNumber': this.isChequePayment ? this.chequeNumberBox : null,
-          'centerid': localStorage.getItem('centerId'),
-          // new added fields - todo
-          'standardCarrying': this.standardCarrying,
-          'standardWeightCut': this.standardWeightCut,
+          'chequeNumber': this.isChequePayment ? this.chequeNumberBox : null
         };
 
         if (!this.customerBillId) {
           this.configApi.saveCustomerBill(request).subscribe(
             resp => {
-              if (resp.body['success']) {
-                this.clearData();
-                this.toastr.success(resp.body['message'], '', { timeOut: 1200 });
-                this.router.navigate(['customers']);
-              } else {
-                this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
-              }
               this.spinner.hide();
+              this.clearData();
+              this.toastr.success('Data saved successfully', '', { timeOut: 1200 });
+              this.router.navigate(['customers']);
             },
             error => {
+              this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
+              // this.clearData();
+              // this.router.navigate(['page-not-found']);
               this.spinner.hide();
-              this.toastr.error(error.body['error'], '', { timeOut: 1200 });
             }
           );
         } else {
           this.configApi.updateCustomerBill(request).subscribe(
             resp => {
-              if (resp.body['success']) {
-                this.clearData();
-                this.toastr.success(resp.body['message'], '', { timeOut: 1200 });
-                this.router.navigate(['customers']);
-              } else {
-                this.toastr.error(resp.body['error'], '', { timeOut: 1200 });
-              }
               this.spinner.hide();
+              this.clearData();
+              this.router.navigate(['customers']);
+              this.toastr.success('Data Updated Successfully', '', { timeOut: 1200 });
             },
             error => {
+              this.toastr.error('Something Went Wrong', '', { timeOut: 1200 });
+              // this.router.navigate(['page-not-found']);
               this.spinner.hide();
-              this.toastr.error(error.body['error'], '', { timeOut: 1200 });
             }
           );
         }
@@ -253,7 +231,7 @@ export class BuyPageComponent implements OnInit {
 
   onMoistureChange = (event, moisture) => {
     if (!isNaN(moisture) && /\S/.test(moisture)) {
-      this.calculatedRate = this.calculateActualRate(Number(this.standardRate), Number(moisture));
+      this.calculatedRate = this.calculateActualRate(this.standardRate, Number(moisture));
     } else {
       this.moisture = 0;
       this.calculatedRate = 0;
@@ -275,7 +253,7 @@ export class BuyPageComponent implements OnInit {
     } else if (moistNum < 10) {
       totalMoist = 10;
     }
-    return Number((stdRate - (totalMoist - 10) * ((stdRate + 300) / 100)).toFixed(0));
+    return Number((stdRate - (totalMoist - 10) * ((stdRate + 200) / 100)).toFixed(0));
   }
 
   cashPaymentChange = (event, cashPayment) => {
@@ -322,7 +300,7 @@ export class BuyPageComponent implements OnInit {
   }
 
   calculateBill = () => {
-    this.emptyWeightList(this.bagWeightList || []);
+    this.emptyWeightList(this.bagWeightList);
     if (this.validateForm()) {
       const totalBagWeight = this.bagWeightList.map(item => item.weight).reduce((prev, next) => prev + next);
       this.totalWeight = totalBagWeight;
